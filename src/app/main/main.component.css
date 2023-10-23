@@ -1,0 +1,13 @@
+.main {
+    height: 80vh;
+    background-color: #D5CABD;
+}
+
+.logo {
+    width: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+}
