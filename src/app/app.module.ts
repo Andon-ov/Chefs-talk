@@ -12,29 +12,11 @@ import { ChefsComponent } from './chefs/chefs.component';
 import { NotFoundComponent } from './not-found/not-found.component'
 import { RouterModule } from '@angular/router';
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from '../environments/environment';
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBqXpKb2qj9VKAYX_DOaOyGV6e-lsUhxG8",
-  authDomain: "chefs-talks.firebaseapp.com",
-  projectId: "chefs-talks",
-  storageBucket: "chefs-talks.appspot.com",
-  messagingSenderId: "821574305127",
-  appId: "1:821574305127:web:1ec43d2f164a6f2c151bc2",
-  measurementId: "G-96713DEB05"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 
 
@@ -54,7 +36,8 @@ const analytics = getAnalytics(app);
     CoreModule,
     ShareModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

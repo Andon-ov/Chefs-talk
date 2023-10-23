@@ -1,1 +1,11 @@
-export const environment = {};
+export const environment = {
+     firebase : {
+        apiKey: "AIzaSyBqXpKb2qj9VKAYX_DOaOyGV6e-lsUhxG8",
+        authDomain: "chefs-talks.firebaseapp.com",
+        projectId: "chefs-talks",
+        storageBucket: "chefs-talks.appspot.com",
+        messagingSenderId: "821574305127",
+        appId: "1:821574305127:web:1ec43d2f164a6f2c151bc2",
+        measurementId: "G-96713DEB05"
+      }
+};
