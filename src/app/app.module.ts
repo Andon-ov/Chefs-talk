@@ -21,7 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { CategoryComponent } from './category/category.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { FirestoreModule } from './firestore/firestore.module';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { RecipeComponent } from './recipe/recipe.component';
     AppRoutingModule,
     CoreModule,
     ShareModule,
+    FirestoreModule,
     HttpClientModule,
     RouterModule,
     // Cloud Firestore
@@ -46,6 +51,7 @@ import { RecipeComponent } from './recipe/recipe.component';
     provideFirestore(() => getFirestore()),
     // Angular Material
     BrowserAnimationsModule,
+    MatFormFieldModule, MatInputModule, MatSelectModule
 
   ],
   providers: [],
