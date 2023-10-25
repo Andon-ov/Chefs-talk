@@ -14,10 +14,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 
 import { environment } from '../environments/environment';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-console.log(environment.firebaseConfig);
+import { ListCategoriesComponent } from './list-categories/list-categories.component';
+import { CategoryComponent } from './category/category.component';
+import { RecipeComponent } from './recipe/recipe.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,9 @@ console.log(environment.firebaseConfig);
     WaitersComponent,
     ChefsComponent,
     NotFoundComponent,
+    ListCategoriesComponent,
+    CategoryComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +41,11 @@ console.log(environment.firebaseConfig);
     ShareModule,
     HttpClientModule,
     RouterModule,
+    // Cloud Firestore
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    // Angular Material
+    BrowserAnimationsModule,
 
   ],
   providers: [],

@@ -61,6 +61,7 @@ export class ChefsComponent {
       querySnapshot.forEach((doc) => {
         const data = doc.data() as Food;
         this.items.push(data);
+      
       });
     });
   }
