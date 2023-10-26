@@ -28,6 +28,7 @@ export interface Category {
   name: string;
   note: string;
   order_index: number;
+  id:string
 }
 
 export interface Ingredients {

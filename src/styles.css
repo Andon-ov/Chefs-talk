@@ -1,3 +1,7 @@
+/* add angular material */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 /* reset Css */
 
 /* https://www.joshwcomeau.com/css/custom-css-reset/ */

@@ -1,43 +1,35 @@
-import { Component } from '@angular/core';
-import { inject } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  addDoc,
-  getDocs,
-  CollectionReference,
-  DocumentData,
-  query,
-} from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
+import { Category } from '../interfaces';
+import { CategoryService } from './category.service';
 
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories.component.html',
   styleUrls: ['./list-categories.component.css'],
 })
-export class ListCategoriesComponent {
+ export class ListCategoriesComponent implements  OnInit {
 
-  
-  // Add data
-  firestore: Firestore = inject(Firestore);
 
-  constructor() {
-    async function newAllergen(firestore: any) {
-      const collectionName = 'Allergen';
-
-      try {
-        const docRef = await addDoc(collection(firestore, collectionName), {
-          title: 'Test',
-        });
-        console.log('Document written with ID: ', docRef.id);
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
+    categories: Category[] = [];
+    
+    
+    constructor(private categoryService: CategoryService) {}
+    
+    ngOnInit(): void {
+      this.getCategory();
     }
-    newAllergen(this.firestore);
+  
+    getCategory(): void {
+      this.categoryService.getCategories().subscribe({
+        next: (data) => {
+          this.categories = data;
+          console.log(data);
+          
+        },
+        error: (error) => {
+          console.error('Error fetching recipes:', error);
+        }
+      });
+    }
   }
-}
 
-interface Allergen {
-  title: string;
-}

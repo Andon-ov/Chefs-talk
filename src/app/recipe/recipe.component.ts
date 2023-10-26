@@ -168,7 +168,6 @@ export class RecipeComponent {
           }
           //* Get Ingredients End
 
-          console.log('data: ', data);
           this.items.push(data);
         }
       })

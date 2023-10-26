@@ -1,0 +1,41 @@
+<div class="form-wrapper">
+  <div class="categoryForm">
+  <h2>Category Form</h2>
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <label>
+    Is Active:
+    <input type="checkbox" formControlName="is_active">
+  </label>
+
+  <label>
+    Menu:
+    <input type="text" formControlName="menu">
+  </label>
+
+  <label>
+    Order Index:
+    <input type="number" formControlName="order_index">
+  </label>
+
+  <label>
+    Name:
+    <input type="text" formControlName="name" required>
+  </label>
+
+  <label>
+    Note:
+    <textarea formControlName="note"></textarea>
+  </label>
+
+  <label>
+    Image URL:
+    <input type="text" formControlName="image">
+  </label>
+
+  <button type="submit">Submit</button>
+</form>
+</div>
+</div>
+
+  
+

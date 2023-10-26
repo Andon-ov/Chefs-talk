@@ -1,6 +1,13 @@
+import {
+  Firestore,
+  collection,
+  query,
+  where,
+  getDocs,
+} from '@angular/fire/firestore';
 import { Component } from '@angular/core';
 import { inject } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Category {
   image: string;
@@ -9,6 +16,7 @@ interface Category {
   name: string;
   note: string;
   order_index: number;
+  id: string;
 }
 @Component({
   selector: 'app-category',
@@ -19,27 +27,29 @@ export class CategoryComponent {
   items: Category[] = [];
   firestore: Firestore = inject(Firestore);
 
-  constructor() {
-    const collectionName = 'Category';
-    const collectionRef = collection(this.firestore, collectionName);
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.params.subscribe((params) => {
+      const selectedCategoryId = params['id'];
+      console.log(selectedCategoryId);
+      
+      const collectionName = 'Recipe';
+      const recipesCollectionRef = collection(this.firestore, collectionName);
+      const q = query(
+        recipesCollectionRef,
+        where('categoryId', '==', selectedCategoryId)
+      );
 
-    getDocs(collectionRef)
-      .then(async (querySnapshot) => {
-        for (const doc of querySnapshot.docs) {
-          const data = doc.data() as Category;
-
-          this.items.push({
-            name: data.name,
-            image: data['image'],
-            is_active: data.is_active,
-            menu: data.menu,
-            note: data.note,
-            order_index: data.order_index,
+      getDocs(q)
+        .then((querySnapshot) => {
+          const recipes: any[] = [];
+          querySnapshot.forEach((doc) => {
+            recipes.push(doc.data());
           });
-        }
-      })
-      .catch((error) => {
-        console.error('Error getting documents: ', error);
-      });
+          console.log('Рецептите за избраната категория: ', recipes);
+        })
+        .catch((error) => {
+          console.error('Грешка при извличането на рецептите: ', error);
+        });
+    });
   }
 }
