@@ -1,37 +1,30 @@
 <p>recipe works!</p>
 
 <ul *ngFor="let item of items">
-  <li>category: {{ item.category.id }}</li>
-
-  <ul *ngFor="let alg of item.allergen">
-    <li>allergen: {{ alg.id }}</li>
-  </ul>
-  <ul>
-    <li *ngFor="let ingredient of item.ingredients">
-        ingredient: {{ ingredient.id }}
-    </li>
-  </ul>
-
-  <li>food plate: {{ item.food_plate.id }}</li>
 
   <ul>
     <li *ngFor="let img of item.image_recipe">
       <img [src]="img" alt="" />
     </li>
+    
   </ul>
-
 
   <ul>
     <li *ngFor="let method of item.preparation_method">
-      {{ method }}
+      preparation_method: {{ method }}
     </li>
   </ul>
 
+  <ul>
+    <li *ngFor="let video of item.video_recipe">
+      video: {{ video }}
+    </li>
+  </ul>
 
-  <li>{{ item.description }}</li>
-  <li>{{ item.order_index }}</li>
-  <li>{{ item.release_time }}</li>
-  <li>{{ item.season }}</li>
-  <li>{{ item.serving_value }}</li>
-  <li>{{ item.summary }}</li>
+  <li>description: {{ item.description }}</li>
+  <li>orderIndex: {{ item.order_index }}</li>
+  <li>releaseTime: {{ item.release_time }}</li>
+  <li>season: {{ item.season }}</li>
+  <li>servingValue: {{ item.serving_value }}</li>
+  <li>summary: {{ item.summary }}</li>
 </ul>

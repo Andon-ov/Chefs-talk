@@ -18,6 +18,7 @@ import {
 export class GetCollectionsComponent {
   firestore: Firestore = inject(Firestore);
   constructor() {
+    
     async function getMoreData(firestore: any) {
       // get multi collection
 
