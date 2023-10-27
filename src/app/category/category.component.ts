@@ -4,6 +4,7 @@ import {
   query,
   where,
   getDocs,
+  doc
 } from '@angular/fire/firestore';
 import { Component } from '@angular/core';
 import { inject } from '@angular/core';
@@ -30,19 +31,23 @@ export class CategoryComponent {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params) => {
       const selectedCategoryId = params['id'];
-      console.log(selectedCategoryId);
-      
+
       const collectionName = 'Recipe';
       const recipesCollectionRef = collection(this.firestore, collectionName);
+
+      const categoryDocRef = doc(this.firestore, "Category", selectedCategoryId);
+
       const q = query(
         recipesCollectionRef,
-        where('categoryId', '==', selectedCategoryId)
+        where("category", "==", categoryDocRef)
       );
 
       getDocs(q)
         .then((querySnapshot) => {
           const recipes: any[] = [];
           querySnapshot.forEach((doc) => {
+            console.log(doc);
+
             recipes.push(doc.data());
           });
           console.log('Рецептите за избраната категория: ', recipes);

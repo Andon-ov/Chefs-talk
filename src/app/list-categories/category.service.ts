@@ -29,8 +29,6 @@ export class CategoryService {
           
           querySnapshot.forEach((doc) => {
             const categoryData = doc.data() as Category;
-            console.log(doc.id);
-            
             const categoryWithId = { ...categoryData, id: doc.id };
     
             data.push(categoryWithId);

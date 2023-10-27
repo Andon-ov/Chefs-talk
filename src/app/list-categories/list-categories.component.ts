@@ -7,29 +7,23 @@ import { CategoryService } from './category.service';
   templateUrl: './list-categories.component.html',
   styleUrls: ['./list-categories.component.css'],
 })
- export class ListCategoriesComponent implements  OnInit {
+export class ListCategoriesComponent implements OnInit {
+  categories: Category[] = [];
 
+  constructor(private categoryService: CategoryService) {}
 
-    categories: Category[] = [];
-    
-    
-    constructor(private categoryService: CategoryService) {}
-    
-    ngOnInit(): void {
-      this.getCategory();
-    }
-  
-    getCategory(): void {
-      this.categoryService.getCategories().subscribe({
-        next: (data) => {
-          this.categories = data;
-          console.log(data);
-          
-        },
-        error: (error) => {
-          console.error('Error fetching recipes:', error);
-        }
-      });
-    }
+  ngOnInit(): void {
+    this.getCategory();
   }
 
+  getCategory(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
+  }
+}

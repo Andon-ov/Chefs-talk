@@ -1,30 +1,51 @@
-<p>recipe works!</p>
+<div class="recipe-card">
+  <ul *ngFor="let item of items">
+    <li>Title: {{ item.title }}</li>
 
-<ul *ngFor="let item of items">
+    <ul>
+      <li *ngFor="let img of item.image_recipe">
+        <img [src]="img" alt="" />
+      </li>
+    </ul>
 
-  <ul>
-    <li *ngFor="let img of item.image_recipe">
-      <img [src]="img" alt="" />
-    </li>
-    
+    <ul>
+      <li *ngFor="let video of item.video_recipe">Video: {{ video }}</li>
+    </ul>
+
+    <ul>
+      <li *ngFor="let method of item.preparation_method">
+        Preparation Method: {{ method }}
+      </li>
+    </ul>
+
+    <li>Ingredients:</li>
+    <ul>
+      <li class="ingredients-list" *ngFor="let ingredient of item.ingredients">
+        <ul>
+          <li>Name: {{ ingredient.name }}</li>
+          <li>Amount: {{ ingredient.amount }}</li>
+          <li>Unit: {{ ingredient.unit }}</li>
+          <li>Base: {{ ingredient.base }}</li>
+          <li>Order Index: {{ ingredient.order_index }}</li>
+          <li>Preparation Method: {{ ingredient.preparation_method }}</li>
+          <li>Quantity: {{ ingredient.quantity }}</li>
+        </ul>
+      </li>
+    </ul>
+
+    <li class="description" >Description: {{ item.description }}</li>
+    <li>Description: {{ item.category }}</li>
+
+    <li>Food Plate: {{ item.food_plate }}</li>
+
+    <li>Order Index: {{ item.order_index }}</li>
+    <li>Release Time: {{ item.release_time }}</li>
+    <li>Season: {{ item.season }}</li>
+    <li>Serving Value: {{ item.serving_value }}</li>
+    <li>Summary: {{ item.summary }}</li>
+
+    <ul>
+      <li  class="allergens-list" *ngFor="let alg of item.allergen">Allergen: {{ alg }}</li>
+    </ul>
   </ul>
-
-  <ul>
-    <li *ngFor="let method of item.preparation_method">
-      preparation_method: {{ method }}
-    </li>
-  </ul>
-
-  <ul>
-    <li *ngFor="let video of item.video_recipe">
-      video: {{ video }}
-    </li>
-  </ul>
-
-  <li>description: {{ item.description }}</li>
-  <li>orderIndex: {{ item.order_index }}</li>
-  <li>releaseTime: {{ item.release_time }}</li>
-  <li>season: {{ item.season }}</li>
-  <li>servingValue: {{ item.serving_value }}</li>
-  <li>summary: {{ item.summary }}</li>
-</ul>
+</div>
