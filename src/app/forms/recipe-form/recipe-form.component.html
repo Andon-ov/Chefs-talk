@@ -1,0 +1,189 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <label for="title">Title:</label>
+  <input type="text" id="title" formControlName="title" />
+
+  <label for="description">Description:</label>
+  <input type="text" id="description" formControlName="description" />
+
+  <label for="food_plate">Food Plate:</label>
+  <input type="text" id="food_plate" formControlName="food_plate" />
+
+  <label for="season">Season:</label>
+  <input type="text" id="season" formControlName="season" />
+
+  <label for="summary">Summary:</label>
+  <input type="text" id="summary" formControlName="summary" />
+
+  <label for="order_index">Order Index:</label>
+  <input type="number" id="order_index" formControlName="order_index" />
+
+  <label for="release_time">Release Time:</label>
+  <input type="number" id="release_time" formControlName="release_time" />
+
+  <label for="serving_value">Serving Value:</label>
+  <input type="number" id="serving_value" formControlName="serving_value" />
+
+  <!-- <div formArrayName="image_recipe">
+    <div *ngFor="let image of imageRecipeControl.controls; let i = index">
+      <label for="image_recipe-{{ i }}">Image {{ i + 1 }}:</label>
+      <input
+        type="text"
+        [id]="'image_recipe-' + i"
+        [formControlName]="'image_recipe.' + i"
+      />
+    </div>
+  </div>
+
+  <div formArrayName="video_recipe">
+    <div *ngFor="let video of videoRecipeControl.controls; let i = index">
+      <label for="video_recipe-{{ i }}">Video {{ i + 1 }}:</label>
+      <input
+        type="text"
+        [id]="'video_recipe-' + i"
+        [formControlName]="'video_recipe.' + i"
+      />
+    </div>
+  </div>
+
+
+
+  <div formArrayName="video_recipe">
+    <div
+      *ngFor="
+        let video of recipeForm.get('video_recipe').controls;
+        let i = index
+      "
+    >
+      <label for="video_recipe-{{ i }}">Video {{ i + 1 }}:</label>
+      <input type="text" [id]="'video_recipe-' + i" [formControlName]="i" />
+    </div>
+  </div>
+
+  <div formArrayName="preparation_method">
+    <div
+      *ngFor="
+        let method of recipeForm.get('preparation_method').controls;
+        let i = index
+      "
+    >
+      <label for="preparation_method-{{ i }}"
+        >Preparation Method {{ i + 1 }}:</label
+      >
+      <input
+        type="text"
+        [id]="'preparation_method-' + i"
+        [formControlName]="i"
+      />
+    </div>
+  </div>
+
+  <div formArrayName="allergen">
+    <div
+      *ngFor="
+        let allergen of recipeForm.get('allergen').controls;
+        let i = index
+      "
+    >
+      <label for="allergen-{{ i }}">Allergen {{ i + 1 }}:</label>
+      <input type="text" [id]="'allergen-' + i" [formControlName]="i" />
+    </div>
+  </div>
+
+  <div formArrayName="ingredients">
+    <div
+      *ngFor="
+        let ingredient of recipeForm.get('ingredients').controls;
+        let i = index
+      "
+    >
+      <label for="amount-{{ i }}">Amount:</label>
+      <input
+        type="number"
+        [id]="'amount-' + i"
+        [formControlName]="i.get('amount')"
+      />
+
+      <label for="base-{{ i }}">Base:</label>
+      <input type="text" [id]="'base-' + i" [formControlName]="i.get('base')" />
+
+      <label for="name-{{ i }}">Name:</label>
+      <input type="text" [id]="'name-' + i" [formControlName]="i.get('name')" />
+    </div>
+  </div> -->
+
+  <label for="category">Category:</label>
+  <input type="text" id="category" formControlName="category" />
+
+  <button type="submit">Submit</button>
+</form>
+
+<!-- 
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title:</label>
+    <input type="text" id="title" formControlName="title">
+  
+    <label for="description">Description:</label>
+    <input type="text" id="description" formControlName="description">
+  
+    <label for="food_plate">Food Plate:</label>
+    <input type="text" id="food_plate" formControlName="food_plate">
+  
+    <label for="season">Season:</label>
+    <input type="text" id="season" formControlName="season">
+  
+    <label for="summary">Summary:</label>
+    <input type="text" id="summary" formControlName="summary">
+  
+    <label for="order_index">Order Index:</label>
+    <input type="number" id="order_index" formControlName="order_index">
+  
+    <label for="release_time">Release Time:</label>
+    <input type="number" id="release_time" formControlName="release_time">
+  
+    <label for="serving_value">Serving Value:</label>
+    <input type="number" id="serving_value" formControlName="serving_value">
+  
+    <div formArrayName="image_recipe">
+      <div *ngFor="let image of recipeForm.get('image_recipe').controls; let i = index">
+        <label for="image_recipe-{{ i }}">Image {{ i + 1 }}:</label>
+        <input type="text" [id]="'image_recipe-' + i" formControlName="image">
+      </div>
+    </div>
+  
+    <div formArrayName="video_recipe">
+      <div *ngFor="let video of recipeForm.get('video_recipe').controls; let i = index">
+        <label for="video_recipe-{{ i }}">Video {{ i + 1 }}:</label>
+        <input type="text" [id]="'video_recipe-' + i" formControlName="video">
+      </div>
+    </div>
+  
+    <div formArrayName="preparation_method">
+      <div *ngFor="let method of recipeForm.get('preparation_method').controls; let i = index">
+        <label for="preparation_method-{{ i }}">Preparation Method {{ i + 1 }}:</label>
+        <input type="text" [id]="'preparation_method-' + i" formControlName="method">
+      </div>
+    </div>
+  
+    <div formArrayName="allergen">
+      <div *ngFor="let allergen of recipeForm.get('allergen').controls; let i = index">
+        <label for="allergen-{{ i }}">Allergen {{ i + 1 }}:</label>
+        <input type="text" [id]="'allergen-' + i" formControlName="allergen">
+      </div>
+    </div>
+  
+    <div formArrayName="ingredients">
+      <div *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index">
+        <label for="amount-{{ i }}">Amount:</label>
+        <input type="number" [id]="'amount-' + i" formControlName="i.get('amount')">
+  
+        <label for="base-{{ i }}">Base:</label>
+        <input type="text" [id]="'base-' + i" formControlName="i.get('base')">
+  
+        <label for="name-{{ i }}">Name:</label>
+        <input type="text" [id]="'name-' + i" formControlName="i.get('name')">
+  
+        <label for="quantity-{{ i }}">Quantity:</label>
+        <input type="number" [id]="'quantity-' + i" formControlName="i.get('quantity')">
+  
+        <label for="unit-{{ i }}">Unit:</label>
+        <input type="text" [id]="'unit-' + i" formControlName="i.get('unit')">  -->

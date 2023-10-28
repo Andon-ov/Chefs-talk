@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Category } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-category-form',
@@ -32,7 +33,7 @@ export class CategoryFormComponent  {
     }
   }
 
-  addCategory(categoryData: any) {
+  addCategory(categoryData: Category) {
     const collectionName = 'Category';
 
     addDoc(collection(this.firestore, collectionName), categoryData)

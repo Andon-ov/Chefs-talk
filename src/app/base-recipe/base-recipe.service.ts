@@ -5,18 +5,18 @@ import {
   collection,
   getDocs,
   CollectionReference,
-  DocumentData,
 } from '@angular/fire/firestore';
-import { Category } from '../interfaces';
+import { BaseRecipe } from '../interfaces';
+
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class CategoryService {
+export class BaseRecipeService  {
   constructor(private firestore: Firestore) {}
 
-  getCategories(): Observable<Category[]> {
-    const collectionName = 'Category';
+  getBaseRecipe(): Observable<BaseRecipe[]> {
+    const collectionName = 'BaseRecipe';
     const collectionRef: CollectionReference = collection(
       this.firestore,
       collectionName
@@ -25,13 +25,13 @@ export class CategoryService {
     return new Observable((observer) => {
       getDocs(collectionRef)
         .then((querySnapshot) => {
-          const data: Category[] = [];
+          const data: BaseRecipe[] = [];
           
           querySnapshot.forEach((doc) => {
-            const categoryData = doc.data() as Category;
-            const categoryWithId = { ...categoryData, id: doc.id };
+            const baseRecipeData = doc.data() as BaseRecipe;
+            const baseRecipeWithId = { ...baseRecipeData, id: doc.id };
     
-            data.push(categoryWithId);
+            data.push(baseRecipeWithId);
           });
           observer.next(data);
           observer.complete();

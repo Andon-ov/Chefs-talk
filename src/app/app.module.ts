@@ -27,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 
 import { FormsModule } from './forms/forms.module';
+import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { FormsModule } from './forms/forms.module';
     ListCategoriesComponent,
     CategoryComponent,
     RecipeComponent,
+    BaseRecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { FormsModule } from './forms/forms.module';
     FormsModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
     // Cloud Firestore
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

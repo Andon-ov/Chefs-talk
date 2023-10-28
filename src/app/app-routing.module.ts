@@ -7,6 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 import { CategoryFormComponent } from './forms/category-form/category-form.component';
 import { CategoryComponent } from './category/category.component';
+import { RecipeFormComponent } from './forms/recipe-form/recipe-form.component';
 
 const routes: Routes = [
   {
@@ -27,8 +28,12 @@ const routes: Routes = [
     component: WaitersComponent,
   },
   {
-    path: 'add',
+    path: 'add-category',
     component: CategoryFormComponent,
+  },
+  {
+    path: 'add-recipe',
+    component: RecipeFormComponent,
   },
 
   {
