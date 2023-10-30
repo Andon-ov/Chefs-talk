@@ -29,6 +29,7 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from './forms/forms.module';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    // Cloudinary
+    CloudinaryModule
 
   ],
   providers: [],

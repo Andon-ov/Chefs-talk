@@ -1,18 +1,23 @@
-<div *ngFor="let category of categories">
-  <a [routerLink]="['/category/', category.id]">
-    <mat-card *ngIf="category.is_active">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ category.name }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <ul>
-          <li>{{ category.menu }}</li>
-          <li>{{ category.order_index }}</li>
-          <li>{{ category.note }}</li>
-          <li><img [src]="category.image" alt="" /></li>
-        </ul>
-      </mat-card-content>
-    </mat-card>
-  </a>
-</div>
+<section class="list-categories">
+  <h1 class="title">Категории</h1>
+  <section class="wrapper">
+    <div *ngFor="let category of categories">
+      <a [routerLink]="['/category/', category.id]">
+        <div class="custom-card" *ngIf="category.is_active">
+          <div class="custom-card-header">
+            <!-- <div class="custom-header-image"></div> -->
+            <div class="custom-card-title">{{ category.name }}</div>
+          </div>
+          <div class="custom-card-content">
+            <ul>
+              <li>{{ category.menu }}</li>
+              <!-- <li>{{ category.order_index }}</li> -->
+              <li>{{ category.note }}</li>
+              <li><img [src]="category.image" alt="" /></li>
+            </ul>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+</section>
