@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '../interfaces';
 import { CategoriesService } from './categories.service';
 
@@ -7,7 +7,7 @@ import { CategoriesService } from './categories.service';
   templateUrl: './list-categories.component.html',
   styleUrls: ['./list-categories.component.css'],
 })
-export class ListCategoriesComponent implements OnInit, OnChanges {
+export class ListCategoriesComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(private categoryService: CategoriesService) {}
@@ -16,16 +16,13 @@ export class ListCategoriesComponent implements OnInit, OnChanges {
     this.getCategory();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
-
   getCategory(): void {
     this.categoryService.getCategories().subscribe({
       next: (data) => {
-        console.log(this.categories);
         this.categories = data.sort((a, b) => a.order_index - b.order_index);
       },
       error: (error) => {
-        console.error('Error fetching recipes:', error);
+        console.error('Error fetching categories:', error);
       },
     });
   }

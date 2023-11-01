@@ -1,16 +1,21 @@
 <div class="category">
-{{recipes}}
+  <h1>
+    {{ category?.name }}
+  </h1>
+  <h3>
+    {{ category?.menu }} -
+    {{ category?.note }}
+  </h3>
+
   <div class="recipe-list">
     <div *ngFor="let recipe of recipes">
-      <div class="recipe-item">
-        <img [src]="recipe.image_recipe[0]" alt="{{ recipe.title }}" />
-        <h3>{{ recipe.title }}</h3>
-        <!-- <p>{{ recipe.note }}</p>
-        <p>Menu: {{ recipe.menu }}</p>
-        <p>Активна: {{ recipe.is_active ? "Да" : "Не" }}</p> -->
-        <p>Подредба: {{ recipe.order_index }}</p>
-        <a [routerLink]="['/recipe', recipe.id ]">Преглед на рецептата</a>
-      </div>
+      <a [routerLink]="['/recipe', recipe.id]">
+        <div class="recipe-item">
+          <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
+          <h3>{{ recipe.title }}</h3>
+          <p>Подредба: {{ recipe.order_index }}</p>
+        </div>
+      </a>
     </div>
   </div>
 </div>
