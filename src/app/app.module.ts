@@ -22,14 +22,11 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
 import { CategoryComponent } from './category/category.component';
 import { RecipeComponent } from './recipe/recipe.component';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-
 import { FormsModule } from './forms/forms.module';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CloudinaryModule} from '@cloudinary/ng';
+import { IngredientComponent } from './ingredient/ingredient.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +39,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
     CategoryComponent,
     RecipeComponent,
     BaseRecipeComponent,
+    IngredientComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,11 +53,6 @@ import {CloudinaryModule} from '@cloudinary/ng';
     // Cloud Firestore
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    // Angular Material
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
     // Cloudinary
     CloudinaryModule
 

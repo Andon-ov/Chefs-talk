@@ -34,16 +34,6 @@
     </div>
   </div>
 
-  <div formArrayName="video_recipe">
-    <div *ngFor="let video of videoRecipeControl.controls; let i = index">
-      <label for="video_recipe-{{ i }}">Video {{ i + 1 }}:</label>
-      <input
-        type="text"
-        [id]="'video_recipe-' + i"
-        [formControlName]="'video_recipe.' + i"
-      />
-    </div>
-  </div>
 
 
 
@@ -90,26 +80,24 @@
   </div>
 
   <div formArrayName="ingredients">
-    <div
-      *ngFor="
-        let ingredient of recipeForm.get('ingredients').controls;
-        let i = index
-      "
-    >
+    <div *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index" [formGroupName]="i">
       <label for="amount-{{ i }}">Amount:</label>
-      <input
-        type="number"
-        [id]="'amount-' + i"
-        [formControlName]="i.get('amount')"
-      />
-
+      <input type="number" [id]="'amount-' + i" formControlName="amount" />
+  
       <label for="base-{{ i }}">Base:</label>
-      <input type="text" [id]="'base-' + i" [formControlName]="i.get('base')" />
-
+      <input type="text" [id]="'base-' + i" formControlName="base" />
+  
       <label for="name-{{ i }}">Name:</label>
-      <input type="text" [id]="'name-' + i" [formControlName]="i.get('name')" />
+      <input type="text" [id]="'name-' + i" formControlName="name" />
     </div>
   </div> -->
+
+  <label for="category">Category:</label>
+<select id="category" formControlName="category">
+  <option [ngValue]="null">Select a category</option>
+  <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+</select>
+
 
   <label for="category">Category:</label>
   <input type="text" id="category" formControlName="category" />

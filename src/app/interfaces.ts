@@ -11,8 +11,6 @@ export interface Category {
   id:string
 }
 
-
-
 export interface Recipe {
   allergen: string[];
   category: DocumentReference<DocumentData>;
@@ -28,17 +26,20 @@ export interface Recipe {
   summary: string;
   title: string;
   video_recipe: string[];
+  id:string
 }
 
 export interface Ingredient {
   amount: number;
   base: DocumentReference<DocumentData>;
-  name: string;
   order_index: number;
   preparation_method: string[];
+  product: DocumentReference<DocumentData>;
   quantity: number;
-  unit: string;
+  recipe:DocumentReference<DocumentData>
+  unit: DocumentReference<DocumentData>;
 }
+
 
 
 export interface BaseRecipe {

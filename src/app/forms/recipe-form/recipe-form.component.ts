@@ -109,38 +109,37 @@ import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
 export class RecipeFormComponent implements OnInit {
   recipeForm: FormGroup;
   firestore: Firestore;
-
+  
   categories: Category[] | null = null;
   baseRecipes: BaseRecipe[] | null = null;
-
-  // videoRecipeControl: FormArray<any> = new FormArray([]);
-  // videoRecipeControl: FormArray = new FormArray([]);
-
+  
+  
   constructor(
     private fb: FormBuilder,
     firestore: Firestore,
     private categoriesService: CategoriesService,
     private baseRecipeService: BaseRecipeService
-  ) {
-    this.firestore = firestore;
+    ) {
+      this.firestore = firestore;
+      
+      this.recipeForm = this.fb.group({
+        title: [''],
+        description: [''],
+        season: [''],
+        summary: [''],
+        order_index: [0],
+        release_time: [0],
+        serving_value: [0],
+        
+        food_plate: this.fb.control(null),
+        allergen: this.fb.control(null),
 
-    this.recipeForm = this.fb.group({
-      title: [''],
-      description: [''],
-      food_plate: [''],
-      season: [''],
-      summary: [''],
-      order_index: [0],
-      release_time: [0],
-      serving_value: [0],
-
-      image_recipe: this.fb.array([]),
-      video_recipe: this.fb.array([]),
-      preparation_method: this.fb.array([]),
-      allergen: this.fb.array([]),
-
-      ingredients: this.fb.group([
-        {
+        image_recipe: this.fb.array([]),
+        video_recipe: this.fb.array([]),
+        preparation_method: this.fb.array([]),
+        
+        ingredients: this.fb.group([
+          {
           amount: [0],
           base: this.fb.control(null),
           name: [''],
@@ -152,6 +151,7 @@ export class RecipeFormComponent implements OnInit {
       ]),
       category: this.fb.control(null),
     });
+    const ingredientsControl = this.recipeForm.get('ingredients') as FormArray;
   }
 
   ngOnInit(): void {

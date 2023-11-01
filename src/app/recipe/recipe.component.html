@@ -1,28 +1,28 @@
 <div class="recipe-card">
-  <ul *ngFor="let item of items">
-    <li>Title: {{ item.title }}</li>
+  <ul>
+    <li>Title: {{ recipe?.title }}</li>
 
     <ul>
-      <li *ngFor="let img of item.image_recipe">
+      <li *ngFor="let img of recipe?.image_recipe">
         <img [src]="img" alt="" />
       </li>
     </ul>
 
     <ul>
-      <li *ngFor="let video of item.video_recipe">Video: {{ video }}</li>
+      <li *ngFor="let video of recipe?.video_recipe">Video: {{ video }}</li>
     </ul>
 
     <ul>
-      <li *ngFor="let method of item.preparation_method">
+      <li *ngFor="let method of recipe?.preparation_method">
         Preparation Method: {{ method }}
       </li>
     </ul>
 
     <li>Ingredients:</li>
     <ul>
-      <li class="ingredients-list" *ngFor="let ingredient of item.ingredients">
+      <li class="ingredients-list" *ngFor="let ingredient of recipe?.ingredients">
         <ul>
-          <li>Name: {{ ingredient.name }}</li>
+          <li>Name: {{ ingredient.product }}</li>
           <li>Amount: {{ ingredient.amount }}</li>
           <li>Unit: {{ ingredient.unit }}</li>
           <li>Base: {{ ingredient.base }}</li>
@@ -33,19 +33,20 @@
       </li>
     </ul>
 
-    <li class="description" >Description: {{ item.description }}</li>
-    <li>Description: {{ item.category }}</li>
+    <li class="description" >Description: {{ recipe?.description }}</li>
 
-    <li>Food Plate: {{ item.food_plate }}</li>
+    <li>Category: {{ recipe?.category }}</li>
 
-    <li>Order Index: {{ item.order_index }}</li>
-    <li>Release Time: {{ item.release_time }}</li>
-    <li>Season: {{ item.season }}</li>
-    <li>Serving Value: {{ item.serving_value }}</li>
-    <li>Summary: {{ item.summary }}</li>
+    <li>Food Plate: {{ recipe?.food_plate }}</li>
 
+    <li>Order Index: {{ recipe?.order_index }}</li>
+    <li>Release Time: {{ recipe?.release_time }}</li>
+    <li>Season: {{ recipe?.season }}</li>
+    <li>Serving Value: {{ recipe?.serving_value }}</li>
+    <li>Summary: {{ recipe?.summary }}</li>
+    
     <ul>
-      <li  class="allergens-list" *ngFor="let alg of item.allergen">Allergen: {{ alg }}</li>
+      <li  class="allergens-list" *ngFor="let alg of recipe?.allergen">Allergen: {{ alg }}</li>
     </ul>
   </ul>
 </div>
