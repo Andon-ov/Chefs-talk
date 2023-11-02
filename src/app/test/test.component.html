@@ -1,0 +1,82 @@
+<!-- <form [formGroup]="testForm">
+  <div>
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" />
+  </div>
+  <div>
+
+    <select
+      formArrayName="allergens"
+      (change)="addReferenceToSelectedAllergen($event)"
+    >
+      <option *ngFor="let allergen of allergens" [value]="allergen.id">
+        {{ allergen.name }}
+      </option>
+    </select>
+  </div>
+
+  <div formArrayName="ingredients">
+    <div
+      *ngFor="let ingredient of ingredients.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" />
+
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" formControlName="amount" />
+    </div>
+  </div>
+
+  <button type="button" (click)="addIngredient()">Add Ingredient</button>
+
+  <button type="button" (click)="onSubmit()">Submit</button>
+</form> -->
+
+
+
+<form [formGroup]="testForm">
+  <div>
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" />
+  </div>
+  <div>
+    <!-- adding reference to object in array -->
+    <!-- <div>
+      <select formControlName="selectedAllergen">
+        <option *ngFor="let allergen of allergens" [value]="allergen.id">
+          {{ allergen.name }}
+        </option>
+      </select>
+      <button type="button" (click)="addSelectedAllergen()">Add Allergen</button>
+    </div> -->
+
+    <div>
+      <select formControlName="selectedAllergen">
+        <option *ngFor="let allergen of allergens" [value]="allergen.id">
+          {{ allergen.name }}
+        </option>
+      </select>
+      <button type="button" (click)="addSelectedAllergen()">Add Allergen</button>
+    </div>
+    <div>
+      <label>Selected Allergens:</label>
+      <div>{{ testForm.get('selectedAllergenNames')?.value }}</div>
+    </div>
+   
+  </div>
+  <div formArrayName="ingredients">
+    <div
+      *ngFor="let ingredient of ingredients.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" />
+
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" formControlName="amount" />
+    </div>
+  </div>
+  <button type="button" (click)="addIngredient()">Add Ingredient</button>
+  <button type="button" (click)="onSubmit()">Submit</button>
+</form>
