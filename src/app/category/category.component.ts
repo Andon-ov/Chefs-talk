@@ -37,15 +37,16 @@ export class CategoryComponent implements OnInit {
         'Category',
         selectedCategoryId
       );
+      console.log(categoryDocRef);
 
       const categorySnapshot = await getDoc(categoryDocRef);
       if (categorySnapshot.exists()) {
         this.category = categorySnapshot.data() as Category;
       }
-
       const q = query(
         recipesCollectionRef,
-        where('category', '==', categoryDocRef)
+        // where('category', '==', categoryDocRef)
+        where('category', '==', selectedCategoryId)
       );
 
       getDocs(q)
@@ -54,10 +55,11 @@ export class CategoryComponent implements OnInit {
 
           querySnapshot.forEach((doc) => {
             const data = doc.data();
+
             const recipe: any = {
               title: data['title'],
-              image_recipe: data['image_recipe']
-                ? data['image_recipe'][0]
+              image_recipe: data['image_recipe'][0]
+                ? data['image_recipe'][0]['image_recipe']
                 : null,
               order_index: data['order_index'],
               id: doc.id,

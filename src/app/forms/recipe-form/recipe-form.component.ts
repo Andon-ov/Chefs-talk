@@ -1,105 +1,24 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-// import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-// import { Recipe } from 'src/app/interfaces';
 
-// @Component({
-//   selector: 'app-recipe-form',
-//   templateUrl: './recipe-form.component.html',
-//   styleUrls: ['./recipe-form.component.css'],
-// })
-// export class RecipeFormComponent {
-//   recipeForm: FormGroup;
-//   firestore: Firestore;
-
-//   constructor(private fb: FormBuilder, firestore: Firestore) {
-//     this.firestore = firestore;
-//     this.recipeForm = this.fb.group({
-//       title: [''],
-//       description: [''],
-//       food_plate: [''],
-//       season: [''],
-//       summary: [''],
-//       order_index: [0],
-//       release_time: [0],
-//       serving_value: [0],
-
-//       // Image Recipe - създаваме FormGroup за всеки обект в масива
-//       image_recipe: this.fb.array([this.createImageRecipeGroup()]),
-
-//       // Video Recipe - създаваме FormGroup за всеки обект в масива
-//       video_recipe: this.fb.array([this.createVideoRecipeGroup()]),
-
-//       // Preparation Method - създаваме FormGroup за всеки обект в масива
-//       preparation_method: this.fb.array([this.createPreparationMethodGroup()]),
-
-//       // Allergen - създаваме FormGroup за всеки обект в масива
-//       allergen: this.fb.array([this.createAllergenGroup()]),
-
-//       // Ingredients - създаваме FormGroup за всеки обект в масива
-//       ingredients: this.fb.array([this.createIngredientsGroup()]),
-
-//       category: this.fb.control(null),
-//     });
-//   }
-
-//   createImageRecipeGroup() {
-//     return this.fb.group({
-//       // Добавете контролите на 'image_recipe' тук
-//     });
-//   }
-
-//   createVideoRecipeGroup() {
-//     return this.fb.group({
-//       // Добавете контролите на 'video_recipe' тук
-//     });
-//   }
-
-//   createPreparationMethodGroup() {
-//     return this.fb.group({
-//       // Добавете контролите на 'preparation_method' тук
-//     });
-//   }
-
-//   createAllergenGroup() {
-//     return this.fb.group({
-//       // Добавете контролите на 'allergen' тук
-//     });
-//   }
-
-//   createIngredientsGroup() {
-//     return this.fb.group({
-//       // Добавете контролите на 'ingredients' тук
-//     });
-//   }
-
-//   onSubmit() {
-//     if (this.recipeForm.valid) {
-//       const recipeData = this.recipeForm.value;
-//       this.addRecipe(recipeData);
-//       this.recipeForm.reset();
-//     }
-//   }
-
-//   addRecipe(recipeData: Recipe) {
-//     const collectionName = 'Recipe';
-
-//     addDoc(collection(this.firestore, collectionName), recipeData)
-//       .then((docRef) => {
-//         console.log('Document written with ID: ', docRef.id);
-//       })
-//       .catch((error) => {
-//         console.error('Error adding document: ', error);
-//       });
-//   }
-// }
-
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { BaseRecipe, Category, Recipe } from 'src/app/interfaces';
-import { CategoriesService } from '../../list-categories/categories.service';
+import { Component , OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  getDocs,
+  CollectionReference,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
+import { CategoriesService } from 'src/app/list-categories/categories.service';
+import { Allergens, BaseRecipe, Category, Plates } from 'src/app/interfaces';
+
 
 @Component({
   selector: 'app-recipe-form',
@@ -109,54 +28,229 @@ import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
 export class RecipeFormComponent implements OnInit {
   recipeForm: FormGroup;
   firestore: Firestore;
-  
-  categories: Category[] | null = null;
-  baseRecipes: BaseRecipe[] | null = null;
-  
-  
-  constructor(
-    private fb: FormBuilder,
-    firestore: Firestore,
-    private categoriesService: CategoriesService,
-    private baseRecipeService: BaseRecipeService
-    ) {
-      this.firestore = firestore;
-      
-      this.recipeForm = this.fb.group({
-        title: [''],
-        description: [''],
-        season: [''],
-        summary: [''],
-        order_index: [0],
-        release_time: [0],
-        serving_value: [0],
-        
-        food_plate: this.fb.control(null),
-        allergen: this.fb.control(null),
+  allergens: Allergens[] = [];
+  plates: Plates[] = [];
+  baseRecipes: BaseRecipe[] = [];
+  categories: Category[] = []
+  currentOrderIndex = 1;
+  isBaseControl: any;
 
-        image_recipe: this.fb.array([]),
-        video_recipe: this.fb.array([]),
-        preparation_method: this.fb.array([]),
-        
-        ingredients: this.fb.group([
-          {
-          amount: [0],
-          base: this.fb.control(null),
-          name: [''],
-          order_index: [0],
-          preparation_method: this.fb.array([]),
-          quantity: [0],
-          unit: [''],
-        },
-      ]),
+  constructor(
+    firestore: Firestore,
+    private fb: FormBuilder,
+    private baseRecipeService: BaseRecipeService,
+    private categoriesService: CategoriesService
+  ) {
+    this.firestore = firestore;
+
+    // adding only one reference to object
+    // this.recipeForm = this.fb.group({
+    //   title: '',
+    //   allergens: this.fb.array([]),
+    //   ingredients: this.fb.array([
+    //     this.fb.group({
+    //       name: '',
+    //       amount: null,
+    //     }),
+    //   ]),
+    // });
+
+    // adding reference to object in array
+    // this.recipeForm = this.fb.group({
+    //   title: '',
+    //   selectedAllergen: null,
+    //   allergens: this.fb.array([]),
+    //   ingredients: this.fb.array([
+    //     this.fb.group({
+    //       name: '',
+    //       amount: null,
+    //     }),
+    //   ]),
+    // });
+
+    this.recipeForm = this.fb.group({
+      // recipe
+      title: '',
       category: this.fb.control(null),
+
+      description: '',
+      summary: '',
+      season: '',
+      order_index: [0],
+      release_time: [0],
+      serving_value: [0],
+
+      selectedAllergen: null,
+      allergens: this.fb.array([]),
+      selectedAllergenNames: '',
+
+      food_plate: this.fb.control(null),
+      image_recipe: this.fb.array([]),
+      video_recipe: this.fb.array([]),
+      preparation_method: this.fb.array([]),
+
+      ingredients: this.fb.array([
+        this.fb.group({
+          name: '',
+          amount: null,
+
+          base: this.fb.control(null),
+          is_base: false, // if base true
+
+          order_index: [0],
+          preparation_method: '',
+          quantity: [0],
+          unit: '',
+        }),
+      ]),
     });
-    const ingredientsControl = this.recipeForm.get('ingredients') as FormArray;
+
+    this.getAllergens().subscribe((data) => {
+      this.allergens = data;
+    });
+
+    this.getPlates().subscribe((data) => {
+      this.plates = data;
+      console.log(this.plates);
+      
+    });
   }
 
   ngOnInit(): void {
-    this.getCategory();
     this.getBaseRecipe();
+    this.getCategory()
+    
+  }
+
+  // image
+  addImage() {
+    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
+    imageArray.push(
+      this.fb.group({
+        image_recipe: '',
+      })
+    );
+  }
+  removeImage(index: number) {
+    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
+    imageArray.removeAt(index);
+  }
+
+  // video
+  addVideo() {
+    const videoArray = this.recipeForm.get('video_recipe') as FormArray;
+    videoArray.push(
+      this.fb.group({
+        video_recipe: '',
+      })
+    );
+  }
+  removeVideo(index: number) {
+    const videoArray = this.recipeForm.get('video_recipe') as FormArray;
+    videoArray.removeAt(index);
+  }
+
+  // preparation
+  addPreparation() {
+    const preparationArray = this.recipeForm.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.push(
+      this.fb.group({
+        preparation_method: '',
+      })
+    );
+  }
+  removePreparation(index: number) {
+    const preparationArray = this.recipeForm.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.removeAt(index);
+  }
+
+  addIngredient() {
+    const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
+    ingredientsArray.push(
+      this.fb.group({
+        name: '',
+        amount: null,
+
+        base: this.fb.control(null),
+        is_base: false, // if base true
+
+        order_index: this.currentOrderIndex,
+        quantity: [0],
+        preparation_method: '',
+        unit: '',
+      })
+    );
+    this.currentOrderIndex++;
+  }
+
+  addReferenceToSelectedAllergen(event: any) {
+    const selectedAllergenId = event.target.value;
+    const allergensArray = this.recipeForm.get('allergens') as FormArray;
+    allergensArray.push(this.fb.control(selectedAllergenId));
+  }
+
+  // adding reference to object in array
+  // addSelectedAllergen() {
+  //   const selectedAllergenId = this.recipeForm.get('selectedAllergen')?.value;
+  //   const allergensArray = this.recipeForm.get('allergens') as FormArray;
+  //   allergensArray.push(this.fb.control(selectedAllergenId));
+  // }
+
+  addSelectedAllergen() {
+    const selectedAllergenId = this.recipeForm.get('selectedAllergen')?.value;
+    const allergensArray = this.recipeForm.get('allergens') as FormArray;
+    allergensArray.push(this.fb.control(selectedAllergenId));
+
+    const selectedAllergenNames = this.recipeForm.get('selectedAllergenNames');
+    const selectedAllergen = this.allergens.find(
+      (a) => a.id === selectedAllergenId
+    );
+    if (selectedAllergen) {
+      selectedAllergenNames?.setValue(
+        selectedAllergenNames.value
+          ? selectedAllergenNames.value + ', ' + selectedAllergen.name
+          : selectedAllergen.name
+      );
+
+      // this.recipeForm.removeControl('selectedAllergen'); 
+      // Remove selectedAllergen from form
+    }
+  }
+
+  onIsBaseChange() {
+    const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
+    this.isBaseControl = ingredientsArray.value[0].is_base;
+  }
+  // onIsBaseChange(index: number) {
+  //   const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
+  //   this.isBaseControl = ingredientsArray.at(index).get('is_base')?.value;
+  // }
+
+  get ingredients() {
+    return this.recipeForm.get('ingredients') as FormArray;
+  }
+
+  get image_recipe() {
+    return this.recipeForm.get('image_recipe') as FormArray;
+  }
+
+  get video_recipe() {
+    return this.recipeForm.get('video_recipe') as FormArray;
+  }
+  get preparation_method() {
+    return this.recipeForm.get('preparation_method') as FormArray;
+  }
+
+  onSubmit() {
+    if (this.recipeForm.valid) {
+      const recipeData = this.recipeForm.value;
+      this.addRecipe(recipeData);
+      this.recipeForm.reset();
+    }
   }
 
   getCategory(): void {
@@ -170,6 +264,65 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
+  getAllergens(): Observable<Allergens[]> {
+    const collectionName = 'Allergens';
+    const collectionRef: CollectionReference = collection(
+      this.firestore,
+      collectionName
+    );
+
+    return new Observable((observer) => {
+      getDocs(collectionRef)
+        .then((querySnapshot) => {
+          const data: Allergens[] = [];
+
+          querySnapshot.forEach((doc) => {
+            const allergensData = doc.data() as any;
+
+            const allergensWithId = { ...allergensData, id: doc.id };
+
+            data.push(allergensWithId);
+          });
+          observer.next(data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  getPlates(): Observable<Plates[]> {
+    const collectionName = 'Plates';
+    const collectionRef: CollectionReference = collection(
+      this.firestore,
+      collectionName
+    );
+
+    return new Observable((observer) => {
+      getDocs(collectionRef)
+        .then((querySnapshot) => {
+          
+          const data: Plates[] = [];
+
+          querySnapshot.forEach((doc) => {
+            const platesData = doc.data() as any;
+
+            const platesWithId = { ...platesData, id: doc.id };
+
+            data.push(platesWithId);
+          });
+          observer.next(data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  
+
   getBaseRecipe(): void {
     this.baseRecipeService.getBaseRecipe().subscribe({
       next: (baseRecipes) => {
@@ -181,15 +334,7 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.recipeForm.valid) {
-      const recipeData = this.recipeForm.value;
-      this.addRecipe(recipeData);
-      this.recipeForm.reset();
-    }
-  }
-
-  addRecipe(recipeData: Recipe) {
+  addRecipe(recipeData: any) {
     const collectionName = 'Recipe';
 
     addDoc(collection(this.firestore, collectionName), recipeData)
@@ -201,3 +346,4 @@ export class RecipeFormComponent implements OnInit {
       });
   }
 }
+

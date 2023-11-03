@@ -9,6 +9,7 @@ import { CategoryFormComponent } from './forms/category-form/category-form.compo
 import { CategoryComponent } from './category/category.component';
 import { RecipeFormComponent } from './forms/recipe-form/recipe-form.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { BaseFormComponent } from './forms/base-form/base-form.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'add-recipe',
     component: RecipeFormComponent,
+  },
+  {
+    path: 'add-base',
+    component: BaseFormComponent,
   },
 
   {

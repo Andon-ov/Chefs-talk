@@ -1,4 +1,4 @@
-<form [formGroup]="testForm">
+<form [formGroup]="baseForm">
   <!-- Title -->
   <div>
     <label for="title">Title</label>
@@ -6,14 +6,30 @@
   </div>
   <!-- Title -->
   <br />
-  <!-- Category -->
-  <label for="category">Category</label>
-  <select id="category" formControlName="category">
-    <option *ngFor="let category of categories" [value]="category.id">
-      {{ category.name }}
-    </option>
-  </select>
-  <!-- Category -->
+  <!-- Base Type -->
+  <div>
+    <label for="base_type">Base Typ</label>
+    <input type="text" id="base_type" formControlName="base_type" />
+  </div>
+  <!-- Base Type -->
+  <br />
+  <!-- Base Recipe Portions -->
+  <div>
+    <label for="base_recipe_portions">Base Recipe Portions</label>
+    <input
+      type="number"
+      id="base_recipe_portions"
+      formControlName="base_recipe_portions"
+    />
+  </div>
+  <!-- Base Recipe Portions -->
+  <br />
+  <!-- Yield -->
+  <div>
+    <label for="base_yield">Yield</label>
+    <input type="number" id="base_yield" formControlName="base_yield" />
+  </div>
+  <!-- Yield -->
   <br />
   <!-- Description -->
   <div>
@@ -29,39 +45,8 @@
   </div>
   <!-- Summary -->
   <br />
-  <!-- Season -->
-  <div>
-    <label for="season">Season</label>
-    <select id="season" formControlName="season">
-      <option value="Пролет">Пролет</option>
-      <option value="Лято">Лято</option>
-      <option value="Есен">Есен</option>
-      <option value="Зима">Зима</option>
-    </select>
-  </div>
-  <!-- Season -->
-  <br />
-  <!-- Order Index -->
-  <div>
-    <label for="order_index">Order Index</label>
-    <input type="text" id="order_index" formControlName="order_index" />
-  </div>
-  <!-- Order Index -->
-  <br />
-  <!-- Release Time -->
-  <div>
-    <label for="release_time">Release Time</label>
-    <input type="text" id="release_time" formControlName="release_time" />
-  </div>
-  <!-- Release Time -->
-  <br />
-  <!-- Serving Value -->
-  <div>
-    <label for="serving_value">Serving Value</label>
-    <input type="text" id="serving_value" formControlName="serving_value" />
-  </div>
-  <!-- Serving Value -->
-  <br />
+  
+  
   <!-- Allergen -->
   <div>
     <div>
@@ -76,7 +61,7 @@
     </div>
     <div>
       <label>Selected Allergens:</label>
-      <div>{{ testForm.get("selectedAllergenNames")?.value }}</div>
+      <div>{{ baseForm.get("selectedAllergenNames")?.value }}</div>
     </div>
     <!-- Allergen -->
     <br />
@@ -129,15 +114,6 @@
     <!-- Preparation -->
     <br />
 
-    <!-- Plate -->
-    <label for="food_plate">Plate</label>
-    <select id="food_plate" formControlName="food_plate">
-      <option *ngFor="let plate of plates" [value]="plate.id">
-        {{ plate.name }}
-      </option>
-    </select>
-    <!-- Plate -->
-    <br />
     <!-- Ingredients -->
   </div>
   <div formArrayName="ingredients">
@@ -186,43 +162,8 @@
           </option>
         </select>
       </div>
-
-      <!-- test -->
-      <!-- <label for="is_base">Base?</label>
-      <select
-        id="is_base"
-        formControlName="is_base"
-        (change)="onIsBaseChange(i)"
-      >
-        <option value="false">Не</option>
-        <option value="true">Да</option>
-      </select>
-  
-      <div *ngIf="i === 0 || ingredients.controls[i].get('is_base')?.value === 'true'">
-        <label for="baseRecipe">Избери базова рецепта:</label>
-        <select id="baseRecipe" formControlName="baseRecipe">
-          <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">{{ recipe.title }}</option>
-        </select>
-      </div> -->
-      <!-- test -->
     </div>
   </div>
   <button type="button" (click)="addIngredient()">Add Ingredient</button>
   <button type="button" (click)="onSubmit()">Submit</button>
 </form>
-
-<!-- adding reference to object in array -->
-<!-- <div>
-      <select formControlName="selectedAllergen">
-        <option *ngFor="let allergen of allergens" [value]="allergen.id">
-          {{ allergen.name }}
-        </option>
-      </select>
-      <button type="button" (click)="addSelectedAllergen()">Add Allergen</button>
-    </div> -->
-
-<!-- <label for="is_base">Base?</label>
-      <select id="is_base" formControlName="is_base">
-        <option value="true">Да</option>
-        <option value="false">Не</option>
-      </select> -->

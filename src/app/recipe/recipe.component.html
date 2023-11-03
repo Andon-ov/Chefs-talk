@@ -4,7 +4,7 @@
 
     <ul>
       <li *ngFor="let img of recipe?.image_recipe">
-        <img [src]="img" alt="" />
+        <img [src]="img.image_recipe" alt="" />
       </li>
     </ul>
 
@@ -22,7 +22,7 @@
     <ul>
       <li class="ingredients-list" *ngFor="let ingredient of recipe?.ingredients">
         <ul>
-          <li>Name: {{ ingredient.product }}</li>
+          <!-- <li>Name: {{ ingredient.product }}</li> -->
           <li>Amount: {{ ingredient.amount }}</li>
           <li>Unit: {{ ingredient.unit }}</li>
           <li>Base: {{ ingredient.base }}</li>
