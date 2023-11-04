@@ -45,8 +45,7 @@
   </div>
   <!-- Summary -->
   <br />
-  
-  
+
   <!-- Allergen -->
   <div>
     <div>
@@ -142,7 +141,12 @@
       />
       <!-- Unit -->
       <label for="unit">Unit</label>
-      <input type="text" id="unit" formControlName="unit" />
+      <select id="unit" formControlName="unit">
+        <option value="гр.">грама</option>
+        <option value="кг.">килограма</option>
+        <option value="мл.">милилитра</option>
+        <option value="л.">литра</option>
+      </select>
       <!-- Base -->
       <label for="is_base">Base?</label>
       <select

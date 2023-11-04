@@ -37,7 +37,6 @@ export class CategoryComponent implements OnInit {
         'Category',
         selectedCategoryId
       );
-      console.log(categoryDocRef);
 
       const categorySnapshot = await getDoc(categoryDocRef);
       if (categorySnapshot.exists()) {
@@ -76,20 +75,3 @@ export class CategoryComponent implements OnInit {
     });
   }
 }
-
-// getDocs(q)
-//   .then((querySnapshot) => {
-//     const recipes: any[] = [];
-
-//     querySnapshot.forEach((doc) => {
-//       // title and image_recipe[0]  - мисля че ще са достатъчни тук + id то доло
-//       const RecipesData = doc.data();
-//       const ingredientWithId = { ...RecipesData, id: doc.id };
-
-//       recipes.push(ingredientWithId);
-//     });
-//     this.recipes = recipes;
-//   })
-//   .catch((error) => {
-//     console.error('Error retrieving recipes: ', error);
-//   });

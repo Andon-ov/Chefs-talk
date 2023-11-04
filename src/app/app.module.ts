@@ -17,7 +17,6 @@ import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
-
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { CategoryComponent } from './category/category.component';
 import { RecipeComponent } from './recipe/recipe.component';
@@ -28,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { IngredientComponent } from './ingredient/ingredient.component';
 import { TestComponent } from './test/test.component';
+import { SafeUrlPipe } from './safe-url.pipe';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { TestComponent } from './test/test.component';
     BaseRecipeComponent,
     IngredientComponent,
     TestComponent,
+    SafeUrlPipe,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,9 @@ import { TestComponent } from './test/test.component';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     // Cloudinary
-    CloudinaryModule
+    CloudinaryModule,
+
+
 
   ],
   providers: [],

@@ -1,52 +1,76 @@
-<div class="recipe-card">
-  <ul>
-    <li>Title: {{ recipe?.title }}</li>
+<div class="recipe-container">
+  <h1 class="recipe-title">{{ recipe?.title }}</h1>
+  <div class="recipe-summary">{{ recipe?.summary }}</div>
 
-    <ul>
+  <div class="recipe-category">
+    <a [routerLink]="['/category', recipe?.category]">
+      {{ category?.name }} - {{ category?.menu }}
+    </a>
+  </div>
+
+  <div class="recipe-details">
+    <ul class="recipe-image">
       <li *ngFor="let img of recipe?.image_recipe">
-        <img [src]="img.image_recipe" alt="" />
+        <img [src]="img.image_recipe" alt="Изображение на рецепта" />
       </li>
     </ul>
+    <div class="recipe-description">
+      <h2>Описание</h2>
+      <p class="recipe-description-text">{{ recipe?.description }}</p>
+    </div>
+  </div>
 
-    <ul>
-      <li *ngFor="let video of recipe?.video_recipe">Video: {{ video }}</li>
-    </ul>
+  <h2>Съставки</h2>
 
-    <ul>
-      <li *ngFor="let method of recipe?.preparation_method">
-        Preparation Method: {{ method }}
-      </li>
-    </ul>
-
-    <li>Ingredients:</li>
-    <ul>
-      <li class="ingredients-list" *ngFor="let ingredient of recipe?.ingredients">
-        <ul>
-          <!-- <li>Name: {{ ingredient.product }}</li> -->
-          <li>Amount: {{ ingredient.amount }}</li>
-          <li>Unit: {{ ingredient.unit }}</li>
-          <li>Base: {{ ingredient.base }}</li>
-          <li>Order Index: {{ ingredient.order_index }}</li>
-          <li>Preparation Method: {{ ingredient.preparation_method }}</li>
-          <li>Quantity: {{ ingredient.quantity }}</li>
-        </ul>
-      </li>
-    </ul>
-
-    <li class="description" >Description: {{ recipe?.description }}</li>
-
-    <li>Category: {{ recipe?.category }}</li>
-
-    <li>Food Plate: {{ recipe?.food_plate }}</li>
-
-    <li>Order Index: {{ recipe?.order_index }}</li>
-    <li>Release Time: {{ recipe?.release_time }}</li>
-    <li>Season: {{ recipe?.season }}</li>
-    <li>Serving Value: {{ recipe?.serving_value }}</li>
-    <li>Summary: {{ recipe?.summary }}</li>
-    
-    <ul>
-      <li  class="allergens-list" *ngFor="let alg of recipe?.allergen">Allergen: {{ alg }}</li>
-    </ul>
+  <ul class="recipe-ingredients" *ngFor="let ingredient of recipe?.ingredients">
+    <li>
+      {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
+      <span *ngIf="ingredient.quantity">{{ ingredient.quantity }}</span>
+    </li>
+    <li *ngIf="ingredient.is_base">
+      <a [routerLink]="['/base', ingredient.base]">Base Link</a>
+    </li>
+    <li *ngIf="ingredient.preparation_method">
+      Обработка: {{ ingredient.preparation_method }}
+    </li>
+    <hr
+      *ngIf="
+        ingredient.name || ingredient.is_base || ingredient.preparation_method
+      "
+    />
+    <hr />
   </ul>
+  <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
+
+  <h2>Приготовление</h2>
+  <ul
+    class="recipe-preparation-method"
+    *ngFor="let method of recipe?.preparation_method"
+  >
+    <li>{{ method.preparation_method }}</li>
+  </ul>
+
+  <div class="recipe-other-details">
+    <!-- <p>Order Index: {{ recipe?.order_index }}</p> -->
+    <p>Време за изаване: {{ recipe?.release_time }} минути</p>
+    <p>Сезон: {{ recipe?.season }}</p>
+    <p>Алергени: {{ recipe?.selectedAllergenNames }}</p>
+    <p>Готово Количество: {{ recipe?.serving_value }} грама</p>
+    <p>Чиния: {{ plate?.name }}</p>
+  </div>
+
+  <div class="recipe-videos" *ngIf="recipe">
+    <h2>Видео рецепта</h2>
+    <ul>
+      <li *ngFor="let video of recipe?.video_recipe">
+        <iframe
+          width="560"
+          height="315"
+          [src]="video.video_recipe | safeUrl"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </li>
+    </ul>
+  </div>
 </div>

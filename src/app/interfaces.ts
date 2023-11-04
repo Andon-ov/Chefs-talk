@@ -18,36 +18,18 @@ export interface Recipe {
   id: string;
   ingredients: Ingredient[];
   order_index: number;
-  preparation_method: string[];
+  preparation_method: PreparationMethodItem[];
   release_time: number;
   season: string;
   serving_value: number;
-  
+
   selectedAllergen: string;
   selectedAllergenNames: string;
   summary: string;
   title: string;
   image_recipe: ImageRecipeItem[];
-  video_recipe: string[];
+  video_recipe: VideoRecipeItem[];
 }
-// export interface Recipe {
-//   allergen: string[];
-//   category: DocumentReference<DocumentData>;
-//   description: string;
-//   food_plate: string;
-//   id: string;
-//   image_recipe: string[];
-//   ingredients: Ingredient[];
-//   order_index: number;
-//   preparation_method: string[];
-//   release_time: number;
-//   season: string;
-//   serving_value: number;
-
-//   summary: string;
-//   title: string;
-//   video_recipe: string[];
-// }
 
 export interface Ingredient {
   amount: number;
@@ -64,7 +46,7 @@ export interface BaseRecipe {
   base_recipe_portions: number;
   base_type: string;
   base_yield: number;
-  
+
   allergen: DocumentReference<DocumentData>[];
   summary: string;
   preparation_method: string[];
@@ -86,7 +68,12 @@ export interface Plates {
   id: string;
 }
 
-
 export interface ImageRecipeItem {
   image_recipe: string;
+}
+export interface VideoRecipeItem {
+  video_recipe: string;
+}
+export interface PreparationMethodItem {
+  preparation_method: string;
 }

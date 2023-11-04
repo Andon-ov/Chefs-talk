@@ -1,196 +1,199 @@
-  <form [formGroup]="recipeForm">
-    <!-- Title -->
-    <div>
-      <label for="title">Title</label>
-      <input type="text" id="title" formControlName="title" />
-    </div>
-    <!-- Title -->
-    <br />
-    <!-- Category -->
-    <label for="category">Category</label>
-    <select id="category" formControlName="category">
-      <option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </option>
+<form [formGroup]="recipeForm">
+  <!-- Title -->
+  <div>
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" />
+  </div>
+  <!-- Title -->
+  <br />
+  <!-- Category -->
+  <label for="category">Category</label>
+  <select id="category" formControlName="category">
+    <option *ngFor="let category of categories" [value]="category.id">
+      {{ category.name }}
+    </option>
+  </select>
+  <!-- Category -->
+  <br />
+  <!-- Description -->
+  <div>
+    <label for="description">Description</label>
+    <input type="text" id="description" formControlName="description" />
+  </div>
+  <!-- Description -->
+  <br />
+  <!-- Summary -->
+  <div>
+    <label for="summary">Summary</label>
+    <input type="text" id="summary" formControlName="summary" />
+  </div>
+  <!-- Summary -->
+  <br />
+  <!-- Season -->
+  <div>
+    <label for="season">Season</label>
+    <select id="season" formControlName="season">
+      <option value="Пролет">Пролет</option>
+      <option value="Лято">Лято</option>
+      <option value="Есен">Есен</option>
+      <option value="Зима">Зима</option>
     </select>
-    <!-- Category -->
-    <br />
-    <!-- Description -->
+  </div>
+  <!-- Season -->
+  <br />
+  <!-- Order Index -->
+  <div>
+    <label for="order_index">Order Index</label>
+    <input type="text" id="order_index" formControlName="order_index" />
+  </div>
+  <!-- Order Index -->
+  <br />
+  <!-- Release Time -->
+  <div>
+    <label for="release_time">Release Time</label>
+    <input type="text" id="release_time" formControlName="release_time" />
+  </div>
+  <!-- Release Time -->
+  <br />
+  <!-- Serving Value -->
+  <div>
+    <label for="serving_value">Serving Value</label>
+    <input type="text" id="serving_value" formControlName="serving_value" />
+  </div>
+  <!-- Serving Value -->
+  <br />
+  <!-- Allergen -->
+  <div>
     <div>
-      <label for="description">Description</label>
-      <input type="text" id="description" formControlName="description" />
-    </div>
-    <!-- Description -->
-    <br />
-    <!-- Summary -->
-    <div>
-      <label for="summary">Summary</label>
-      <input type="text" id="summary" formControlName="summary" />
-    </div>
-    <!-- Summary -->
-    <br />
-    <!-- Season -->
-    <div>
-      <label for="season">Season</label>
-      <select id="season" formControlName="season">
-        <option value="Пролет">Пролет</option>
-        <option value="Лято">Лято</option>
-        <option value="Есен">Есен</option>
-        <option value="Зима">Зима</option>
-      </select>
-    </div>
-    <!-- Season -->
-    <br />
-    <!-- Order Index -->
-    <div>
-      <label for="order_index">Order Index</label>
-      <input type="text" id="order_index" formControlName="order_index" />
-    </div>
-    <!-- Order Index -->
-    <br />
-    <!-- Release Time -->
-    <div>
-      <label for="release_time">Release Time</label>
-      <input type="text" id="release_time" formControlName="release_time" />
-    </div>
-    <!-- Release Time -->
-    <br />
-    <!-- Serving Value -->
-    <div>
-      <label for="serving_value">Serving Value</label>
-      <input type="text" id="serving_value" formControlName="serving_value" />
-    </div>
-    <!-- Serving Value -->
-    <br />
-    <!-- Allergen -->
-    <div>
-      <div>
-        <select formControlName="selectedAllergen">
-          <option *ngFor="let allergen of allergens" [value]="allergen.id">
-            {{ allergen.name }}
-          </option>
-        </select>
-        <button type="button" (click)="addSelectedAllergen()">
-          Add Allergen
-        </button>
-      </div>
-      <div>
-        <label>Selected Allergens:</label>
-        <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
-      </div>
-      <!-- Allergen -->
-      <br />
-      <!-- Image -->
-      <div formArrayName="image_recipe">
-        <div
-          *ngFor="let image of image_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="image_recipe">Image</label>
-          <input type="text" id="image_recipe" formControlName="image_recipe" />
-          <button type="button" (click)="removeImage(i)">Remove Image</button>
-        </div>
-      </div>
-      <button type="button" (click)="addImage()">Add Image</button>
-      <!-- Image -->
-      <br />
-      <!-- Video -->
-      <div formArrayName="video_recipe">
-        <div
-          *ngFor="let video of video_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="video_recipe">Video</label>
-          <input type="text" id="video_recipe" formControlName="video_recipe" />
-          <button type="button" (click)="removeVideo(i)">Remove Video</button>
-        </div>
-        <button type="button" (click)="addVideo()">Add Video</button>
-      </div>
-      <!-- Video -->
-      <br />
-      <!-- Preparation -->
-      <div formArrayName="preparation_method">
-        <div
-          *ngFor="let preparation of preparation_method.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="preparation_method">Preparation Method</label>
-          <input
-            type="text"
-            id="preparation_method"
-            formControlName="preparation_method"
-          />
-          <button type="button" (click)="removePreparation(i)">
-            Remove Preparation
-          </button>
-        </div>
-        <button type="button" (click)="addPreparation()">Add Preparation</button>
-      </div>
-      <!-- Preparation -->
-      <br />
-  
-      <!-- Plate -->
-      <label for="food_plate">Plate</label>
-      <select id="food_plate" formControlName="food_plate">
-        <option *ngFor="let plate of plates" [value]="plate.id">
-          {{ plate.name }}
+      <select formControlName="selectedAllergen">
+        <option *ngFor="let allergen of allergens" [value]="allergen.id">
+          {{ allergen.name }}
         </option>
       </select>
-      <!-- Plate -->
-      <br />
-      <!-- Ingredients -->
+      <button type="button" (click)="addSelectedAllergen()">
+        Add Allergen
+      </button>
     </div>
-    <div formArrayName="ingredients">
+    <div>
+      <label>Selected Allergens:</label>
+      <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
+    </div>
+    <!-- Allergen -->
+    <br />
+    <!-- Image -->
+    <div formArrayName="image_recipe">
       <div
-        *ngFor="let ingredient of ingredients.controls; let i = index"
+        *ngFor="let image of image_recipe.controls; let i = index"
         [formGroupName]="i"
       >
-        <!-- Name -->
-        <label for="name">Name</label>
-        <input type="text" id="name" formControlName="name" />
-        <!-- Amount -->
-        <label for="amount">Amount</label>
-        <input type="number" id="amount" formControlName="amount" />
-        <!-- Order Index -->
-        <label for="order_index">Order Index</label>
-        <input type="number" id="order_index" formControlName="order_index" />
-        <!-- Quantity -->
-        <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" formControlName="amount" />
-        <!-- Preparation Method -->
+        <label for="image_recipe">Image</label>
+        <input type="text" id="image_recipe" formControlName="image_recipe" />
+        <button type="button" (click)="removeImage(i)">Remove Image</button>
+      </div>
+    </div>
+    <button type="button" (click)="addImage()">Add Image</button>
+    <!-- Image -->
+    <br />
+    <!-- Video -->
+    <div formArrayName="video_recipe">
+      <div
+        *ngFor="let video of video_recipe.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <label for="video_recipe">Video</label>
+        <input type="text" id="video_recipe" formControlName="video_recipe" />
+        <button type="button" (click)="removeVideo(i)">Remove Video</button>
+      </div>
+      <button type="button" (click)="addVideo()">Add Video</button>
+    </div>
+    <!-- Video -->
+    <br />
+    <!-- Preparation -->
+    <div formArrayName="preparation_method">
+      <div
+        *ngFor="let preparation of preparation_method.controls; let i = index"
+        [formGroupName]="i"
+      >
         <label for="preparation_method">Preparation Method</label>
         <input
           type="text"
           id="preparation_method"
           formControlName="preparation_method"
         />
-        <!-- Unit -->
-        <label for="unit">Unit</label>
-        <input type="text" id="unit" formControlName="unit" />
-        <!-- Base -->
-        <label for="is_base">Base?</label>
-        <select
-          id="is_base"
-          formControlName="is_base"
-          (change)="onIsBaseChange()"
-        >
-          <option value="false">Не</option>
-          <option value="true">Да</option>
-        </select>
-  
-        <div *ngIf="isBaseControl == 'true'">
-          <label for="base">Избери базова рецепта:</label>
-          <select id="base" formControlName="base">
-            <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
-              {{ recipe.title }}
-            </option>
-          </select>
-        </div>
+        <button type="button" (click)="removePreparation(i)">
+          Remove Preparation
+        </button>
+      </div>
+      <button type="button" (click)="addPreparation()">Add Preparation</button>
+    </div>
+    <!-- Preparation -->
+    <br />
 
+    <!-- Plate -->
+    <label for="food_plate">Plate</label>
+    <select id="food_plate" formControlName="food_plate">
+      <option *ngFor="let plate of plates" [value]="plate.id">
+        {{ plate.name }}
+      </option>
+    </select>
+    <!-- Plate -->
+    <br />
+    <!-- Ingredients -->
+  </div>
+  <div formArrayName="ingredients">
+    <div
+      *ngFor="let ingredient of ingredients.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <!-- Name -->
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" />
+      <!-- Amount -->
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" formControlName="amount" />
+      <!-- Order Index -->
+      <label for="order_index">Order Index</label>
+      <input type="number" id="order_index" formControlName="order_index" />
+      <!-- Quantity -->
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" formControlName="amount" />
+      <!-- Preparation Method -->
+      <label for="preparation_method">Preparation Method</label>
+      <input
+        type="text"
+        id="preparation_method"
+        formControlName="preparation_method"
+      />
+
+      <!-- Unit -->
+      <label for="unit">Unit</label>
+      <select id="unit" formControlName="unit">
+        <option value="гр.">грама</option>
+        <option value="кг.">килограма</option>
+        <option value="мл.">милилитра</option>
+        <option value="л.">литра</option>
+      </select>
+      <!-- Base -->
+      <label for="is_base">Base?</label>
+      <select
+        id="is_base"
+        formControlName="is_base"
+        (change)="onIsBaseChange()"
+      >
+        <option value="false">Не</option>
+        <option value="true">Да</option>
+      </select>
+
+      <div *ngIf="isBaseControl == 'true'">
+        <label for="base">Избери базова рецепта:</label>
+        <select id="base" formControlName="base">
+          <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
+            {{ recipe.title }}
+          </option>
+        </select>
       </div>
     </div>
-    <button type="button" (click)="addIngredient()">Add Ingredient</button>
-    <button type="button" (click)="onSubmit()">Submit</button>
-  </form>
-
-  
+  </div>
+  <button type="button" (click)="addIngredient()">Add Ingredient</button>
+  <button type="button" (click)="onSubmit()">Submit</button>
+</form>

@@ -1,50 +1,8 @@
-// import { Component } from '@angular/core';
-// import { inject } from '@angular/core';
-// import {
-//   Firestore,
-//   collection,
-//   getDocs,
-
-// } from '@angular/fire/firestore';
-// import {
-//   Recipe,
-// } from '../interfaces';
-
-// @Component({
-//   selector: 'app-recipe',
-//   templateUrl: './recipe.component.html',
-//   styleUrls: ['./recipe.component.css'],
-// })
-// export class RecipeComponent {
-//   items: Recipe[] = [];
-
-//   firestore: Firestore = inject(Firestore);
-
-//   constructor() {
-//     // Recipe
-//     const collectionName = 'Recipe';
-//     const collectionRef = collection(this.firestore, collectionName);
-
-//     getDocs(collectionRef)
-//       .then(async (querySnapshot) => {
-//         for (const doc of querySnapshot.docs) {
-//           const data = doc.data() as Recipe;
-
-//           this.items.push(data);
-//           console.log(data);
-
-//         }
-//       })
-//       .catch((error) => {
-//         console.error('Error getting documents: ', error);
-//       });
-//   }
-// }
-
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Recipe } from '../interfaces';
+import { Category, Plates, Recipe } from '../interfaces';
 import { RecipeService } from './recipe.service';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-recipe',
@@ -52,36 +10,62 @@ import { RecipeService } from './recipe.service';
   styleUrls: ['./recipe.component.css'],
 })
 export class RecipeComponent {
-  recipe: Recipe | undefined |null;
+  recipe: Recipe | null = null;
+  category: Category | null = null;
+  plate: Plates | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private firestore: Firestore = inject(Firestore)
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const recipeId = params.get('id');
 
       if (recipeId) {
         try {
-          const recipe = await this.recipeService.getRecipeById(recipeId);
-          this.recipe = recipe;
-          console.log(recipe);
-          
-
-          if (!recipe) {
-            console.error('Рецептата не е намерена.');
+          this.recipe = await this.recipeService.getRecipeById(recipeId);
+          if (this.recipe) {
+            await this.loadCategoryAndPlateData();
+          } else {
+            console.error('Recipe not found.');
           }
         } catch (error) {
-          console.error('Възникна грешка при извличането на рецептата:', error);
+          console.error(
+            'An error occurred while retrieving the recipe:',
+            error
+          );
         }
       } else {
-        console.error('ID на рецептата не е предоставен.');
+        console.error('Recipe ID not provided.');
       }
     });
   }
+
+  private async loadCategoryAndPlateData() {
+    const selectedPlateId = this.recipe?.food_plate;
+    const selectedCategoryId = this.recipe?.category;
+
+    if (selectedPlateId) {
+      const platesDocRef = doc(this.firestore, 'Plates/' + selectedPlateId);
+      const platesSnapshot = await getDoc(platesDocRef);
+      if (platesSnapshot.exists()) {
+        this.plate = platesSnapshot.data() as Plates;
+      }
+    }
+
+    if (selectedCategoryId) {
+      const categoryDocRef = doc(
+        this.firestore,
+        'Category/' + selectedCategoryId
+      );
+      const categorySnapshot = await getDoc(categoryDocRef);
+      if (categorySnapshot.exists()) {
+        this.category = categorySnapshot.data() as Category;
+      }
+    }
+  }
 }
-
-
 
 // //! Get Allergen
 // const allergenReferenceArray = data.allergen;

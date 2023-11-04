@@ -10,6 +10,7 @@ import { CategoryComponent } from './category/category.component';
 import { RecipeFormComponent } from './forms/recipe-form/recipe-form.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { BaseFormComponent } from './forms/base-form/base-form.component';
+import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'add-base',
     component: BaseFormComponent,
+  },
+  {
+    path: 'base/:id',
+    component: BaseRecipeComponent,
   },
 
   {
