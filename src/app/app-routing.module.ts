@@ -11,6 +11,7 @@ import { RecipeFormComponent } from './forms/recipe-form/recipe-form.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { BaseFormComponent } from './forms/base-form/base-form.component';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
+import { ListBaseComponent } from './list-base/list-base.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'base/:id',
     component: BaseRecipeComponent,
+  },
+  {
+    path: 'base',
+    component: ListBaseComponent,
   },
 
   {

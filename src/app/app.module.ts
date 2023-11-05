@@ -28,6 +28,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
 import { IngredientComponent } from './ingredient/ingredient.component';
 import { TestComponent } from './test/test.component';
 import { SafeUrlPipe } from './safe-url.pipe';
+import { ListBaseComponent } from './list-base/list-base.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { SafeUrlPipe } from './safe-url.pipe';
     IngredientComponent,
     TestComponent,
     SafeUrlPipe,
+    ListBaseComponent,
   ],
   imports: [
     BrowserModule,

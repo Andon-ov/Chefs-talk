@@ -5,6 +5,8 @@ import {
   collection,
   getDocs,
   CollectionReference,
+  doc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { BaseRecipe } from '../interfaces';
 
@@ -42,6 +44,17 @@ export class BaseRecipeService  {
     });
 
     
+  }
+
+  async getBaseById(baseId: string): Promise<BaseRecipe | null> {
+    const baseDocRef = doc(this.firestore, 'BaseRecipe', baseId);
+    const baseSnapshot = await getDoc(baseDocRef);
+
+    if (baseSnapshot.exists()) {
+      return baseSnapshot.data() as BaseRecipe;
+    } else {
+      return null;
+    }
   }
 
 

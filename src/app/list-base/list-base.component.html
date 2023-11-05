@@ -1,0 +1,19 @@
+<div class="category">
+    <h1>
+     Базови Рецепти
+    </h1>
+ 
+  
+    <div class="recipe-list">
+      <div *ngFor="let recipe of baseRecipes">
+        <a [routerLink]="['/base', recipe.id]">
+          <div class="recipe-item">
+       
+            <h3>{{ recipe.title }}</h3>
+            
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  

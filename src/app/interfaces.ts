@@ -46,16 +46,17 @@ export interface BaseRecipe {
   base_recipe_portions: number;
   base_type: string;
   base_yield: number;
-
   allergen: DocumentReference<DocumentData>[];
+  selectedAllergen: string;
+  selectedAllergenNames: string;
   summary: string;
-  preparation_method: string[];
+  preparation_method: PreparationMethodItem[];
   title: string;
   id: string;
   description: string;
   ingredients: Ingredient[];
-  image_recipe: string[];
-  video_recipe: string[];
+  image_recipe: ImageRecipeItem[];
+  video_recipe: VideoRecipeItem[];
 }
 
 export interface Allergens {

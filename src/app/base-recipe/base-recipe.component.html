@@ -1,1 +1,70 @@
-<p>base-recipe works!</p>
+<div class="recipe-container">
+  <h1 class="recipe-title">{{ base?.title }}</h1>
+  <p>Тип: {{ base?.base_type }}</p>
+  <div class="recipe-summary">{{ base?.summary }}</div>
+
+  <div class="recipe-details">
+    <ul class="recipe-image">
+      <li *ngFor="let img of base?.image_recipe">
+        <img [src]="img.image_recipe" alt="Изображение на рецепта" />
+      </li>
+    </ul>
+    <div class="recipe-description">
+      <h2>Описание</h2>
+      <p class="recipe-description-text">{{ base?.description }}</p>
+    </div>
+  </div>
+
+  <h2>Съставки</h2>
+
+  <ul class="recipe-ingredients" *ngFor="let ingredient of base?.ingredients">
+    <li>
+      {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
+      <span *ngIf="ingredient.quantity">{{ ingredient.quantity }}</span>
+    </li>
+    <li *ngIf="ingredient.is_base">
+      <a [routerLink]="['/base', ingredient.base]">Base Link</a>
+    </li>
+    <li *ngIf="ingredient.preparation_method">
+      Обработка: {{ ingredient.preparation_method }}
+    </li>
+    <hr
+      *ngIf="
+        ingredient.name || ingredient.is_base || ingredient.preparation_method
+      "
+    />
+    <hr />
+  </ul>
+  <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
+
+  <h2>Приготовление</h2>
+  <ul
+    class="recipe-preparation-method"
+    *ngFor="let method of base?.preparation_method"
+  >
+    <li>{{ method.preparation_method }}</li>
+  </ul>
+
+  <div class="recipe-other-details">
+    <!-- <p>Order Index: {{ base?.order_index }}</p> -->
+    <p>base recipe portions : {{ base?.base_recipe_portions }}</p>
+    <p>base type : {{ base?.base_type }}</p>
+    <p>base yield : {{ base?.base_yield }}</p>
+    <p>Алергени: {{ base?.selectedAllergenNames }}</p>
+  </div>
+
+  <div class="recipe-videos" *ngIf="base">
+    <h2>Видео рецепта</h2>
+    <ul>
+      <li *ngFor="let video of base?.video_recipe">
+        <iframe
+          width="560"
+          height="315"
+          [src]="video.video_recipe | safeUrl"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </li>
+    </ul>
+  </div>
+</div>
