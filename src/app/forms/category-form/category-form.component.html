@@ -1,42 +1,36 @@
-<div class="form-wrapper">
-  <div class="categoryForm">
-  <h2>Category Form</h2>
-<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-  <label>
-    Is Active:
-    <input type="checkbox" formControlName="is_active">
-  </label>
+<div class="main">
+      <h1 class="title">Добавяне на категория</h1>
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <label>
+          Is Active:
+          <input type="checkbox" formControlName="is_active" />
+        </label>
 
-  <label>
-    Menu:
-    <input type="text" formControlName="menu">
-  </label>
+        <label>
+          Menu:
+          <input type="text" formControlName="menu" />
+        </label>
 
-  <label>
-    Order Index:
-    <input type="number" formControlName="order_index">
-  </label>
+        <label>
+          Order Index:
+          <input type="number" formControlName="order_index" />
+        </label>
 
-  <label>
-    Name:
-    <input type="text" formControlName="name" required>
-  </label>
+        <label>
+          Name:
+          <input type="text" formControlName="name" required />
+        </label>
 
-  <label>
-    Note:
-    <textarea formControlName="note"></textarea>
-  </label>
+        <label>
+          Note:
+          <textarea formControlName="note"></textarea>
+        </label>
 
-  <label>
-    Image URL:
-    <input type="text" formControlName="image">
-  </label>
+        <label>
+          Image URL:
+          <input type="text" formControlName="image" />
+        </label>
 
-  <button type="submit">Submit</button>
-</form>
-</div>
-</div>
-
-
-
-
+        <button type="submit">Submit</button>
+      </form>
+    </div>

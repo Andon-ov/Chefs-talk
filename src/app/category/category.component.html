@@ -1,21 +1,22 @@
-<div class="category">
-  <h1>
-    {{ category?.name }}
-  </h1>
-  <h3>
-    {{ category?.menu }} -
-    {{ category?.note }}
-  </h3>
+<div class="mainLong">
+  <div class="category">
+    <h1 class="title">
+      {{ category?.name }}
+    </h1>
+    <h3 class="title">
+      {{ category?.menu }} -
+      {{ category?.note }}
+    </h3>
 
-  <div class="recipe-list">
-    <div *ngFor="let recipe of recipes">
-      <a [routerLink]="['/recipe', recipe.id]">
-        <div class="recipe-item">
-          <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
-          <h3>{{ recipe.title }}</h3>
-          <!-- <p>Подредба: {{ recipe.order_index }}</p> -->
-        </div>
-      </a>
+    <div class="recipe-list">
+      <div *ngFor="let recipe of recipes">
+        <a [routerLink]="['/recipe', recipe.id]">
+          <div class="recipe-item">
+            <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
+            <h3>{{ recipe.title }}</h3>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
