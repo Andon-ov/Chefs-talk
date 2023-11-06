@@ -62,7 +62,6 @@ export class BaseFormComponent implements OnInit {
           name: '',
           amount: null,
           base: this.fb.control(null),
-          is_base: false,
           order_index: [0],
           preparation_method: '',
           quantity: [0],
@@ -176,8 +175,6 @@ export class BaseFormComponent implements OnInit {
           : selectedAllergen.name
       );
 
-      // this.baseForm.removeControl('selectedAllergen');
-      // Remove selectedAllergen from form
     }
   }
 
@@ -185,10 +182,7 @@ export class BaseFormComponent implements OnInit {
     const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
     this.isBaseControl = ingredientsArray.value[0].is_base;
   }
-  // onIsBaseChange(index: number) {
-  //   const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
-  //   this.isBaseControl = ingredientsArray.at(index).get('is_base')?.value;
-  // }
+
 
   get ingredients() {
     return this.baseForm.get('ingredients') as FormArray;

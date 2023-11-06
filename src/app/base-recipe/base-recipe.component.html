@@ -22,17 +22,13 @@
       {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
       <span *ngIf="ingredient.quantity">{{ ingredient.quantity }}</span>
     </li>
-    <li *ngIf="ingredient.is_base">
+    <li *ngIf="ingredient.base">
       <a [routerLink]="['/base', ingredient.base]">Base Link</a>
     </li>
     <li *ngIf="ingredient.preparation_method">
       Обработка: {{ ingredient.preparation_method }}
     </li>
-    <hr
-      *ngIf="
-        ingredient.name || ingredient.is_base || ingredient.preparation_method
-      "
-    />
+    <hr *ngIf="ingredient.name || ingredient.preparation_method" />
     <hr />
   </ul>
   <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->

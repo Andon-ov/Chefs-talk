@@ -1,16 +1,15 @@
-<p>comment-form works!</p>
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Име:</label>
+    <input type="text" id="name" formControlName="name" class="form-control" required />
+  </div>
+  <div class="form-group">
+    <label for="text">Коментар:</label>
+    <textarea id="text" formControlName="text" class="form-control" required></textarea>
+  </div>
 
-<!-- Angular Material -->
-<!-- <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
-    <mat-form-field>
-      <input matInput formControlName="name" placeholder="Име">
-    </mat-form-field>
-  
-    <input type="hidden" formControlName="recipeId" [value]="recipeId">
-  
-    <mat-form-field>
-      <textarea matInput formControlName="comment" placeholder="Коментар"></textarea>
-    </mat-form-field>
-  
-    <button type="submit" mat-raised-button color="primary">Публикувай</button>
-  </form> -->
+  <input type="hidden" formControlName="recipeId" />
+
+  <button type="submit" class="btn btn-primary">Публикувай коментар</button>
+</form>
+<hr>

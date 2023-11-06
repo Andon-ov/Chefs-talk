@@ -1,34 +1,60 @@
 .header {
-    height: 10vh;
-    background-color: #8abe53; 
-    color: #FFF; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .logo{
-  font-size: 42px;
-  font-weight: 900;
-  text-decoration:underline;
+  height: 6vh;
+  background-color: var(--mainGreenColor);
+  color: var(--mainWhiteColor);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
 
-  }
-  .logo a {
-    color: white;
-  }
-  
+.logo {
+  font-size: 32px;
+  font-weight: 900;
+  text-decoration: underline;
+
+}
+
+.logo a {
+  color: var(--mainWhiteColor);
+}
+
+.navigation ul {
+  display: flex;
+}
+
+.navigation li {
+  margin-right: 20px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: var(--mainWhiteColor);
+}
+
+
+@media (max-width: 768px) {
   .navigation ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
+    display: block;
+    position: absolute;
+    background-color: var(--mainWhiteColor);
+    top: 50px;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
   }
-  
+
   .navigation li {
-    margin-right: 20px;
+    display: block;
   }
-  
-  .navigation a {
-    text-decoration: none;
-    color: #FFF; 
+
+  .navigation li a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--mainGreenColor);
   }
+
+  .navigation li:hover {
+    background-color: #f0f0f0;
+  }
+}

@@ -24,11 +24,12 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { FormsModule } from './forms/forms.module';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {CloudinaryModule} from '@cloudinary/ng';
+import { CloudinaryModule } from '@cloudinary/ng';
 import { IngredientComponent } from './ingredient/ingredient.component';
-import { TestComponent } from './test/test.component';
 import { SafeUrlPipe } from './safe-url.pipe';
 import { ListBaseComponent } from './list-base/list-base.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -43,7 +44,6 @@ import { ListBaseComponent } from './list-base/list-base.component';
     RecipeComponent,
     BaseRecipeComponent,
     IngredientComponent,
-    TestComponent,
     SafeUrlPipe,
     ListBaseComponent,
   ],
@@ -62,8 +62,8 @@ import { ListBaseComponent } from './list-base/list-base.component';
     provideFirestore(() => getFirestore()),
     // Cloudinary
     CloudinaryModule,
-
-
+    // Angular Material
+    BrowserAnimationsModule,
 
   ],
   providers: [],

@@ -221,10 +221,10 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  onIsBaseChange() {
-    const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
-    this.isBaseControl = ingredientsArray.value[0].is_base;
-  }
+  // onIsBaseChange() {
+  //   const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
+  //   this.isBaseControl = ingredientsArray.value[0].is_base;
+  // }
   // onIsBaseChange(index: number) {
   //   const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
   //   this.isBaseControl = ingredientsArray.at(index).get('is_base')?.value;

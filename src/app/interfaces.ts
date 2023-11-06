@@ -1,4 +1,8 @@
-import { DocumentData, DocumentReference } from '@angular/fire/firestore';
+import {
+  DocumentData,
+  DocumentReference,
+  Timestamp,
+} from '@angular/fire/firestore';
 
 export interface Category {
   image: string;
@@ -38,7 +42,6 @@ export interface Ingredient {
   preparation_method: string;
   name: string;
   quantity: number;
-  is_base: boolean;
   unit: string;
 }
 
@@ -78,3 +81,11 @@ export interface VideoRecipeItem {
 export interface PreparationMethodItem {
   preparation_method: string;
 }
+
+export interface Comments {
+  create_time: Timestamp;
+  name: string;
+  recipe: string;
+  text: string;
+}
+
