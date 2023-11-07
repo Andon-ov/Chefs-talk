@@ -6,4 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+  handleMenuItemClick(item: string) {
+    console.log('Clicked on ' + item);
+    this.closeMenu();
+  }
 }

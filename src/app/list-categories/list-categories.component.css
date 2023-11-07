@@ -67,3 +67,12 @@
   a:hover {
       background-color: #f0f0f0;
   }
+
+
+  @media (max-width: 768px) {
+      .wrapper {
+          display: flex;
+          flex-direction: column;
+          padding: 0 50px;
+      }
+  }

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { BaseFormComponent } from './base-form/base-form.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
     RecipeFormComponent,
     BaseFormComponent,
     CommentFormComponent,
+    ImageUploadComponent,
   ],
   imports: [
     CommonModule,
