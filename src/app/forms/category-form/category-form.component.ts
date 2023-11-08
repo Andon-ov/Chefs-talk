@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { Category } from 'src/app/interfaces';
@@ -8,7 +8,7 @@ import { Category } from 'src/app/interfaces';
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.css'],
 })
-export class CategoryFormComponent  {
+export class CategoryFormComponent {
   categoryForm: FormGroup;
   firestore: Firestore;
 
@@ -24,13 +24,26 @@ export class CategoryFormComponent  {
     });
   }
 
-
   onSubmit() {
     if (this.categoryForm.valid) {
       const categoryData = this.categoryForm.value;
       this.addCategory(categoryData);
-      this.categoryForm.reset()
+      this.categoryForm.reset();
     }
+  }
+
+  removeImage() {
+    const imageControl = this.categoryForm.get('image');
+    imageControl?.setValue('');
+  }
+
+  addImageToForm(imageUrl: string) {
+    const imageControl = this.categoryForm.get('image');
+    imageControl?.setValue(imageUrl);
+  }
+
+  get image() {
+    return this.categoryForm.get('image');
   }
 
   addCategory(categoryData: Category) {
@@ -44,6 +57,4 @@ export class CategoryFormComponent  {
         console.error('Error adding document: ', error);
       });
   }
-
- 
 }

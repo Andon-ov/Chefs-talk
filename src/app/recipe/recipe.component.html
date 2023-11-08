@@ -33,11 +33,7 @@
     <li *ngIf="ingredient.preparation_method">
       Обработка: {{ ingredient.preparation_method }}
     </li>
-    <hr
-      *ngIf="
-        ingredient.name  || ingredient.preparation_method
-      "
-    />
+    <hr *ngIf="ingredient.name || ingredient.preparation_method" />
     <hr />
   </ul>
   <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
@@ -73,16 +69,12 @@
       </li>
     </ul>
   </div>
-  <app-comment-form  [recipeId]="recipeId"/>
+  <app-comment-form [recipeId]="recipeId" />
   <section class="comments" *ngIf="comments">
-    <ul  *ngFor="let comment of comments">
-      <li>{{comment.name}}</li>
-      <li>{{comment.text}}</li>
-     <p>{{ comment.create_time.toDate() | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
-
-
-
+    <ul *ngFor="let comment of comments">
+      <li>{{ comment.name }}</li>
+      <li>{{ comment.text }}</li>
+      <p>{{ comment.create_time.toDate() | date : "dd/MM/yyyy HH:mm:ss" }}</p>
     </ul>
   </section>
-
 </div>

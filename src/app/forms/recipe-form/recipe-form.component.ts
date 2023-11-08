@@ -1,5 +1,4 @@
-
-import { Component , OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -19,7 +18,6 @@ import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
 import { CategoriesService } from 'src/app/list-categories/categories.service';
 import { Allergens, BaseRecipe, Category, Plates } from 'src/app/interfaces';
 
-
 @Component({
   selector: 'app-recipe-form',
   templateUrl: './recipe-form.component.html',
@@ -31,7 +29,7 @@ export class RecipeFormComponent implements OnInit {
   allergens: Allergens[] = [];
   plates: Plates[] = [];
   baseRecipes: BaseRecipe[] = [];
-  categories: Category[] = []
+  categories: Category[] = [];
   currentOrderIndex = 1;
   isBaseControl: any;
 
@@ -42,31 +40,6 @@ export class RecipeFormComponent implements OnInit {
     private categoriesService: CategoriesService
   ) {
     this.firestore = firestore;
-
-    // adding only one reference to object
-    // this.recipeForm = this.fb.group({
-    //   title: '',
-    //   allergens: this.fb.array([]),
-    //   ingredients: this.fb.array([
-    //     this.fb.group({
-    //       name: '',
-    //       amount: null,
-    //     }),
-    //   ]),
-    // });
-
-    // adding reference to object in array
-    // this.recipeForm = this.fb.group({
-    //   title: '',
-    //   selectedAllergen: null,
-    //   allergens: this.fb.array([]),
-    //   ingredients: this.fb.array([
-    //     this.fb.group({
-    //       name: '',
-    //       amount: null,
-    //     }),
-    //   ]),
-    // });
 
     this.recipeForm = this.fb.group({
       // recipe
@@ -111,15 +84,12 @@ export class RecipeFormComponent implements OnInit {
 
     this.getPlates().subscribe((data) => {
       this.plates = data;
-      console.log(this.plates);
-      
     });
   }
 
   ngOnInit(): void {
     this.getBaseRecipe();
-    this.getCategory()
-    
+    this.getCategory();
   }
 
   // image
@@ -193,13 +163,6 @@ export class RecipeFormComponent implements OnInit {
     allergensArray.push(this.fb.control(selectedAllergenId));
   }
 
-  // adding reference to object in array
-  // addSelectedAllergen() {
-  //   const selectedAllergenId = this.recipeForm.get('selectedAllergen')?.value;
-  //   const allergensArray = this.recipeForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-  // }
-
   addSelectedAllergen() {
     const selectedAllergenId = this.recipeForm.get('selectedAllergen')?.value;
     const allergensArray = this.recipeForm.get('allergens') as FormArray;
@@ -215,20 +178,8 @@ export class RecipeFormComponent implements OnInit {
           ? selectedAllergenNames.value + ', ' + selectedAllergen.name
           : selectedAllergen.name
       );
-
-      // this.recipeForm.removeControl('selectedAllergen'); 
-      // Remove selectedAllergen from form
     }
   }
-
-  // onIsBaseChange() {
-  //   const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
-  //   this.isBaseControl = ingredientsArray.value[0].is_base;
-  // }
-  // onIsBaseChange(index: number) {
-  //   const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
-  //   this.isBaseControl = ingredientsArray.at(index).get('is_base')?.value;
-  // }
 
   get ingredients() {
     return this.recipeForm.get('ingredients') as FormArray;
@@ -302,7 +253,6 @@ export class RecipeFormComponent implements OnInit {
     return new Observable((observer) => {
       getDocs(collectionRef)
         .then((querySnapshot) => {
-          
           const data: Plates[] = [];
 
           querySnapshot.forEach((doc) => {
@@ -320,8 +270,6 @@ export class RecipeFormComponent implements OnInit {
         });
     });
   }
-
-  
 
   getBaseRecipe(): void {
     this.baseRecipeService.getBaseRecipe().subscribe({
@@ -346,4 +294,3 @@ export class RecipeFormComponent implements OnInit {
       });
   }
 }
-

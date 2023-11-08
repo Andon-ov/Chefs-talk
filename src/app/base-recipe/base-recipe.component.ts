@@ -21,11 +21,6 @@ export class BaseRecipeComponent {
       if (baseId) {
         try {
           this.base = await this.baseRecipeService.getBaseById(baseId);
-          if (this.base) {
-            console.log(this.base);
-          } else {
-            console.error('Recipe not found.');
-          }
         } catch (error) {
           console.error(
             'An error occurred while retrieving the recipe:',

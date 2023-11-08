@@ -19,7 +19,7 @@
   .recipe-category a {
     font-size: 18px;
     text-decoration: none;
-    color: #007BFF;
+    color: var(--mainGreenColor);
   }
   
   .recipe-category a:hover {
@@ -42,6 +42,7 @@
   
   .recipe-description-text {
     font-size: 16px;
+    white-space: pre-wrap;
   }
   
   .recipe-ingredients li {
@@ -50,7 +51,7 @@
   }
   
   .recipe-ingredients li a {
-    color: #007BFF;
+    color: var(--mainGreenColor);
     text-decoration: none;
   }
   

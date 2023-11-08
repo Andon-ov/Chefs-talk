@@ -1,36 +1,49 @@
-<div class="main">
-      <h1 class="title">Добавяне на категория</h1>
-      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-        <label>
-          Is Active:
-          <input type="checkbox" formControlName="is_active" />
-        </label>
+<div class="mainLong">
+  <h1 class="title">Добавяне на категория</h1>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <label>
+      Активна категрия:
+      <input type="checkbox" formControlName="is_active" />
+      <p class="hint">Ще бъде ли категорията видима във сайта</p>
+    </label>
 
-        <label>
-          Menu:
-          <input type="text" formControlName="menu" />
-        </label>
+    <label>
+      Меню:
+      <p class="hint">Към кое меню спада тази категория</p>
+      <input type="text" formControlName="menu" />
+    </label>
 
-        <label>
-          Order Index:
-          <input type="number" formControlName="order_index" />
-        </label>
+    <label>
+      Ред:
+      <p class="hint">Редът по който се показват категорийте</p>
+      <input type="number" formControlName="order_index" />
+    </label>
 
-        <label>
-          Name:
-          <input type="text" formControlName="name" required />
-        </label>
+    <label>
+      Име:
+      <input type="text" formControlName="name" required />
+    </label>
 
-        <label>
-          Note:
-          <textarea formControlName="note"></textarea>
-        </label>
+    <label>
+      Бележка:
+      <p class="hint">Няколко думи за категорията</p>
+      <textarea formControlName="note"></textarea>
+    </label>
 
-        <label>
-          Image URL:
-          <input type="text" formControlName="image" />
-        </label>
+    <app-image-upload (imageUploaded)="addImageToForm($event)" />
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <!-- Image Upload -->
+
+    <!-- Image -->
+
+    <label for="image">Добавена снимка</label>
+    <input type="text" id="image" formControlName="image" />
+    <button type="button" (click)="removeImage()">
+      Премахни добавената снимка
+    </button>
+
+    <!-- Image -->
+
+    <button type="submit">Добави категорията</button>
+  </form>
+</div>

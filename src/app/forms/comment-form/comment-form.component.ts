@@ -26,18 +26,12 @@ export class CommentFormComponent implements OnInit {
   ngOnInit() {
     this.commentForm = this.fb.group({
       name: ['', Validators.required],
-      recipeId: [this.recipeId], // Hidden field
+      recipeId: [this.recipeId], 
       text: ['', Validators.required],
       create_time: this.timestamp,
     });
   }
 
-  // onSubmit() {
-  //   if (this.commentForm.valid) {
-  //     this.commentService.addComment(this.commentForm.value);
-  //     this.commentForm.reset();
-  //   }
-  // }
   async onSubmit() {
     if (this.commentForm.valid) {
       try {
@@ -47,7 +41,6 @@ export class CommentFormComponent implements OnInit {
         if (result) {
           console.log('Comment successfully added.');
           this.commentForm.reset();
-          // Here i can add logic to refill the recipe
         } else {
           console.error('Error adding comment.');
         }

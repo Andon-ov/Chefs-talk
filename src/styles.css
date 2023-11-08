@@ -119,18 +119,22 @@ body {
 
   --mainWhiteColor: #FFFFFF;
   --mainGrayColor: #ddd;
+  --lightGrayColor: #ccc;
 
+  --grayishOrangeColor: #D5CABD;
+  --mainBlackColor: #000000;
 }
 
 .main {
   height: 87vh;
-  background-color: #D5CABD;
+  background-color: var(--grayishOrangeColor);
+
 }
 
 
 .mainLong {
-  border: 1px solid #ccc;
-  background-color: #D5CABD;
+  border: 1px solid var(--lightGrayColor);
+  background-color: var(--grayishOrangeColor);
   min-height: 87vh;
 }
 
@@ -139,9 +143,9 @@ form {
   margin: 0 auto 50px auto;
   padding: 20px;
 
-  background-color: #fff;
+  background-color: var(--mainWhiteColor);
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mainGrayColor);
   border-radius: 10px;
 }
 
@@ -157,22 +161,24 @@ textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--lightGrayColor);
   border-radius: 5px;
+}
+
+textarea {
+  white-space: pre-wrap;
 }
 
 input[type="checkbox"] {
   margin-right: 5px;
 }
 
-
-
 button {
   display: inline-block;
   padding: 10px 20px;
   margin: 10px 10px 10px 0;
   background-color: var(--mainGreenColor);
-  color: #fff;
+  color: var(--mainWhiteColor);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -185,4 +191,10 @@ button:hover {
 .title {
   text-align: center;
   padding: 20px 0;
+}
+
+.hint {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--secondGreenColor);
 }

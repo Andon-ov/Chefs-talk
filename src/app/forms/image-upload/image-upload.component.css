@@ -1,0 +1,13 @@
+.cloudinary-button {
+    background-color: var(--mainGreenColor);
+    color: var(--mainWhiteColor);
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 28px;
+    height: 28x;
+    cursor: pointer;
+    font-weight: normal;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 10px 14px;
+}

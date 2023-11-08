@@ -5,7 +5,6 @@ import {
   collection,
   getDocs,
   CollectionReference,
-  DocumentData,
 } from '@angular/fire/firestore';
 import { Category } from '../interfaces';
 
@@ -21,16 +20,16 @@ export class CategoriesService {
       this.firestore,
       collectionName
     );
-  
+
     return new Observable((observer) => {
       getDocs(collectionRef)
         .then((querySnapshot) => {
           const data: Category[] = [];
-          
+
           querySnapshot.forEach((doc) => {
             const categoryData = doc.data() as Category;
             const categoryWithId = { ...categoryData, id: doc.id };
-    
+
             data.push(categoryWithId);
           });
           observer.next(data);
@@ -40,12 +39,5 @@ export class CategoriesService {
           observer.error(error);
         });
     });
-
-    
   }
-
-
-  
 }
-
-

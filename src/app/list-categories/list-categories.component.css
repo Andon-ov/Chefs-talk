@@ -61,11 +61,11 @@
 
   a {
       text-decoration: none;
-      color: #000;
+      color: var(--mainBlackColor);
   }
 
   a:hover {
-      background-color: #f0f0f0;
+      background-color: var(--mainWhiteColor);
   }
 
 

@@ -1,7 +1,7 @@
 .footer {
   height: 5vh;
-  background-color: #00C0A3; 
-  color: #FFF;
+  background-color: var(--secondGreenColor); 
+  color: var(--mainWhiteColor);
   text-align: center;
   padding: 10px;
 }

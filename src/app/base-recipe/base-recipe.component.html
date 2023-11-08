@@ -3,7 +3,7 @@
     <h1 class="title">{{ base?.title }}</h1>
     <p>Тип: {{ base?.base_type }}</p>
     <div class="recipe-summary">{{ base?.summary }}</div>
-  
+
     <div class="recipe-details">
       <ul class="recipe-image">
         <li *ngFor="let img of base?.image_recipe">
@@ -15,9 +15,9 @@
         <p class="recipe-description-text">{{ base?.description }}</p>
       </div>
     </div>
-  
+
     <h2>Съставки</h2>
-  
+
     <ul class="recipe-ingredients" *ngFor="let ingredient of base?.ingredients">
       <li>
         {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
@@ -32,8 +32,7 @@
       <hr *ngIf="ingredient.name || ingredient.preparation_method" />
       <hr />
     </ul>
-    <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
-  
+
     <h2>Приготовление</h2>
     <ul
       class="recipe-preparation-method"
@@ -41,7 +40,7 @@
     >
       <li>{{ method.preparation_method }}</li>
     </ul>
-  
+
     <div class="recipe-other-details">
       <!-- <p>Order Index: {{ base?.order_index }}</p> -->
       <p>base recipe portions : {{ base?.base_recipe_portions }}</p>
@@ -49,7 +48,7 @@
       <p>base yield : {{ base?.base_yield }}</p>
       <p>Алергени: {{ base?.selectedAllergenNames }}</p>
     </div>
-  
+
     <div class="recipe-videos" *ngIf="base">
       <h2>Видео рецепта</h2>
       <ul>
@@ -65,5 +64,4 @@
       </ul>
     </div>
   </div>
-  
 </div>

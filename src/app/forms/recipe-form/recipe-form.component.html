@@ -7,7 +7,7 @@
       <input type="text" id="title" formControlName="title" />
     </div>
     <!-- Title -->
-     
+
     <!-- Category -->
     <label for="category">Category</label>
     <select id="category" formControlName="category">
@@ -16,21 +16,21 @@
       </option>
     </select>
     <!-- Category -->
-     
+
     <!-- Description -->
     <div>
       <label for="description">Description</label>
       <input type="text" id="description" formControlName="description" />
     </div>
     <!-- Description -->
-     
+
     <!-- Summary -->
     <div>
       <label for="summary">Summary</label>
       <input type="text" id="summary" formControlName="summary" />
     </div>
     <!-- Summary -->
-     
+
     <!-- Season -->
     <div>
       <label for="season">Season</label>
@@ -42,28 +42,28 @@
       </select>
     </div>
     <!-- Season -->
-     
+
     <!-- Order Index -->
     <div>
       <label for="order_index">Order Index</label>
       <input type="text" id="order_index" formControlName="order_index" />
     </div>
     <!-- Order Index -->
-     
+
     <!-- Release Time -->
     <div>
       <label for="release_time">Release Time</label>
       <input type="text" id="release_time" formControlName="release_time" />
     </div>
     <!-- Release Time -->
-     
+
     <!-- Serving Value -->
     <div>
       <label for="serving_value">Serving Value</label>
       <input type="text" id="serving_value" formControlName="serving_value" />
     </div>
     <!-- Serving Value -->
-     
+
     <!-- Allergen -->
     <div>
       <div>
@@ -81,7 +81,7 @@
         <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
       </div>
       <!-- Allergen -->
-       
+
       <!-- Image -->
       <div formArrayName="image_recipe">
         <div
@@ -95,7 +95,7 @@
       </div>
       <button type="button" (click)="addImage()">Add Image</button>
       <!-- Image -->
-       
+
       <!-- Video -->
       <div formArrayName="video_recipe">
         <div
@@ -109,7 +109,7 @@
         <button type="button" (click)="addVideo()">Add Video</button>
       </div>
       <!-- Video -->
-       
+
       <!-- Preparation -->
       <div formArrayName="preparation_method">
         <div
@@ -131,7 +131,6 @@
         </button>
       </div>
       <!-- Preparation -->
-       
 
       <!-- Plate -->
       <label for="food_plate">Plate</label>
@@ -141,7 +140,7 @@
         </option>
       </select>
       <!-- Plate -->
-       
+
       <!-- Ingredients -->
     </div>
     <div formArrayName="ingredients">
@@ -178,17 +177,7 @@
           <option value="л.">литра</option>
         </select>
         <!-- Base -->
-        <!-- <label for="is_base">Base?</label>
-        <select
-          id="is_base"
-          formControlName="is_base"
-          (change)="onIsBaseChange()"
-        >
-          <option value="false">Не</option>
-          <option value="true">Да</option>
-        </select>
-  
-        <div *ngIf="isBaseControl == 'true'"> -->
+
         <label for="base">Избери базова рецепта:</label>
         <select id="base" formControlName="base">
           <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">

@@ -1,23 +1,25 @@
 <div class="mainLong">
-  <h1 class="title">Добавяне на базова рецепта</h1>
+  <h1 class="title">Добавяне на основна рецепта</h1>
   <form [formGroup]="baseForm">
     <!-- Title -->
     <div>
-      <label for="title">Title</label>
+      <label for="title">Заглавие</label>
       <input type="text" id="title" formControlName="title" />
     </div>
     <!-- Title -->
-    <br />
+    
     <!-- Base Type -->
     <div>
-      <label for="base_type">Base Type</label>
+      <label for="base_type">Вид</label>
+      <p class="hint">Сос, Дресин, Основа и др.</p>
       <input type="text" id="base_type" formControlName="base_type" />
     </div>
     <!-- Base Type -->
-    <br />
+    
     <!-- Base Recipe Portions -->
     <div>
-      <label for="base_recipe_portions">Base Recipe Portions</label>
+      <label for="base_recipe_portions">Порций</label>
+      <p class="hint">Колко порций получаваме от тази основна рецепта</p>
       <input
         type="number"
         id="base_recipe_portions"
@@ -25,102 +27,126 @@
       />
     </div>
     <!-- Base Recipe Portions -->
-    <br />
+    
     <!-- Yield -->
     <div>
-      <label for="base_yield">Yield</label>
+      <label for="base_yield">Добив</label>
+      <p class="hint">Количесто на готовата основа</p>
       <input type="number" id="base_yield" formControlName="base_yield" />
     </div>
     <!-- Yield -->
-    <br />
+    
     <!-- Description -->
     <div>
-      <label for="description">Description</label>
-      <input type="text" id="description" formControlName="description" />
+      <label for="description">Начин на приготвяне</label>
+      <textarea
+        name="text"
+        id="description"
+        formControlName="description"
+        cols="30"
+        rows="5"
+      ></textarea>
     </div>
     <!-- Description -->
-    <br />
+    
     <!-- Summary -->
     <div>
-      <label for="summary">Summary</label>
+      <label for="summary">Резюме</label>
+      <p class="hint">Кратко изложение на основната рецепта</p>
       <input type="text" id="summary" formControlName="summary" />
     </div>
     <!-- Summary -->
-    <br />
+    
 
     <!-- Allergen -->
     <div>
       <div>
+        <label for="selectedAllergen">Алергени</label>
+        <p class="hint">Добавете алергените, който садържа основната рецепта</p>
         <select formControlName="selectedAllergen">
           <option *ngFor="let allergen of allergens" [value]="allergen.id">
             {{ allergen.name }}
           </option>
         </select>
         <button type="button" (click)="addSelectedAllergen()">
-          Add Allergen
+          Добави избраният алерген
         </button>
       </div>
       <div>
-        <label>Selected Allergens:</label>
+        <p class="hint">Алергени, който вече сте добавили:</p>
         <div>{{ baseForm.get("selectedAllergenNames")?.value }}</div>
       </div>
       <!-- Allergen -->
-      <br />
-      <!--  -->
-      <app-image-upload />
-      <!--  -->
+      
+      <!-- Image Upload -->
+
+      <app-image-upload (imageUploaded)="addImageToForm($event)" />
+
+      <!-- Image Upload -->
+
       <!-- Image -->
       <div formArrayName="image_recipe">
         <div
           *ngFor="let image of image_recipe.controls; let i = index"
           [formGroupName]="i"
         >
-          <label for="image_recipe">Image</label>
+          <label for="image_recipe">Добавена снимка</label>
           <input type="text" id="image_recipe" formControlName="image_recipe" />
-          <button type="button" (click)="removeImage(i)">Remove Image</button>
+          <button type="button" (click)="removeImage(i)">
+            Премахни добавената снимка
+          </button>
         </div>
       </div>
-      <button type="button" (click)="addImage()">Add Image</button>
       <!-- Image -->
-      <br />
+      
       <!-- Video -->
       <div formArrayName="video_recipe">
         <div
           *ngFor="let video of video_recipe.controls; let i = index"
           [formGroupName]="i"
         >
-          <label for="video_recipe">Video</label>
+          <label for="video_recipe">Постави тук видео линкът</label>
           <input type="text" id="video_recipe" formControlName="video_recipe" />
-          <button type="button" (click)="removeVideo(i)">Remove Video</button>
+          <button type="button" (click)="removeVideo(i)">
+            Премахни видео линкът
+          </button>
         </div>
-        <button type="button" (click)="addVideo()">Add Video</button>
+        <button type="button" (click)="addVideo()">
+          Добави линк към видео
+        </button>
       </div>
       <!-- Video -->
-      <br />
+      
       <!-- Preparation -->
       <div formArrayName="preparation_method">
         <div
           *ngFor="let preparation of preparation_method.controls; let i = index"
           [formGroupName]="i"
         >
-          <label for="preparation_method">Preparation Method</label>
+          <label for="preparation_method"
+            >Метод на приготвяне на основната рецепта</label
+          >
+          <p class="hint">
+            Добави метод използван при приготвяне на основната рецептата
+          </p>
           <input
             type="text"
             id="preparation_method"
             formControlName="preparation_method"
           />
           <button type="button" (click)="removePreparation(i)">
-            Remove Preparation
+            Премахни метода
           </button>
         </div>
         <button type="button" (click)="addPreparation()">
-          Add Preparation
+          Добави метод на приготвяне
         </button>
       </div>
       <!-- Preparation -->
-      <br />
+      
 
       <!-- Ingredients -->
+      <h3>Съставки</h3>
     </div>
     <div formArrayName="ingredients">
       <div
@@ -128,26 +154,32 @@
         [formGroupName]="i"
       >
         <!-- Name -->
-        <label for="name">Name</label>
+        <label for="name">Име</label>
         <input type="text" id="name" formControlName="name" />
         <!-- Amount -->
-        <label for="amount">Amount</label>
+        <label for="amount">Количество</label>
         <input type="number" id="amount" formControlName="amount" />
         <!-- Order Index -->
-        <label for="order_index">Order Index</label>
+        <label for="order_index">Ред</label>
+        <p class="hint">Редът по който се показват съставките в рецептата</p>
         <input type="number" id="order_index" formControlName="order_index" />
         <!-- Quantity -->
-        <label for="quantity">Quantity</label>
+        <label for="quantity">Бройка</label>
+        <p class="hint">
+          Използва се когато съставка има точно определени бройки
+        </p>
         <input type="number" id="quantity" formControlName="quantity" />
         <!-- Preparation Method -->
-        <label for="preparation_method">Preparation Method</label>
+        <label for="preparation_method"
+          >Методи на приготвяне на съставката</label
+        >
         <input
           type="text"
           id="preparation_method"
           formControlName="preparation_method"
         />
         <!-- Unit -->
-        <label for="unit">Unit</label>
+        <label for="unit">Мерна еденица</label>
         <select id="unit" formControlName="unit">
           <option value="гр.">грама</option>
           <option value="кг.">килограма</option>
@@ -166,7 +198,7 @@
         </select> -->
 
         <!-- <div *ngIf="isBaseControl == 'true'"> -->
-        <label for="base">Избери базова рецепта:</label>
+        <label for="base">Избери основна рецепта:</label>
         <select id="base" formControlName="base">
           <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
             {{ recipe.title }}
@@ -175,7 +207,9 @@
         <!-- </div> -->
       </div>
     </div>
-    <button type="button" (click)="addIngredient()">Add Ingredient</button>
-    <button type="button" (click)="onSubmit()">Submit</button>
+    <button type="button" (click)="addIngredient()">
+      Добави още една състава
+    </button>
+    <button type="button" (click)="onSubmit()">Добави основната рецепта</button>
   </form>
 </div>

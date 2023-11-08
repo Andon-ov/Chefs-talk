@@ -15,8 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
-import { CategoriesService } from 'src/app/list-categories/categories.service';
-import { Allergens, BaseRecipe, Category, Plates } from 'src/app/interfaces';
+import { Allergens, BaseRecipe } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-base-form',
@@ -30,12 +29,12 @@ export class BaseFormComponent implements OnInit {
   baseRecipes: BaseRecipe[] = [];
   currentOrderIndex = 1;
   isBaseControl: any;
+  // imageUrl = ''
 
   constructor(
     firestore: Firestore,
     private fb: FormBuilder,
-    private baseRecipeService: BaseRecipeService,
-    private categoriesService: CategoriesService
+    private baseRecipeService: BaseRecipeService
   ) {
     this.firestore = firestore;
 
@@ -73,31 +72,39 @@ export class BaseFormComponent implements OnInit {
     this.getAllergens().subscribe((data) => {
       this.allergens = data;
     });
-
-  
   }
 
   ngOnInit(): void {
     this.getBaseRecipe();
   }
 
-  // image
   addImage() {
     const imageArray = this.baseForm.get('image_recipe') as FormArray;
     imageArray.push(
       this.fb.group({
-        image_recipe: '',
+        image_recipe: [],
       })
     );
   }
+
   removeImage(index: number) {
     const imageArray = this.baseForm.get('image_recipe') as FormArray;
     imageArray.removeAt(index);
   }
 
+  addImageToForm(imageUrl: string) {
+    const imageArray = this.baseForm.get('image_recipe') as FormArray;
+    imageArray.push(
+      this.fb.group({
+        image_recipe: imageUrl,
+      })
+    );
+  }
+
   // video
   addVideo() {
     const videoArray = this.baseForm.get('video_recipe') as FormArray;
+    
     videoArray.push(
       this.fb.group({
         video_recipe: '',
@@ -152,13 +159,6 @@ export class BaseFormComponent implements OnInit {
     allergensArray.push(this.fb.control(selectedAllergenId));
   }
 
-  // adding reference to object in array
-  // addSelectedAllergen() {
-  //   const selectedAllergenId = this.baseForm.get('selectedAllergen')?.value;
-  //   const allergensArray = this.baseForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-  // }
-
   addSelectedAllergen() {
     const selectedAllergenId = this.baseForm.get('selectedAllergen')?.value;
     const allergensArray = this.baseForm.get('allergens') as FormArray;
@@ -174,7 +174,6 @@ export class BaseFormComponent implements OnInit {
           ? selectedAllergenNames.value + ', ' + selectedAllergen.name
           : selectedAllergen.name
       );
-
     }
   }
 
@@ -182,7 +181,6 @@ export class BaseFormComponent implements OnInit {
     const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
     this.isBaseControl = ingredientsArray.value[0].is_base;
   }
-
 
   get ingredients() {
     return this.baseForm.get('ingredients') as FormArray;
@@ -206,8 +204,6 @@ export class BaseFormComponent implements OnInit {
       this.baseForm.reset();
     }
   }
-
-
 
   getAllergens(): Observable<Allergens[]> {
     const collectionName = 'Allergens';
@@ -236,8 +232,6 @@ export class BaseFormComponent implements OnInit {
         });
     });
   }
-
-
 
   getBaseRecipe(): void {
     this.baseRecipeService.getBaseRecipe().subscribe({
