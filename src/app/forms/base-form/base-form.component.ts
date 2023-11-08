@@ -29,7 +29,6 @@ export class BaseFormComponent implements OnInit {
   baseRecipes: BaseRecipe[] = [];
   currentOrderIndex = 1;
   isBaseControl: any;
-  // imageUrl = ''
 
   constructor(
     firestore: Firestore,
@@ -39,32 +38,31 @@ export class BaseFormComponent implements OnInit {
     this.firestore = firestore;
 
     this.baseForm = this.fb.group({
-      // base recipe
-      title: '',
-      description: '',
-      summary: '',
+      title: ['', [Validators.required]],
+      base_type: ['', [Validators.required]],
+      summary: [''],
+      description: ['', [Validators.required]],
+      base_yield: ['', [Validators.required]],
+      unit: ['', [Validators.required]],
+
       selectedAllergen: null,
       allergens: this.fb.array([]),
       selectedAllergenNames: '',
 
-      // new
-      base_type: '',
       base_recipe_portions: [0],
-      base_yield: [0],
-      // new end
 
       image_recipe: this.fb.array([]),
       video_recipe: this.fb.array([]),
       preparation_method: this.fb.array([]),
       ingredients: this.fb.array([
         this.fb.group({
-          name: '',
-          amount: null,
+          name: ['', [Validators.required]],
+          amount: [null, [Validators.required]],
           base: this.fb.control(null),
+          unit: ['', [Validators.required]],
           order_index: [0],
           preparation_method: '',
           quantity: [0],
-          unit: '',
         }),
       ]),
     });
@@ -104,7 +102,7 @@ export class BaseFormComponent implements OnInit {
   // video
   addVideo() {
     const videoArray = this.baseForm.get('video_recipe') as FormArray;
-    
+
     videoArray.push(
       this.fb.group({
         video_recipe: '',
@@ -138,16 +136,13 @@ export class BaseFormComponent implements OnInit {
     const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
     ingredientsArray.push(
       this.fb.group({
-        name: '',
-        amount: null,
-
+        name: ['', [Validators.required]],
+        amount: [null, [Validators.required]],
         base: this.fb.control(null),
-        is_base: false, // if base true
-
         order_index: this.currentOrderIndex,
-        quantity: [0],
         preparation_method: '',
-        unit: '',
+        quantity: [0],
+        unit: ['', [Validators.required]],
       })
     );
     this.currentOrderIndex++;

@@ -42,38 +42,38 @@ export class RecipeFormComponent implements OnInit {
     this.firestore = firestore;
 
     this.recipeForm = this.fb.group({
-      // recipe
-      title: '',
-      category: this.fb.control(null),
+      title: ['', [Validators.required]],
+      category: this.fb.control([null, [Validators.required]]),
+      // category: this.fb.control(null),
 
-      description: '',
-      summary: '',
-      season: '',
-      order_index: [0],
+      description: ['', [Validators.required]],
+      season: ['', [Validators.required]],
+      summary: [''],
+
       release_time: [0],
       serving_value: [0],
+      order_index: [0],
 
       selectedAllergen: null,
       allergens: this.fb.array([]),
       selectedAllergenNames: '',
 
-      food_plate: this.fb.control(null),
+      // food_plate: this.fb.control(null),
+      food_plate: this.fb.control([null, [Validators.required]]),
+
       image_recipe: this.fb.array([]),
       video_recipe: this.fb.array([]),
       preparation_method: this.fb.array([]),
 
       ingredients: this.fb.array([
         this.fb.group({
-          name: '',
-          amount: null,
-
+          name: ['', [Validators.required]],
+          amount: [null, [Validators.required]],
           base: this.fb.control(null),
-          is_base: false, // if base true
-
+          unit: ['', [Validators.required]],
           order_index: [0],
-          preparation_method: '',
+          preparation_method: [''],
           quantity: [0],
-          unit: '',
         }),
       ]),
     });
@@ -142,16 +142,13 @@ export class RecipeFormComponent implements OnInit {
     const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
     ingredientsArray.push(
       this.fb.group({
-        name: '',
-        amount: null,
-
+        name: ['', [Validators.required]],
+        amount: [null, [Validators.required]],
         base: this.fb.control(null),
-        is_base: false, // if base true
-
+        unit: ['', [Validators.required]],
         order_index: this.currentOrderIndex,
+        preparation_method: [''],
         quantity: [0],
-        preparation_method: '',
-        unit: '',
       })
     );
     this.currentOrderIndex++;

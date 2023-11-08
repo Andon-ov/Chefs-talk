@@ -53,6 +53,7 @@ export interface BaseRecipe {
   selectedAllergen: string;
   selectedAllergenNames: string;
   summary: string;
+  unit: string;
   preparation_method: PreparationMethodItem[];
   title: string;
   id: string;
