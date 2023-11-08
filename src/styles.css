@@ -198,3 +198,8 @@ button:hover {
   font-style: italic;
   color: var(--secondGreenColor);
 }
+.errors {
+  font-style: italic;
+  color: red;
+  font-size: 12px;
+}

@@ -1,28 +1,56 @@
 <div class="mainLong">
   <h1 class="title">Добавяне на категория</h1>
   <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <!-- Image Upload -->
+    <app-image-upload (imageUploaded)="addImageToForm($event)" />
+
+    <div *ngIf="categoryForm.get('image')?.value !== ''">
+      <p class="hint">Вие добавихте снимка</p>
+      <!-- <label for="image">Добавена снимка</label> -->
+      <input type="text" id="image" formControlName="image" />
+      <button type="button" (click)="removeImage()">
+        Премахни добавената снимка
+      </button>
+    </div>
+
+    <!-- Image -->
+
     <label>
-      Активна категрия:
+      Активна ли е категрия?
       <input type="checkbox" formControlName="is_active" />
-      <p class="hint">Ще бъде ли категорията видима във сайта</p>
+      <p class="hint">Ще бъде ли категорията видима във сайта?</p>
     </label>
 
     <label>
-      Меню:
-      <p class="hint">Към кое меню спада тази категория</p>
-      <input type="text" formControlName="menu" />
-    </label>
-
-    <label>
-      Ред:
-      <p class="hint">Редът по който се показват категорийте</p>
-      <input type="number" formControlName="order_index" />
-    </label>
-
-    <label>
-      Име:
+      Заглавие (задължително):
       <input type="text" formControlName="name" required />
     </label>
+
+    <div *ngIf="categoryForm.get('name')?.touched">
+      <div
+        class="errors"
+        *ngIf="categoryForm.get('name')?.errors?.['required']"
+      >
+        Моля попълнете заглавието!
+      </div>
+    </div>
+
+    <label for="menu">Меню (задължително):</label>
+    <p class="hint">Към кое меню спада тази категория?</p>
+    <select id="menu" formControlName="menu">
+      <option value="Основно Меню">Основно</option>
+      <option value="Сезонно Меню">Сезонно</option>
+      <option value="Тестово Меню">Тестово</option>
+    </select>
+
+    <div *ngIf="categoryForm.get('menu')?.touched">
+      <div
+        class="errors"
+        *ngIf="categoryForm.get('menu')?.errors?.['required']"
+      >
+        Моля изберете меню!
+      </div>
+    </div>
 
     <label>
       Бележка:
@@ -30,20 +58,14 @@
       <textarea formControlName="note"></textarea>
     </label>
 
-    <app-image-upload (imageUploaded)="addImageToForm($event)" />
+    <label>
+      Последователност:
+      <p class="hint">Ред на подредба на категориите</p>
+      <input type="number" formControlName="order_index" />
+    </label>
 
-    <!-- Image Upload -->
+    <button type="submit">Добавете категорията</button>
 
-    <!-- Image -->
-
-    <label for="image">Добавена снимка</label>
-    <input type="text" id="image" formControlName="image" />
-    <button type="button" (click)="removeImage()">
-      Премахни добавената снимка
-    </button>
-
-    <!-- Image -->
-
-    <button type="submit">Добави категорията</button>
+    <!-- {{ categoryForm.value | json }} -->
   </form>
 </div>

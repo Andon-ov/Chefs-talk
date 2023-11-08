@@ -7,7 +7,7 @@
       <input type="text" id="title" formControlName="title" />
     </div>
     <!-- Title -->
-    
+
     <!-- Base Type -->
     <div>
       <label for="base_type">Вид</label>
@@ -15,7 +15,7 @@
       <input type="text" id="base_type" formControlName="base_type" />
     </div>
     <!-- Base Type -->
-    
+
     <!-- Base Recipe Portions -->
     <div>
       <label for="base_recipe_portions">Порций</label>
@@ -27,7 +27,7 @@
       />
     </div>
     <!-- Base Recipe Portions -->
-    
+
     <!-- Yield -->
     <div>
       <label for="base_yield">Добив</label>
@@ -35,7 +35,7 @@
       <input type="number" id="base_yield" formControlName="base_yield" />
     </div>
     <!-- Yield -->
-    
+
     <!-- Description -->
     <div>
       <label for="description">Начин на приготвяне</label>
@@ -48,7 +48,7 @@
       ></textarea>
     </div>
     <!-- Description -->
-    
+
     <!-- Summary -->
     <div>
       <label for="summary">Резюме</label>
@@ -56,7 +56,6 @@
       <input type="text" id="summary" formControlName="summary" />
     </div>
     <!-- Summary -->
-    
 
     <!-- Allergen -->
     <div>
@@ -77,7 +76,7 @@
         <div>{{ baseForm.get("selectedAllergenNames")?.value }}</div>
       </div>
       <!-- Allergen -->
-      
+
       <!-- Image Upload -->
 
       <app-image-upload (imageUploaded)="addImageToForm($event)" />
@@ -98,7 +97,7 @@
         </div>
       </div>
       <!-- Image -->
-      
+
       <!-- Video -->
       <div formArrayName="video_recipe">
         <div
@@ -116,7 +115,7 @@
         </button>
       </div>
       <!-- Video -->
-      
+
       <!-- Preparation -->
       <div formArrayName="preparation_method">
         <div
@@ -143,7 +142,6 @@
         </button>
       </div>
       <!-- Preparation -->
-      
 
       <!-- Ingredients -->
       <h3>Съставки</h3>
@@ -160,7 +158,8 @@
         <label for="amount">Количество</label>
         <input type="number" id="amount" formControlName="amount" />
         <!-- Order Index -->
-        <label for="order_index">Ред</label>
+
+        <label for="order_index">Последователност</label>
         <p class="hint">Редът по който се показват съставките в рецептата</p>
         <input type="number" id="order_index" formControlName="order_index" />
         <!-- Quantity -->
@@ -211,5 +210,81 @@
       Добави още една състава
     </button>
     <button type="button" (click)="onSubmit()">Добави основната рецепта</button>
+
+        {{ baseForm.value | json }}
   </form>
 </div>
+
+
+<!-- 
+
+  <div class="mainLong">
+  <h1 class="title">Добавяне на категория</h1>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+
+    <app-image-upload (imageUploaded)="addImageToForm($event)" />
+
+    <div *ngIf="categoryForm.get('image')?.value !== ''">
+      <p class="hint">Вие добавихте снимка</p>
+
+      <input type="text" id="image" formControlName="image" />
+      <button type="button" (click)="removeImage()">
+        Премахни добавената снимка
+      </button>
+    </div>
+
+
+    <label>
+      Активна ли е категрия?
+      <input type="checkbox" formControlName="is_active" />
+      <p class="hint">Ще бъде ли категорията видима във сайта?</p>
+    </label>
+
+    <label>
+      Заглавие (задължително):
+      <input type="text" formControlName="name" required />
+    </label>
+
+    <div *ngIf="categoryForm.get('name')?.touched">
+      <div
+        class="errors"
+        *ngIf="categoryForm.get('name')?.errors?.['required']"
+      >
+        Моля попълнете заглавието!
+      </div>
+    </div>
+
+    <label for="menu">Меню (задължително):</label>
+    <p class="hint">Към кое меню спада тази категория?</p>
+    <select id="menu" formControlName="menu">
+      <option value="Основно Меню">Основно</option>
+      <option value="Сезонно Меню">Сезонно</option>
+      <option value="Тестово Меню">Тестово</option>
+    </select>
+
+    <div *ngIf="categoryForm.get('menu')?.touched">
+      <div
+        class="errors"
+        *ngIf="categoryForm.get('menu')?.errors?.['required']"
+      >
+        Моля изберете меню!
+      </div>
+    </div>
+
+    <label>
+      Бележка:
+      <p class="hint">Няколко думи за категорията</p>
+      <textarea formControlName="note"></textarea>
+    </label>
+
+    <label>
+      Последователност:
+      <p class="hint">Ред на подредба на категориите</p>
+      <input type="number" formControlName="order_index" />
+    </label>
+
+    <button type="submit">Добавете категорията</button>
+
+  </form>
+</div>
+ -->

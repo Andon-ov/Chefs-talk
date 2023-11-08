@@ -17,7 +17,7 @@ export class CategoryFormComponent {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
       is_active: [false],
-      menu: [''],
+      menu: ['', [Validators.required]],
       order_index: [0],
       note: [''],
       image: [''],
@@ -29,6 +29,9 @@ export class CategoryFormComponent {
       const categoryData = this.categoryForm.value;
       this.addCategory(categoryData);
       this.categoryForm.reset();
+    }else{
+      console.log(this.categoryForm.errors);
+      
     }
   }
 
