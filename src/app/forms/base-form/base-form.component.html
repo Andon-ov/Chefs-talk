@@ -35,7 +35,7 @@
 
     <!-- Summary -->
     <div>
-      <label for="summary">Резюме</label>
+      <label for="summary">Резюме:</label>
       <p class="hint">Кратко изложение на основната рецепта</p>
       <input type="text" id="summary" formControlName="summary" />
     </div>
@@ -199,7 +199,7 @@
         [formGroupName]="i"
       >
         <!-- Ingredient титле-->
-        <div class="ingredientTitle">
+        <div class="divider">
           <hr />
           <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
           <hr />
@@ -255,7 +255,7 @@
 
         <!-- Quantity -->
 
-        <label for="quantity">Бройка</label>
+        <label for="quantity">Бройка:</label>
         <p class="hint">
           Използва се когато съставка има точно определени бройки
         </p>
@@ -264,7 +264,7 @@
         <!-- Preparation Method -->
 
         <label for="preparation_method"
-          >Методи на приготвяне на съставката</label
+          >Методи на приготвяне на съставката:</label
         >
         <p class="hint">
           Въведете методите, разделени със запетайка и интервал:
@@ -292,10 +292,9 @@
 
         <!-- Order Index -->
 
-        <label for="order_index">Последователност</label>
+        <label for="order_index">Последователност:</label>
         <p class="hint">Редът по който се показват съставките в рецептата</p>
         <input type="number" id="order_index" formControlName="order_index" />
-        
       </div>
     </div>
     <br />

@@ -35,6 +35,12 @@ export class CommentService {
         };
         comments.push(comment);
       });
+      comments.sort((a, b) => {
+        const dateA: any = a.create_time.toDate();
+        const dateB: any = b.create_time.toDate();
+
+        return dateB - dateA;
+      });
 
       return comments;
     } catch (error) {
@@ -45,6 +51,10 @@ export class CommentService {
 
   async addComment(commentData: Comments): Promise<string | null> {
     try {
+      if (!commentData.name) {
+        commentData.name = 'Анонимен';
+      }
+
       const collectionName = 'Comments';
       const docRef = await addDoc(
         collection(this.firestore, collectionName),

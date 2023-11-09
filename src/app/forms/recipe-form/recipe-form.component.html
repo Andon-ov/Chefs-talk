@@ -36,7 +36,7 @@
 
     <!-- Summary -->
     <div>
-      <label for="summary">Резюме</label>
+      <label for="summary">Резюме:</label>
       <p class="hint">Кратко изложение на рецепта</p>
       <input type="text" id="summary" formControlName="summary" />
     </div>
@@ -97,12 +97,27 @@
 
     <!-- Serving Value -->
     <div>
-      <label for="serving_value">Готово количестов: </label>
+      <label for="serving_value">Готово количество: </label>
       <p class="hint">Колко тежи готовото ястие?</p>
       <input type="text" id="serving_value" formControlName="serving_value" />
     </div>
     <!-- Serving Value -->
     <br />
+
+    <!-- Unit required-->
+    <label for="unit">Мерна еденица (задължително):</label>
+    <p class="hint">В която измерваме добивът</p>
+    <select id="unit" formControlName="unit">
+      <option value="гр.">Грам</option>
+      <option value="кг.">Килограм</option>
+      <option value="мл.">Милилитър</option>
+      <option value="л.">Литър</option>
+    </select>
+    <div *ngIf="recipeForm.get('unit')?.touched">
+      <div class="errors" *ngIf="recipeForm.get('unit')?.errors?.['required']">
+        Моля изберете мерна еденица!
+      </div>
+    </div>
 
     <!-- Allergen -->
     <!-- <div>
@@ -259,7 +274,7 @@
 
       <!-- Order Index -->
       <div>
-        <label for="order_index">Последователност</label>
+        <label for="order_index">Последователност: </label>
         <p class="hint">Редът по който се показват рецептите в категорията</p>
         <input type="number" id="order_index" formControlName="order_index" />
       </div>
@@ -328,7 +343,7 @@
 
         <!-- Quantity -->
 
-        <label for="quantity">Бройка</label>
+        <label for="quantity">Бройка: </label>
         <p class="hint">
           Използва се когато съставка има точно определени бройки
         </p>
@@ -337,7 +352,7 @@
         <!-- Preparation Method -->
 
         <label for="preparation_method"
-          >Методи на приготвяне на съставката</label
+          >Методи на приготвяне на съставката: </label
         >
         <p class="hint">
           Въведете методите, разделени със запетайка и интервал:
@@ -365,7 +380,7 @@
 
         <!-- Order Index -->
 
-        <label for="order_index">Последователност</label>
+        <label for="order_index">Последователност:</label>
         <p class="hint">Редът по който се показват съставките в рецептата</p>
         <input type="number" id="order_index" formControlName="order_index" />
       </div>

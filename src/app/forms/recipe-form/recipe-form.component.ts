@@ -48,6 +48,7 @@ export class RecipeFormComponent implements OnInit {
 
       description: ['', [Validators.required]],
       season: ['', [Validators.required]],
+      unit: ['', [Validators.required]],
       summary: [''],
 
       release_time: [0],

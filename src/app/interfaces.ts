@@ -26,6 +26,7 @@ export interface Recipe {
   release_time: number;
   season: string;
   serving_value: number;
+  unit: string;
 
   selectedAllergen: string;
   selectedAllergenNames: string;
@@ -89,4 +90,3 @@ export interface Comments {
   recipe: string;
   text: string;
 }
-

@@ -13,6 +13,7 @@ export class CommentFormComponent implements OnInit {
   commentForm!: FormGroup;
   firestore: Firestore;
   timestamp = new Date();
+
   @Input() recipeId!: string | null;
 
   constructor(
@@ -25,21 +26,26 @@ export class CommentFormComponent implements OnInit {
 
   ngOnInit() {
     this.commentForm = this.fb.group({
-      name: ['', Validators.required],
-      recipeId: [this.recipeId], 
+      name: [''],
       text: ['', Validators.required],
-      create_time: this.timestamp,
+      recipeId: [this.recipeId],
+      create_time: [this.timestamp],
     });
   }
 
   async onSubmit() {
+    this.timestamp = new Date();
+
     if (this.commentForm.valid) {
+      this.commentForm.patchValue({ recipeId: this.recipeId });
+      this.commentForm.patchValue({ create_time: this.timestamp });
+
       try {
         const result = await this.commentService.addComment(
           this.commentForm.value
         );
         if (result) {
-          console.log('Comment successfully added.');
+          alert('Вие успешно добавихте вашия коментар');
           this.commentForm.reset();
         } else {
           console.error('Error adding comment.');

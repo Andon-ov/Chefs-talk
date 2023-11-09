@@ -1,0 +1,6 @@
+form#commentForm {
+    background-color: var(--grayishOrangeColor);
+    max-width: 100%;
+    border: unset;
+}
+

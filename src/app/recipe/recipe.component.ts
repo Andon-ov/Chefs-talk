@@ -16,6 +16,7 @@ export class RecipeComponent {
   plate: Plates | null = null;
   comments: Comments[] = [];
   recipeId: string | null = '';
+  showCommentForm = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +54,10 @@ export class RecipeComponent {
       console.log('Comment successfully added.');
       this.loadCommentsForRecipe();
     });
+  }
+
+  toggleCommentForm() {
+    this.showCommentForm = !this.showCommentForm;
   }
 
   private async loadCommentsForRecipe() {
