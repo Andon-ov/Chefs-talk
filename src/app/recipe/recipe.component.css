@@ -55,13 +55,13 @@
 
 .key {
 
-  font-style: italic;
   color: var(--darkGrayColor);
   padding-right: 10px;
 }
 
 .value {
-  float: inline-end;
+  font-style: italic;
+  /* float: inline-end; */
   font-weight: 500;
 
 }
@@ -74,15 +74,15 @@ table {
   border-collapse: collapse;
   width: 100%;
   padding: 10px;
-  
+
 
 }
 
 td,
 th {
-  border: 1px solid var(--mainWhiteColor);
+  border: 1px solid var(--mainGrayColor);
   padding: 10px;
-  
+
 }
 
 tr:hover {
@@ -102,23 +102,29 @@ tr:hover {
   font-size: 16px;
 }
 
+.recipe-ingredients {
+  padding: 0 16px;
+}
+
 .recipe-ingredients li {
   font-size: 16px;
   margin-bottom: 10px;
+  list-style-type: disc;
 }
 
 .recipe-ingredients li a {
-  color: var(--secondGreenColor);
   text-decoration: none;
+  color: var(--darkGrayColor);
 }
 
 .recipe-ingredients li a:hover {
   text-decoration: underline;
+  color: var(--secondGreenColor);
 }
 
 .recipe-preparation-method li {
   font-size: 16px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 

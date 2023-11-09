@@ -217,7 +217,8 @@ button:hover {
   display: flex;
   align-items: center;
   font-style: italic;
-  color: var(--secondGreenColor);
+  color: var(--mainBlackColor);
+  font-weight: 800;
 
 }
 

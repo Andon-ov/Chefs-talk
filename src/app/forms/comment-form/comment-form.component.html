@@ -2,12 +2,13 @@
   <form [formGroup]="commentForm" id="commentForm" (ngSubmit)="onSubmit()">
     <div class="divider">
       <hr />
-      <p>&nbsp;&nbsp;Коментирай&nbsp;&nbsp;</p>
+      <p>&nbsp;&nbsp;Коментирайте&nbsp;&nbsp;</p>
       <hr />
     </div>
 
     <div class="form-group">
       <label for="name">Име:</label>
+      <p class="hint">Ако не попълните име ще сте "Анонимен"</p>
       <input
         type="text"
         id="name"
@@ -29,10 +30,6 @@
       </div>
     </div>
 
-    <!-- <input type="hidden" formControlName="recipeId" [value]="recipeId" /> -->
-
     <button type="submit">Публикувайте коментара</button>
   </form>
-  {{ commentForm.value | json }}
-
-
+</div>

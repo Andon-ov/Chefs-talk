@@ -29,13 +29,13 @@
       <table class="recipe-other-details">
         <!-- season requite -->
         <tr>
-          <td><span class="key">Сезон:</span></td>
+          <td><span class="key">Сезон</span></td>
           <td>
             <span class="value">{{ recipe?.season }}</span>
           </td>
         </tr>
         <tr *ngIf="recipe?.serving_value">
-          <td><span class="key">Готово Количество:</span></td>
+          <td><span class="key">Готово Количество</span></td>
           <!-- serving_value, unit -->
           <td>
             <span class="value"
@@ -48,43 +48,53 @@
         </tr>
         <!-- release_time -->
         <tr *ngIf="recipe?.release_time">
-          <td><span class="key">Време за издаване:</span></td>
+          <td><span class="key">Време за издаване</span></td>
           <td>
             <span class="value">{{ recipe?.release_time }}&nbsp; минути</span>
           </td>
         </tr>
         <!-- plate -->
         <tr>
-          <td><span class="key">Чиния:</span></td>
+          <td><span class="key">Чиния</span></td>
           <td>
             <span class="value">{{ plate?.name }}</span>
           </td>
         </tr>
+
         <!-- selectedAllergenNames -->
         <tr *ngIf="recipe?.selectedAllergenNames">
-          <td><span class="key"> Алергени:</span></td>
+          <td><span class="key"> Алергени</span></td>
           <td>
             <span class="value">{{ recipe?.selectedAllergenNames }}</span>
           </td>
         </tr>
       </table>
 
-      <!-- description require -->
+      <div class="divider">
+        <hr />
+        <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
+        <hr />
+      </div>
       <br />
-      <h3>Начин на приготвяне</h3>
 
+      <!-- description require -->
       <p class="recipe-description-text description">
         {{ recipe?.description }}
       </p>
       <br />
-      <h3 *ngIf="recipe?.ingredients">Съставки</h3>
+
+      <div *ngIf="recipe?.ingredients" class="divider">
+        <hr />
+        <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
+        <hr />
+      </div>
+      <br />
 
       <ul
         class="recipe-ingredients"
         *ngFor="let ingredient of recipe?.ingredients"
       >
         <li *ngIf="recipe?.ingredients">
-          <hr />
           <!-- name, amount, unit require -->
           {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
 
@@ -94,21 +104,32 @@
           <!-- base -->
           <span class="value" *ngIf="ingredient.base">
             <a [routerLink]="['/base', ingredient.base]"
-              >Основна Рецепта</a
-            ></span
-          >
+              >&nbsp;&nbsp;<i
+                class="fa-solid fa-kitchen-set fa-beat-fade"
+              ></i></a
+          ></span>
           <br />
           <!-- preparation_method -->
           <span class="key" *ngIf="ingredient.preparation_method">
-            Обработка: {{ ingredient.preparation_method }}
+            Обработка: <i> {{ ingredient.preparation_method }}</i>
           </span>
         </li>
 
-        <hr *ngIf="ingredient.name || ingredient.amount || ingredient.unit" />
+        <!-- <hr *ngIf="ingredient.name || ingredient.amount || ingredient.unit" /> -->
       </ul>
+
       <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
+      <div
+        *ngIf="
+          recipe?.preparation_method && recipe?.preparation_method?.length! > 0
+        "
+        class="divider"
+      >
+        <hr />
+        <p>&nbsp;&nbsp;Методи&nbsp;&nbsp;</p>
+        <hr />
+      </div>
       <br />
-      <h3>Приготовление</h3>
       <ul
         class="recipe-preparation-method"
         *ngFor="let method of recipe?.preparation_method"
@@ -120,8 +141,15 @@
         class="recipe-videos"
         *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
       >
+        <div
+          *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
+          class="divider"
+        >
+          <hr />
+          <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
+          <hr />
+        </div>
         <br />
-        <h3>Видео рецепта</h3>
 
         <ul>
           <li *ngFor="let video of recipe?.video_recipe">
@@ -143,7 +171,7 @@
 
       <div *ngIf="comments.length > 0" class="divider">
         <hr />
-        <p>&nbsp;&nbsp;Коментирайте&nbsp;&nbsp;</p>
+        <p>&nbsp;&nbsp;Коментари&nbsp;&nbsp;</p>
         <hr />
       </div>
 
