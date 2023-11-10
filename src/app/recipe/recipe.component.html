@@ -111,7 +111,7 @@
           <br />
           <!-- preparation_method -->
           <span class="key" *ngIf="ingredient.preparation_method">
-            Обработка: <i> {{ ingredient.preparation_method }}</i>
+            <i> {{ ingredient.preparation_method }}</i>
           </span>
         </li>
 
@@ -141,10 +141,7 @@
         class="recipe-videos"
         *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
       >
-        <div
-          *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
-          class="divider"
-        >
+        <div class="divider">
           <hr />
           <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
           <hr />

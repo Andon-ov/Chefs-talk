@@ -98,13 +98,23 @@ export class RecipeFormComponent implements OnInit {
     const imageArray = this.recipeForm.get('image_recipe') as FormArray;
     imageArray.push(
       this.fb.group({
-        image_recipe: '',
+        image_recipe: [],
       })
     );
   }
+
   removeImage(index: number) {
     const imageArray = this.recipeForm.get('image_recipe') as FormArray;
     imageArray.removeAt(index);
+  }
+
+  addImageToForm(imageUrl: string) {
+    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
+    imageArray.push(
+      this.fb.group({
+        image_recipe: imageUrl,
+      })
+    );
   }
 
   // video

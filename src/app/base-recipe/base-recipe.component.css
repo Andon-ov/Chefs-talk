@@ -47,7 +47,8 @@
   
   .recipe-ingredients li {
     font-size: 16px;
-    margin-bottom: 10px;
+    list-style:inside;
+    /* margin-bottom: 10px; */
   }
   
   .recipe-ingredients li a {

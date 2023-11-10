@@ -76,6 +76,7 @@ export class BaseFormComponent implements OnInit {
     this.getBaseRecipe();
   }
 
+  // image
   addImage() {
     const imageArray = this.baseForm.get('image_recipe') as FormArray;
     imageArray.push(

@@ -154,45 +154,28 @@
       <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
       <!-- Allergen -->
 
-      <!-- Image -->
-      <div formArrayName="image_recipe">
-        <div
-          *ngFor="let image of image_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <p class="hint">Добавена снимка</p>
-          <input type="text" id="image_recipe" formControlName="image_recipe" />
-          <button type="button" (click)="removeImage(i)">
-            Премахнете добавената снимка
-          </button>
-        </div>
-      </div>
-      <!-- <div formArrayName="image_recipe">
-        <div
-          *ngFor="let image of image_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="image_recipe">Image</label>
-          <input type="text" id="image_recipe" formControlName="image_recipe" />
-          <button type="button" (click)="removeImage(i)">Remove Image</button>
-        </div>
-      </div>
-      <button type="button" (click)="addImage()">Add Image</button> -->
-      <!-- Image -->
+         <!-- Image Upload -->
 
-      <!-- Video -->
+         <app-image-upload (imageUploaded)="addImageToForm($event)" />
 
-      <!-- <div formArrayName="video_recipe">
-        <div
-          *ngFor="let video of video_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="video_recipe">Video</label>
-          <input type="text" id="video_recipe" formControlName="video_recipe" />
-          <button type="button" (click)="removeVideo(i)">Remove Video</button>
-        </div>
-        <button type="button" (click)="addVideo()">Add Video</button>
-      </div> -->
+         <!-- Image Upload -->
+   
+         <!-- Image -->
+         <div formArrayName="image_recipe">
+           <div
+             *ngFor="let image of image_recipe.controls; let i = index"
+             [formGroupName]="i"
+           >
+             <p class="hint">Добавена снимка</p>
+             <input type="text" id="image_recipe" formControlName="image_recipe" />
+             <button type="button" (click)="removeImage(i)">
+               Премахнете добавената снимка
+             </button>
+           </div>
+         </div>
+         <!-- Image -->
+
+     <!-- Video -->
       <div formArrayName="video_recipe">
         <div
           *ngFor="let video of video_recipe.controls; let i = index"
@@ -287,7 +270,7 @@
         [formGroupName]="i"
       >
         <!-- Ingredient титле-->
-        <div class="ingredientTitle">
+        <div class="divider">
           <hr />
           <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
           <hr />

@@ -16,7 +16,7 @@ export class ListBaseComponent implements OnInit {
   getBaseRecipes() {
     this.baseRecipeService.getBaseRecipe().subscribe({
       next: (data) => {
-        this.baseRecipes = data;
+        this.baseRecipes = data.sort((a, b) => a.title.localeCompare(b.title));
       },
       error: (error) => {
         console.error('Error fetching categories:', error);

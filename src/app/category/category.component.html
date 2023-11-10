@@ -1,19 +1,20 @@
 <div class="mainLong">
   <div class="category">
-    <h1 class="title">
+    <h1 class="category-title">
       {{ category?.name }}
     </h1>
-    <h3 class="title">
-      {{ category?.menu }} -
+    <h4 class="category-subtitle">
       {{ category?.note }}
-    </h3>
+    </h4>
 
     <div class="recipe-list">
       <div *ngFor="let recipe of recipes">
         <a [routerLink]="['/recipe', recipe.id]">
           <div class="recipe-item">
-            <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
-            <h3>{{ recipe.title }}</h3>
+            <div class="recipe-image">
+              <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
+            </div>
+            <p class="recipe-title">{{ recipe.title }}</p>
           </div>
         </a>
       </div>

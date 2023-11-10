@@ -50,49 +50,6 @@
 }
 
 
-
-/*! Table */
-
-.key {
-
-  color: var(--darkGrayColor);
-  padding-right: 10px;
-}
-
-.value {
-  font-style: italic;
-  /* float: inline-end; */
-  font-weight: 500;
-
-}
-
-tr:nth-child(even) {
-  background-color: var(--lightGrayColor);
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  padding: 10px;
-
-
-}
-
-td,
-th {
-  border: 1px solid var(--mainGrayColor);
-  padding: 10px;
-
-}
-
-tr:hover {
-  background-color: var(--mainGrayColor);
-  transition: background-color 0.3s;
-}
-
-
-
-
 .recipe-description h2 {
   font-size: 20px;
   font-weight: bold;

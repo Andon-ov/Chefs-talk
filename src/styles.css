@@ -112,6 +112,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* font-size: clamp(0.6rem, 0.734rem + 0.8511vw, 0.9rem); */
 }
 
 :root {
@@ -191,6 +192,7 @@ button {
 
 button:hover {
   background-color: var(--secondGreenColor);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }
 
 /*! Form */
@@ -229,12 +231,53 @@ button:hover {
 hr {
   width: 100%;
   height: 0;
+  margin-bottom: 5px;
+}
+
+/*! Table */
+
+.key {
+
+  color: var(--darkGrayColor);
+  padding-right: 10px;
+}
+
+.value {
+  font-style: italic;
+  /* float: inline-end; */
+  font-weight: 500;
+
+}
+
+tr:nth-child(even) {
+  background-color: var(--lightGrayColor);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 10px;
+
+
+}
+
+td,
+th {
+  border: 1px solid var(--mainGrayColor);
+  padding: 10px;
+
+}
+
+tr:hover {
+  background-color: var(--mainGrayColor);
+  transition: background-color 0.3s;
 }
 
 
 
-/* .description {
 
-  white-space: pre-line;
-  display: block;
-} */
+@media (max-width: 768px) {
+
+
+
+}

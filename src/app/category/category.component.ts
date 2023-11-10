@@ -63,11 +63,13 @@ export class CategoryComponent implements OnInit {
               order_index: data['order_index'],
               id: doc.id,
             };
-
             recipes.push(recipe);
           });
-
-          this.recipes = recipes;
+          this.recipes = recipes.sort((a, b) => {
+            const orderIndexA = Number(a.order_index);
+            const orderIndexB = Number(b.order_index);
+            return orderIndexA - orderIndexB;
+          });
         })
         .catch((error) => {
           console.error('Error retrieving recipes: ', error);

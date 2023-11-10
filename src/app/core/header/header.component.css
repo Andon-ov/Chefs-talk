@@ -2,10 +2,16 @@
   height: 8vh;
   background-color: var(--mainGreenColor);
   color: var(--mainWhiteColor);
+  padding: 20px;
+}
+
+.wrapper {
+  height: 100%;
+  max-width: 1440px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -72,5 +78,42 @@
 }
 
 .dropdown:hover .dropbtn {
-  color:var(--mainBlackColor);
+  color: var(--mainBlackColor);
+}
+
+
+@media(max-width: 460px) {
+  .header {
+    height: unset;
+   
+  }
+  
+  .wrapper {
+    height: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(min-width: 461px) and (max-width: 767px) {
+  .wrapper{
+    width: 80%;
+  }
+  .logo {
+    font-size: 26px;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wrapper{
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .wrapper{
+    width: 80%;
+  }
 }
