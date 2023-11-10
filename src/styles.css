@@ -178,7 +178,8 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
-button {
+button,
+.btn {
   width: 100%;
   display: inline-block;
   padding: 10px 20px;
@@ -188,9 +189,11 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
-button:hover {
+button:hover,
+.btn:hover {
   background-color: var(--secondGreenColor);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }
@@ -276,8 +279,4 @@ tr:hover {
 
 
 
-@media (max-width: 768px) {
-
-
-
-}
+@media (max-width: 768px) {}

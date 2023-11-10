@@ -23,13 +23,12 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { FormsModule } from './forms/forms.module';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {CloudinaryModule} from '@cloudinary/ng';
+import { CloudinaryModule } from '@cloudinary/ng';
 import { SafeUrlPipe } from './safe-url.pipe';
 import { ListBaseComponent } from './list-base/list-base.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -61,11 +60,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CloudinaryModule,
     // Angular Material
     BrowserAnimationsModule,
-    
-    
-
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
