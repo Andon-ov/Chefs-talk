@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseRecipe } from '../interfaces';
 import { BaseRecipeService } from './base-recipe.service';
 
@@ -10,13 +10,17 @@ import { BaseRecipeService } from './base-recipe.service';
 })
 export class BaseRecipeComponent {
   base: BaseRecipe | null = null;
+  baseId = '';
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+
     private baseRecipeService: BaseRecipeService
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const baseId = params.get('id');
+      this.baseId = baseId!;
 
       if (baseId) {
         try {
@@ -31,5 +35,8 @@ export class BaseRecipeComponent {
         console.error('Recipe ID not provided.');
       }
     });
+  }
+  navigateToEdit() {
+    this.router.navigate(['/base-edit', this.baseId]);
   }
 }

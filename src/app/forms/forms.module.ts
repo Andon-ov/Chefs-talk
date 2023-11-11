@@ -6,6 +6,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { BaseFormComponent } from './base-form/base-form.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { BaseFormEditComponent } from './base-form-edit/base-form-edit.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     BaseFormComponent,
     CommentFormComponent,
     ImageUploadComponent,
+    BaseFormEditComponent,
   ],
   imports: [
     CommonModule,

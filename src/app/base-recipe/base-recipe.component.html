@@ -59,8 +59,8 @@
           <a [routerLink]="['/base', ingredient.base]">Base Link</a>
         </li>
         <li *ngIf="ingredient.preparation_method">
-          <span class="value">
-            {{ ingredient.preparation_method }}
+          <span style="color: gray">
+            <i> {{ ingredient.preparation_method }}</i>
           </span>
         </li>
         <hr *ngIf="ingredient.name || ingredient.preparation_method" />
@@ -159,6 +159,7 @@
       ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
       назад</a
     >
+    <button (click)="navigateToEdit()">Edit</button>
   </div>
   <br />
 </div>

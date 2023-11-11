@@ -198,7 +198,7 @@
         *ngFor="let ingredient of ingredients.controls; let i = index"
         [formGroupName]="i"
       >
-        <!-- Ingredient титле-->
+        <!-- Ingredient -->
         <div class="divider">
           <hr />
           <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
@@ -308,71 +308,3 @@
   </form>
 </div>
 
-<!-- 
- 
-
-    <app-image-upload (imageUploaded)="addImageToForm($event)" />
-
-    <div *ngIf="categoryForm.get('image')?.value !== ''">
-      <p class="hint">Вие добавихте снимка</p>
-
-      <input type="text" id="image" formControlName="image" />
-      <button type="button" (click)="removeImage()">
-        Премахни добавената снимка
-      </button>
-    </div>
-
-
-    <label>
-      Активна ли е категрия?
-      <input type="checkbox" formControlName="is_active" />
-      <p class="hint">Ще бъде ли категорията видима във сайта?</p>
-    </label>
-
-    <label>
-      Заглавие (задължително):
-      <input type="text" formControlName="name" required />
-    </label>
-
-    <div *ngIf="categoryForm.get('name')?.touched">
-      <div
-        class="errors"
-        *ngIf="categoryForm.get('name')?.errors?.['required']"
-      >
-        Моля попълнете заглавието!
-      </div>
-    </div>
-
-    <label for="menu">Меню (задължително):</label>
-    <p class="hint">Към кое меню спада тази категория?</p>
-    <select id="menu" formControlName="menu">
-      <option value="Основно Меню">Основно</option>
-      <option value="Сезонно Меню">Сезонно</option>
-      <option value="Тестово Меню">Тестово</option>
-    </select>
-
-    <div *ngIf="categoryForm.get('menu')?.touched">
-      <div
-        class="errors"
-        *ngIf="categoryForm.get('menu')?.errors?.['required']"
-      >
-        Моля изберете меню!
-      </div>
-    </div>
-
-    <label>
-      Бележка:
-      <p class="hint">Няколко думи за категорията</p>
-      <textarea formControlName="note"></textarea>
-    </label>
-
-    <label>
-      Последователност:
-      <p class="hint">Ред на подредба на категориите</p>
-      <input type="number" formControlName="order_index" />
-    </label>
-
-    <button type="submit">Добавете категорията</button>
-
-
- -->

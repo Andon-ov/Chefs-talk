@@ -1,0 +1,155 @@
+<div class="mainLong">
+  <h1 class="title">Редактиране на основна рецепта</h1>
+  <form [formGroup]="baseFormEdit">
+    <!-- (ngSubmit)="onSubmit()" -->
+    <!-- Title -->
+    <label for="title"> Заглавие (задължително): </label>
+    <input type="text" id="title" formControlName="title" />
+
+    <!-- Base Type -->
+    <label for="base_type"> Вид (задължително): </label>
+    <p class="hint">Сос, Дресин, Основа и др.</p>
+    <input type="text" id="base_type" formControlName="base_type" />
+
+    <!-- Summary -->
+    <label for="summary"> Резюме: </label>
+    <p class="hint">Кратко изложение на основната рецепта</p>
+    <textarea id="summary" formControlName="summary"></textarea>
+
+    <!-- Description -->
+    <label for="description"> Начин на приготвяне (задължително): </label>
+    <textarea
+      rows="10"
+      id="description"
+      formControlName="description"
+    ></textarea>
+
+    <!-- Base Yield -->
+    <label for="base_yield"> Добив (задължително): </label>
+    <p class="hint">Количесто на готовата основа</p>
+    <input type="number" id="base_yield" formControlName="base_yield" />
+
+    <!-- Unit -->
+    <label for="unit"> Мерна еденица (задължително): </label>
+    <p class="hint">В която измерваме добивът</p>
+    <input type="text" id="unit" formControlName="unit" />
+
+    <!-- Base Recipe Portions -->
+    <label for="unit"> Порций: </label>
+    <p class="hint">Колко порций получаваме от тази основна рецепта</p>
+    <input
+      type="text"
+      id="base_recipe_portions"
+      formControlName="base_recipe_portions"
+    />
+
+    <!-- Allergen -->
+    <p class="hint">Алергени, който вече сте добавили:</p>
+
+    <!-- Image Upload -->
+    <p class="hint">Добавена снимка</p>
+
+    <!-- Image -->
+    <div formArrayName="image_recipe">
+      <div
+        *ngFor="let image of image_recipe.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- Name required-->
+        <label [for]="'image_recipe' + i">Снимка</label>
+        <input
+          type="text"
+          [id]="'image_recipe' + i"
+          formControlName="image_recipe"
+        />
+      </div>
+    </div>
+
+    <!-- Video -->
+    <p class="hint">Поставете тук видео линкът</p>
+
+    <!-- Preparation -->
+    <p class="hint">
+      Добавете метод използван при приготвяне на основната рецептата
+    </p>
+
+    <!-- Ingredients -->
+    <div class="divider">
+      <hr />
+      <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
+      <hr />
+    </div>
+
+    <div formArrayName="ingredients">
+      <div
+        *ngFor="let ingredient of ingredients.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- Name required-->
+        <label [for]="'name' + i">Име (задължително):</label>
+        <input type="text" [id]="'name' + i" formControlName="name" />
+
+        <!-- Amount required-->
+        <label [for]="'amount' + i">Количество (задължително):</label>
+        <input type="number" [id]="'amount' + i" formControlName="amount" />
+
+        <!-- Unit required-->
+        <label [for]="'unit' + i">Мерна еденица (задължително):</label>
+        <p class="hint">В която измерваме съставката</p>
+        <input type="text" [id]="'unit' + i" formControlName="unit" />
+
+        <!-- Quantity -->
+        <label [for]="'quantity' + i">Бройка:</label>
+        <p class="hint">
+          Използва се когато съставка има точно определени бройки
+        </p>
+        <input type="number" [id]="'quantity' + i" formControlName="quantity" />
+
+        <!-- Preparation Method -->
+        <label [for]="'preparation_method' + i"
+          >Методи на приготвяне на съставката:</label
+        >
+        <p class="hint">
+          Въведете методите, разделени със запетайка и интервал:
+          <br />
+          Пример: Почистване, измиване, нарязване.
+        </p>
+        <input
+          type="text"
+          [id]="'preparation_method' + i"
+          formControlName="preparation_method"
+        />
+
+        <!-- Base link -->
+        <label [for]="'base' + i">Избери основна рецепта:</label>
+        <p class="hint">
+          Ако тази съставка е част от основна рецепта моля изберете коя?
+        </p>
+        <input type="text" [id]="'base' + i" formControlName="base" />
+
+        <!-- Order Index -->
+
+        <label [for]="'order_index' + i">Последователност:</label>
+        <p class="hint">Редът по който се показват съставките в рецептата</p>
+        <input
+          type="number"
+          [id]="'order_index' + i"
+          formControlName="order_index"
+        />
+
+        <!-- Add a button to remove the ingredient -->
+        <button type="button" (click)="removeIngredient(i)">
+          Премахнете съставката
+        </button>
+      </div>
+    </div>
+
+    <!-- Add button to add new ingredient -->
+    <button type="button" (click)="addIngredient()">
+      Добавете още една съставка
+    </button>
+
+    <!-- Submit button -->
+    <button type="submit">Запазете промените</button>
+  </form>
+</div>
