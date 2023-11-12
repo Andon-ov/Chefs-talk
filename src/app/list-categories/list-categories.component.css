@@ -1,58 +1,50 @@
-  .list-categories {
-      margin: 0 auto;
-      max-width: 800px;
+  .categories-list {
+      margin: 0 auto 50px auto;
+      max-width: 1200px;
+  }
 
+  .category-title {
+      color: var(--mainWhiteColor);
+      margin: 30px 0;
+      text-align: center;
+      font-size: 32px;
+      font-family: var(--titleFont)
   }
 
   .wrapper {
+      place-self: center;
       margin: 0 auto 50px 0;
-
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      justify-items: center;
-      align-items: center;
+      gap: 30px;
+
   }
 
-  .custom-card {
-      background-color: var(--mainWhiteColor);
-      border: 1px solid var(--mainGrayColor);
-      border-radius: 5px;
-      margin: 10px 0;
-      transition: transform 0.2s;
-  }
-
-  .custom-card:hover {
-      transform: scale(1.05);
-  }
-
-  .custom-card-header {
-      background-color: var(--mainGreenColor);
-      color: var(--mainWhiteColor);
-      padding: 10px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      text-align: center;
-  }
-
-  .custom-card-title {
-      font-size: 16px;
-  }
-
-  .custom-card-content ul {
+  .cards {
+      display: grid;
+      flex-wrap: wrap;
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
   }
 
-  .custom-card-content ul li {
-      padding: 5px 10px;
-      border-bottom: 1px solid var(--mainGrayColor);
+  .card-item {
+      display: flex;
+      background-color: var(--grayishOrangeColor);
   }
 
-  .custom-card-content ul li:last-child {
-      border-bottom: none;
+
+  .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px 25px 5px 50px;
+      transition: transform 0.1s linear, box-shadow 0.2s;
   }
+
+  /* .card-image {} */
+
 
   img {
       max-width: 100%;
@@ -64,8 +56,65 @@
       color: var(--mainBlackColor);
   }
 
-  a:hover {
-      background-color: var(--mainWhiteColor);
+  .card-title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 90%;
+      height: auto;
+      color: var(--mainWhiteColor);
+      padding: 0.5rem;
+      border-radius: 5px 0 0 5px;
+      transform: rotate(-3.3deg);
+      transform-origin: left top;
+      /* text-transform: uppercase; */
+      overflow: hidden;
+      z-index: 1;
+      background-color: var(--titleBackground);
+      animation: 0s 0s fly-in 0 reverse both;
+      font-family: var(--titleFont)
+  }
+
+  @media (min-width: 535px) {
+      .card-title {
+          animation: 0.5s 0.25s fly-out 1 both;
+      }
+  }
+
+  .card:focus .card-title,
+  .card:hover .card-title {
+      animation: 0.5s ease-in 0s fly-in 1 both;
+  }
+
+  .card:focus,
+  .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.2);
+  }
+
+
+  @keyframes fly-in {
+      0% {
+          top: 0;
+          right: 0;
+          font-size: 1.325rem;
+      }
+
+      25% {
+          top: 0;
+          right: -200%;
+          font-size: 1.325rem;
+      }
+
+      26% {
+          font-size: 2rem;
+      }
+
+      100% {
+          top: 2rem;
+          right: 0;
+          font-size: 2rem;
+      }
   }
 
 
@@ -85,7 +134,8 @@
   @media(min-width: 461px) and (max-width: 767px) {
       .wrapper {
           margin: 0 auto;
-          width: 80%;
+          padding: 0 50px;
+          width: 100%;
           display: flex;
           flex-direction: column;
 
@@ -95,10 +145,17 @@
   @media (min-width: 768px) and (max-width: 1023px) {
       .wrapper {
           margin: 0 auto;
-          width: 90%;
+          padding: 0 50px;
+          width: 100%;
           grid-template-columns: repeat(2, 1fr);
 
       }
   }
 
-  @media (min-width: 1024px) and (max-width: 1440px) {}
+  @media (min-width: 1024px) and (max-width: 1440px) {
+      .wrapper {
+          margin: 0 auto;
+          padding: 0 50px;
+
+      }
+  }

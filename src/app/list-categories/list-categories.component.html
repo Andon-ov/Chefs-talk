@@ -1,24 +1,25 @@
 <div class="mainLong">
-  <section class="list-categories">
-    <h1 class="title">Категории</h1>
+  <section class="categories-list">
+    <h1 class="category-title">Категории</h1>
+
     <section class="wrapper">
-      <div *ngFor="let category of categories">
+      <ul class="cards" *ngFor="let category of categories">
+        <!-- card -->
         <a [routerLink]="['/category/', category.id]">
-          <div class="custom-card" *ngIf="category.is_active">
-            <div class="custom-card-header">
-              <!-- <div class="custom-header-image"></div> -->
-              <div class="custom-card-title">{{ category.name }}</div>
-            </div>
-            <div class="custom-card-content">
-              <ul>
-                <li>{{ category.menu }}</li>
-                <li>{{ category.note }}</li>
-                <li><img [src]="category.image" alt="" /></li>
-              </ul>
-            </div>
+          <div *ngIf="category.is_active">
+            <li class="card-item">
+              <div class="card" tabindex="0">
+                <div class="card-image">
+                  <img [src]="category.image" alt="category.name" />
+                </div>
+
+                <h3 class="card-title">{{ category.name }}</h3>
+                <!-- <p>{{ category.menu }}{{ category.note }}</p> -->
+              </div>
+            </li>
           </div>
         </a>
-      </div>
+      </ul>
     </section>
   </section>
 </div>

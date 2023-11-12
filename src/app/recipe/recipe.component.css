@@ -5,8 +5,10 @@
 }
 
 .recipe-title {
-  font-size: 32px;
+  font-size: 26px;
   text-align: center;
+  font-family: var(--titleFont);
+  /* color: var(--mainWhiteColor); */
 }
 
 
@@ -24,12 +26,10 @@
 
 .recipe-category a {
   font-size: 18px;
-  text-decoration: none;
-  color: var(--darkGrayColor);
+  color: var(--mainGreenColor);
 }
 
 .recipe-category a:hover {
-  text-decoration: underline;
   color: var(--secondGreenColor);
 }
 
@@ -70,12 +70,11 @@
 }
 
 .recipe-ingredients li a {
-  text-decoration: none;
-  color: var(--darkGrayColor);
+
+  color: var(--mainGreenColor);
 }
 
 .recipe-ingredients li a:hover {
-  text-decoration: underline;
   color: var(--secondGreenColor);
 }
 

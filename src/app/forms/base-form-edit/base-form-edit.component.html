@@ -1,7 +1,6 @@
 <div class="mainLong">
   <h1 class="title">Редактиране на основна рецепта</h1>
   <form [formGroup]="baseFormEdit">
-    <!-- (ngSubmit)="onSubmit()" -->
     <!-- Title -->
     <label for="title"> Заглавие (задължително): </label>
     <input type="text" id="title" formControlName="title" />
@@ -67,6 +66,20 @@
 
     <!-- Video -->
     <p class="hint">Поставете тук видео линкът</p>
+    <div formArrayName="video_recipe">
+      <div
+        *ngFor="let video of video_recipe.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- Name required-->
+        <label [for]="'video_recipe' + i">Видео</label>
+        <input
+          type="text"
+          [id]="'video_recipe' + i"
+          formControlName="video_recipe"
+        />
+      </div>
+    </div>
 
     <!-- Preparation -->
     <p class="hint">
@@ -106,11 +119,9 @@
         <input type="number" [id]="'quantity' + i" formControlName="quantity" />
 
         <!-- Preparation Method -->
-        <label [for]="'preparation_method' + i"
-          >Методи на приготвяне на съставката:</label
-        >
+        <label [for]="'preparation_method' + i">Допълнителна информация:</label>
         <p class="hint">
-          Въведете методите, разделени със запетайка и интервал:
+          Въведете информация, разделена със запетайка и интервал:
           <br />
           Пример: Почистване, измиване, нарязване.
         </p>
@@ -150,6 +161,6 @@
     </button>
 
     <!-- Submit button -->
-    <button type="submit">Запазете промените</button>
+    <button type="button" (click)="onSubmit()">Запазете промените</button>
   </form>
 </div>

@@ -49,21 +49,31 @@
         class="recipe-ingredients"
         *ngFor="let ingredient of base?.ingredients"
       >
-        <li>
+        <li *ngIf="base?.ingredients">
+          <!-- name, amount, unit require -->
           {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
+
+          <!-- quantity -->
           <span *ngIf="ingredient.quantity"
             >({{ ingredient.quantity }} бр.)</span
           >
-        </li>
-        <li *ngIf="ingredient.base">
-          <a [routerLink]="['/base', ingredient.base]">Base Link</a>
-        </li>
-        <li *ngIf="ingredient.preparation_method">
-          <span style="color: gray">
+
+          <!-- base -->
+          <span class="value" *ngIf="ingredient.base">
+            <a [routerLink]="['/base', ingredient.base]">
+              &nbsp;&nbsp;<i class="fa-solid fa-forward"></i>
+              &nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass fa-beat-fade"></i>
+              &nbsp;&nbsp;<i class="fa-solid fa-backward"></i>
+              </a
+          ></span>
+          <br />
+          <!-- preparation_method -->
+          <span class="key" *ngIf="ingredient.preparation_method">
             <i> {{ ingredient.preparation_method }}</i>
           </span>
         </li>
-        <hr *ngIf="ingredient.name || ingredient.preparation_method" />
+
+        <!-- <hr *ngIf="ingredient.name || ingredient.preparation_method" /> -->
       </ul>
     </div>
     <!-- ingredients -->
@@ -159,7 +169,7 @@
       ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
       назад</a
     >
-    <button (click)="navigateToEdit()">Edit</button>
+    <!-- <button (click)="navigateToEdit()">Edit</button> -->
   </div>
   <br />
 </div>

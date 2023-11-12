@@ -7,6 +7,7 @@ import {
   PreparationMethodItem,
   VideoRecipeItem,
 } from '../../interfaces';
+import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
 import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
@@ -19,13 +20,17 @@ export class BaseFormEditComponent implements OnInit {
   base: BaseRecipe | null = null;
   baseId = '';
   baseFormEdit!: FormGroup;
+  firestore: Firestore;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private baseRecipeService: BaseRecipeService
-  ) {}
+    private baseRecipeService: BaseRecipeService,
+    firestore: Firestore
+  ) {
+    this.firestore = firestore;
+  }
 
   navigateToEdit() {
     this.router.navigate(['/base-edit', this.baseId]);
@@ -40,17 +45,16 @@ export class BaseFormEditComponent implements OnInit {
     this.baseFormEdit = this.fb.group({
       title: ['', [Validators.required]],
       base_type: ['', [Validators.required]],
-      summary: [''],
       description: ['', [Validators.required]],
       base_yield: ['', [Validators.required]],
       unit: ['', [Validators.required]],
 
+      summary: [''],
       selectedAllergen: null,
-      allergens: this.fb.array([]),
       selectedAllergenNames: '',
-
       base_recipe_portions: [0],
 
+      allergens: this.fb.array([]),
       image_recipe: this.fb.array([]),
       video_recipe: this.fb.array([]),
       preparation_method: this.fb.array([]),
@@ -66,6 +70,8 @@ export class BaseFormEditComponent implements OnInit {
       if (baseId) {
         try {
           this.base = await this.baseRecipeService.getBaseById(baseId);
+          console.log(this.base);
+
           this.patchFormWithBaseData();
         } catch (error) {
           console.error(
@@ -140,7 +146,7 @@ export class BaseFormEditComponent implements OnInit {
       ) {
         this.base.preparation_method.forEach(
           (method: PreparationMethodItem) => {
-            videosFormArray.push(
+            methodsFormArray.push(
               this.fb.group({
                 preparation_method: [method.preparation_method],
               })
@@ -195,5 +201,20 @@ export class BaseFormEditComponent implements OnInit {
   }
   get preparation_method() {
     return this.baseFormEdit.get('preparation_method') as FormArray;
+  }
+
+  onSubmit() {
+    if (this.baseFormEdit.valid) {
+      const baseRecipeData = this.baseFormEdit.value;
+      this.addBaseRecipe(baseRecipeData);
+      this.baseFormEdit.reset();
+    }
+  }
+
+  addBaseRecipe(baseRecipeData: any) {
+    const collectionName = 'BaseRecipe';
+    const docRef = doc(this.firestore, collectionName, this.baseId);
+    updateDoc(docRef, baseRecipeData);
+    this.router.navigate(['/base', this.baseId]);
   }
 }

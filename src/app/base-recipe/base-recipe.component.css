@@ -17,7 +17,6 @@
 
 .recipe-category a {
   font-size: 18px;
-  text-decoration: none;
   color: var(--mainGreenColor);
 }
 
@@ -26,8 +25,11 @@
 }
 
 .recipe-image li {
-  list-style: none;
   margin-bottom: 10px;
+}
+
+.recipe-image li img {
+  width: 100%;
 }
 
 .recipe-description {
@@ -44,18 +46,24 @@
   white-space: pre-wrap;
 }
 
+.recipe-ingredients {
+  padding: 0 16px;
+}
+
 .recipe-ingredients li {
   font-size: 16px;
-  list-style: inside;
+  margin-bottom: 10px;
+  list-style-type: disc;
 }
 
 .recipe-ingredients li a {
   color: var(--mainGreenColor);
-  text-decoration: none;
 }
 
 .recipe-ingredients li a:hover {
-  text-decoration: underline;
+
+  color: var(--secondGreenColor);
+
 }
 
 .recipe-preparation-method li {
