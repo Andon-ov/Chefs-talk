@@ -17,7 +17,7 @@
 
 .recipe-category a {
   font-size: 18px;
-  color: var(--mainGreenColor);
+  color: var(--mainColor);
 }
 
 .recipe-category a:hover {
@@ -57,12 +57,12 @@
 }
 
 .recipe-ingredients li a {
-  color: var(--mainGreenColor);
+  color: var(--mainColor);
 }
 
 .recipe-ingredients li a:hover {
 
-  color: var(--secondGreenColor);
+  color: var(--secondColor);
 
 }
 
@@ -89,22 +89,4 @@
   width: 100%;
   max-width: 800px;
   height: 450px;
-}
-
-
-.btn {
-  display: block;
-  padding: 10px 20px;
-  background-color: var(--mainGreenColor);
-  color: var(--mainWhiteColor);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-
-.btn:hover {
-  background-color: var(--secondGreenColor);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }

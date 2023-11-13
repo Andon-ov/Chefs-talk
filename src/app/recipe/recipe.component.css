@@ -26,11 +26,11 @@
 
 .recipe-category a {
   font-size: 18px;
-  color: var(--mainGreenColor);
+  color: var(--mainColor);
 }
 
 .recipe-category a:hover {
-  color: var(--secondGreenColor);
+  color: var(--secondColor);
 }
 
 .recipe-hero {
@@ -71,11 +71,11 @@
 
 .recipe-ingredients li a {
 
-  color: var(--mainGreenColor);
+  color: var(--mainColor);
 }
 
 .recipe-ingredients li a:hover {
-  color: var(--secondGreenColor);
+  color: var(--secondColor);
 }
 
 .recipe-preparation-method li {
@@ -102,7 +102,7 @@
 }
 
 .comments {
-  border: 1px solid var(--mainGrayColor);
+  border: 1px solid var(--borderColor);
   margin: 30px 0;
   padding: 20px;
 }
@@ -119,19 +119,19 @@
 
 .comments p {
   font-size: 14px;
-  color: var(--darkGrayColor);
+  color: var(--mainGreyColor);
 }
 
 .comments ul li:nth-child(odd) {
   /* background-color: var(--mainWhiteColor); */
-  background-color: var(--grayishOrangeColor);
+  background-color: var(--backgroundColor);
   padding-left: 5px;
   border-radius: 5px;
   /* font-weight: bold; */
 }
 
 .comments ul li:nth-child(even) {
-  background-color: var(--mainGrayColor);
+  background-color:  var(--mainCoralColor);
   font-style: italic;
   border-radius: 5px;
 }

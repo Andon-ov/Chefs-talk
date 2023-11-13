@@ -165,6 +165,10 @@
       </div>
 
       <button (click)="toggleCommentForm()">Искате ли да коментирате?</button>
+      <a class="btn" href="javascript:history.back()"
+      ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+      назад</a
+    >
       <div *ngIf="showCommentForm">
         <app-comment-form [recipeId]="recipeId" />
       </div>

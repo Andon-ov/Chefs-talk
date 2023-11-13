@@ -1,5 +1,4 @@
 .category {
-    padding: 20px;
     width: 1200px;
     margin: 0 auto;
 }
@@ -44,7 +43,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--grayishOrangeColor);
+    background: var(--backgroundColor);
     color: var(--mainBlackColor);
     font-weight: 600;
     padding: 0 5px;
@@ -76,7 +75,7 @@
     top: 2%;
     height: 20%;
     color: var(--mainWhiteColor);
-    background: var(--mainGreenColor);
+    background: var(--mainColor);
     font-size: 14px;
     transition: 1s ease-in-out;
 }

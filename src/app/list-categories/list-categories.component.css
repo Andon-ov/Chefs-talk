@@ -32,7 +32,7 @@
 
   .card-item {
       display: flex;
-      background-color: var(--grayishOrangeColor);
+      background-color: var(--backgroundColor);
   }
 
 
@@ -70,7 +70,7 @@
       /* text-transform: uppercase; */
       overflow: hidden;
       z-index: 1;
-      background-color: var(--titleBackground);
+      background-color: var(--animatedTitleBackground);
       animation: 0s 0s fly-in 0 reverse both;
       font-family: var(--titleFont)
   }

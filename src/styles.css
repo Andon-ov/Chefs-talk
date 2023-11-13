@@ -81,7 +81,7 @@ h6 {
   isolation: isolate;
 }
 
-/* 
+/*
     Custom
   */
 ul {
@@ -116,44 +116,58 @@ body {
 }
 
 :root {
-  --mainGreenColor: #8abe53;
-  --secondGreenColor: #00C0A3;
+  --mainColor: #8abe53;
+  /* --mainColor: #FF8960; */
+
+  --secondColor: #00C0A3;
+  /* --secondColor: #7FD1AE; */
 
   --mainWhiteColor: #FFFFFF;
-  --mainGrayColor: #ddd;
-  --lightGrayColor: #ccc;
-  --darkGrayColor: #777;
-
-  --grayishOrangeColor: #D5CABD;
   --mainBlackColor: #000000;
-  --mainErrorColor: red;
+  --mainRedColor: red;
 
-  --titleBackground: rgba(0, 192, 163, 0.8);
+  --mainGreyColor: #708090;
+  --mainCoralColor: #FFEDCB;
+
+
+  --animatedTitleBackground: rgba(0, 192, 163, 0.8);
+  /* --animatedTitleBackground: rgba(255, 137, 96, 0.8); */
+
+  --borderColor: #ddd;
+  --backgroundColor: #D5CABD;
 
   --titleFont: Georgia, Times, serif;
 }
 
 .main {
   height: 87vh;
-  background-color: var(--grayishOrangeColor);
+  background-color: var(--backgroundColor);
 
 }
 
 
 .mainLong {
-  border: 1px solid var(--lightGrayColor);
-  background-color: var(--grayishOrangeColor);
+  border: 1px solid var(--borderColor);
+  background-color: var(--backgroundColor);
+  background-repeat: no-repeat;
   min-height: 87vh;
+}
+
+.logo-container {
+  width: 1600px;
+  height: 1200px;
+  background-image: url('./assets/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 form {
   max-width: 600px;
   margin: 0 auto 50px auto;
   padding: 20px;
-
   background-color: var(--mainWhiteColor);
   padding: 20px;
-  border: 1px solid var(--mainGrayColor);
+  border: 1px solid var(--borderColor);
   border-radius: 10px;
 }
 
@@ -169,24 +183,67 @@ textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid var(--lightGrayColor);
-  border-radius: 5px;
+  border: unset;
+  border-bottom: 1px solid var(--mainColor);
+  border-color: var(--mainColor);
+  background: var(--mainWhiteColor);
 }
 
 textarea {
   white-space: pre-wrap;
 }
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   margin-right: 5px;
+  border: 1px solid var(--mainWhiteColor);
+} */
+
+
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+input[type="checkbox"]:focus-visible {
+  outline: 1px solid var(--secondColor);
+  /* border: 1px solid var(--mainColor); */
+  border: unset;
 }
 
-button {
-  width: 100%;
-  display: inline-block;
+select:hover {
+  background: var(--mainWhiteColor);
+  color: (--secondColor);
+
+}
+
+select:checked {
+  background: var(--mainWhiteColor);
+  color: (--secondColor);
+}
+
+select:active,
+select:focus {
+  outline: 1px solid var(--secondColor);
+  /* box-shadow: 0 0 5px var(--animatedTitleBackground);  */
+}
+
+option {
+  background-color: var(--mainColor);
+  color: var(--mainWhiteColor);
+
+}
+
+select option:hover {
+  background-color: var(--mainColor);
+  color: var(--mainWhiteColor);
+}
+
+/*  */
+
+button,
+.btn {
   padding: 10px 20px;
-  margin: 10px 10px 10px 0;
-  background-color: var(--mainGreenColor);
+  display: block;
+  background-color: var(--mainColor);
   color: var(--mainWhiteColor);
   border: none;
   border-radius: 5px;
@@ -194,10 +251,18 @@ button {
   text-align: center;
 }
 
-button:hover {
-  background-color: var(--secondGreenColor);
+button {
+  width: 100%;
+  margin: 10px 10px 10px 0;
+
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--secondColor);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }
+
 
 /*! Form */
 .title {
@@ -208,12 +273,12 @@ button:hover {
 .hint {
   font-size: 12px;
   font-style: italic;
-  color: var(--secondGreenColor);
+  color: var(--mainGreyColor);
 }
 
 .errors {
   font-style: italic;
-  color: var(--mainErrorColor);
+  color: var(--mainRedColor);
   font-size: 12px;
 }
 
@@ -242,7 +307,7 @@ hr {
 
 .key {
 
-  color: var(--darkGrayColor);
+  color: var(--mainGreyColor);
   padding-right: 10px;
 }
 
@@ -254,7 +319,7 @@ hr {
 }
 
 tr:nth-child(even) {
-  background-color: var(--lightGrayColor);
+  background-color: var(--mainCoralColor);
 }
 
 table {
@@ -267,13 +332,13 @@ table {
 
 td,
 th {
-  border: 1px solid var(--mainGrayColor);
+  border: 1px solid var(--borderColor);
   padding: 10px;
 
 }
 
 tr:hover {
-  background-color: var(--mainGrayColor);
+  background-color: var(--mainWhiteColor);
   transition: background-color 0.3s;
 }
 

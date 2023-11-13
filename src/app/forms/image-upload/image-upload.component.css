@@ -1,5 +1,5 @@
 .cloudinary-button {
-    background-color: var(--mainGreenColor);
+    background-color: var(--mainColor);
     color: var(--mainWhiteColor);
     text-decoration: none;
     font-size: 16px;
@@ -13,5 +13,5 @@
 }
 
 .cloudinary-button:hover {
-    background-color: var(--secondGreenColor);
+    background-color: var(--secondColor);
 }
