@@ -1,5 +1,5 @@
 <div class="mainLong">
-  <h1 class="title">Редактиране на основна рецепта</h1>
+  <h1 class="title-black">Редактиране на основна рецепта</h1>
   <form [formGroup]="baseFormEdit">
     <!-- Title -->
     <label for="title"> Заглавие (задължително): </label>
@@ -42,8 +42,19 @@
       formControlName="base_recipe_portions"
     />
 
-    <!-- Allergen -->
-    <p class="hint">Алергени, който вече сте добавили:</p>
+  
+
+    <div *ngIf="base?.allergens && base?.allergens?.length! > 0" formArrayName="allergens">
+      <p class="hint">Алергени, който вече сте добавили:</p>
+
+      <div
+        *ngFor="let allergen of allergens.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <label [for]="'allergens' + i">Алергени</label>
+        <input type="text" [id]="'allergens' + i" formControlName="allergen" />
+      </div>
+    </div>
 
     <!-- Image Upload -->
     <p class="hint">Добавена снимка</p>

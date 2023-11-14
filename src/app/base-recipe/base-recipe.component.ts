@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BaseRecipe } from '../interfaces';
-import { BaseRecipeService } from './base-recipe.service';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BaseRecipe} from '../shared/interfaces/interfaces';
+import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.service';
 
 @Component({
   selector: 'app-base-recipe',
@@ -15,7 +15,6 @@ export class BaseRecipeComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-
     private baseRecipeService: BaseRecipeService
   ) {
     this.route.paramMap.subscribe(async (params) => {
@@ -36,6 +35,7 @@ export class BaseRecipeComponent {
       }
     });
   }
+
   navigateToEdit() {
     this.router.navigate(['/base-edit', this.baseId]);
   }

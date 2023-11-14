@@ -61,9 +61,7 @@
 }
 
 .recipe-ingredients li a:hover {
-
   color: var(--secondColor);
-
 }
 
 .recipe-preparation-method li {

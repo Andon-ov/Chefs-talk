@@ -123,15 +123,13 @@
 }
 
 .comments ul li:nth-child(odd) {
-  /* background-color: var(--mainWhiteColor); */
   background-color: var(--backgroundColor);
   padding-left: 5px;
   border-radius: 5px;
-  /* font-weight: bold; */
 }
 
 .comments ul li:nth-child(even) {
-  background-color:  var(--mainCoralColor);
+  background-color:  var(--mainMagnoliaColor);
   font-style: italic;
   border-radius: 5px;
 }

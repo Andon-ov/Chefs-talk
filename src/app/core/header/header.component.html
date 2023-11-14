@@ -1,45 +1,48 @@
 <header class="header">
   <div class="wrapper">
+
     <div class="logo">
       <a routerLink="/home">Chefs Talks</a>
     </div>
     <nav class="navigation">
+
       <ul>
         <li><a routerLink="/chefs">Chefs</a></li>
         <!-- <li><a routerLink="/waiters">Waiters</a></li> -->
         <li><a routerLink="/base">Base</a></li>
 
-        <div class="dropdown">
-          <button class="dropbtn" (click)="toggleMenu()">
-            Add
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div
-            class="dropdown-content"
-            *ngIf="isMenuOpen"
-            (click)="closeMenu()"
-          >
-            <a
-              (click)="handleMenuItemClick('Link 1')"
-              href="#"
-              routerLink="/add-base"
-              >Add Base</a
-            >
-            <a
-              (click)="handleMenuItemClick('Link 2')"
-              href="#"
-              routerLink="/add-recipe"
-              >Add Recipe</a
-            >
-            <a
-              (click)="handleMenuItemClick('Link 3')"
-              href="#"
-              routerLink="/add-category"
-              >Add Category</a
-            >
-          </div>
-        </div>
       </ul>
+      <div class="dropdown">
+        <button class="dropBtn" (click)="toggleMenu()">
+          Add
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div
+          class="dropdown-content"
+          *ngIf="isMenuOpen"
+          (click)="closeMenu()"
+        >
+          <a
+            (click)="handleMenuItemClick('Link 1')"
+            href="#"
+            routerLink="/add-base"
+          >Add Base</a
+          >
+          <a
+            (click)="handleMenuItemClick('Link 2')"
+            href="#"
+            routerLink="/add-recipe"
+          >Add Recipe</a
+          >
+          <a
+            (click)="handleMenuItemClick('Link 3')"
+            href="#"
+            routerLink="/add-category"
+          >Add Category</a
+          >
+        </div>
+      </div>
     </nav>
+
   </div>
 </header>

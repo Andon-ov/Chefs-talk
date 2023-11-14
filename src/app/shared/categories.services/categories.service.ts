@@ -6,7 +6,7 @@ import {
   getDocs,
   CollectionReference,
 } from '@angular/fire/firestore';
-import { Category } from '../interfaces';
+import { Category } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',

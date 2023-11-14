@@ -127,6 +127,8 @@ body {
   --mainRedColor: red;
 
   --mainGreyColor: #708090;
+  --mainMagnoliaColor: #F6F4F9;
+
   --mainCoralColor: #FFEDCB;
 
 
@@ -265,9 +267,17 @@ button:hover,
 
 
 /*! Form */
-.title {
+.title-white,
+.title-black {
   text-align: center;
   padding: 20px 0;
+  color: var(--mainWhiteColor);
+  font-family: var(--titleFont);
+  font-size: 32px;
+}
+
+.title-black {
+  color: var(--mainBlackColor);
 }
 
 .hint {
@@ -319,7 +329,7 @@ hr {
 }
 
 tr:nth-child(even) {
-  background-color: var(--mainCoralColor);
+  background-color: var(--mainMagnoliaColor);
 }
 
 table {
@@ -338,7 +348,8 @@ th {
 }
 
 tr:hover {
-  background-color: var(--mainWhiteColor);
+  background-color:
+    var(--mainCoralColor);
   transition: background-color 0.3s;
 }
 

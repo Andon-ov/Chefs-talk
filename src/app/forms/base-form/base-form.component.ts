@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -13,9 +13,9 @@ import {
   getDocs,
   CollectionReference,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
-import { Allergens, BaseRecipe } from 'src/app/interfaces';
+import {Observable} from 'rxjs';
+import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
+import {Allergens, BaseRecipe} from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-base-form',
@@ -110,6 +110,7 @@ export class BaseFormComponent implements OnInit {
       })
     );
   }
+
   removeVideo(index: number) {
     const videoArray = this.baseForm.get('video_recipe') as FormArray;
     videoArray.removeAt(index);
@@ -126,6 +127,7 @@ export class BaseFormComponent implements OnInit {
       })
     );
   }
+
   removePreparation(index: number) {
     const preparationArray = this.baseForm.get(
       'preparation_method'
@@ -173,10 +175,10 @@ export class BaseFormComponent implements OnInit {
     }
   }
 
-  onIsBaseChange() {
-    const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
-    this.isBaseControl = ingredientsArray.value[0].is_base;
-  }
+  // onIsBaseChange() {
+  //   const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
+  //   this.isBaseControl = ingredientsArray.value[0].is_base;
+  // }
 
   get ingredients() {
     return this.baseForm.get('ingredients') as FormArray;
@@ -189,6 +191,7 @@ export class BaseFormComponent implements OnInit {
   get video_recipe() {
     return this.baseForm.get('video_recipe') as FormArray;
   }
+
   get preparation_method() {
     return this.baseForm.get('preparation_method') as FormArray;
   }
@@ -200,6 +203,7 @@ export class BaseFormComponent implements OnInit {
       this.baseForm.reset();
     }
   }
+
 
   getAllergens(): Observable<Allergens[]> {
     const collectionName = 'Allergens';
@@ -216,7 +220,7 @@ export class BaseFormComponent implements OnInit {
           querySnapshot.forEach((doc) => {
             const allergensData = doc.data() as any;
 
-            const allergensWithId = { ...allergensData, id: doc.id };
+            const allergensWithId = {...allergensData, id: doc.id};
 
             data.push(allergensWithId);
           });
@@ -239,6 +243,7 @@ export class BaseFormComponent implements OnInit {
       },
     });
   }
+
 
   addBaseRecipe(baseRecipeData: any) {
     const collectionName = 'BaseRecipe';

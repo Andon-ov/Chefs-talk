@@ -7,7 +7,7 @@ import {
   getDocs,
   addDoc,
 } from '@angular/fire/firestore';
-import { Comments } from '../interfaces';
+import { Comments } from '../interfaces/interfaces';
 import { Subject } from 'rxjs';
 
 @Injectable({

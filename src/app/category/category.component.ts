@@ -7,10 +7,10 @@ import {
   doc,
   getDoc,
 } from '@angular/fire/firestore';
-import { Component, OnInit } from '@angular/core';
-import { inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Recipe, Category } from '../interfaces';
+import {Component, OnInit} from '@angular/core';
+import {inject} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Recipe, Category} from '../shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-category',
@@ -23,7 +23,8 @@ export class CategoryComponent implements OnInit {
 
   firestore: Firestore = inject(Firestore);
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(async (params) => {

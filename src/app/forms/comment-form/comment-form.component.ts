@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore } from '@angular/fire/firestore';
-import { CommentService } from 'src/app/recipe/comment.service';
+import { CommentService } from 'src/app/shared/comments.services/comment.service';
 
 @Component({
   selector: 'app-comment-form',

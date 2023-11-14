@@ -50,7 +50,9 @@ export interface BaseRecipe {
   base_recipe_portions: number;
   base_type: string;
   base_yield: number;
-  allergen: DocumentReference<DocumentData>[];
+  allergens: DocumentReference<DocumentData>[];
+  // allergens: Allergens[];
+
   selectedAllergen: string;
   selectedAllergenNames: string;
   summary: string;

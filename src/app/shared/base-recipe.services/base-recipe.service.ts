@@ -8,7 +8,7 @@ import {
   doc,
   getDoc,
 } from '@angular/fire/firestore';
-import { BaseRecipe } from '../interfaces';
+import { BaseRecipe } from '../interfaces/interfaces';
 
 
 @Injectable({
@@ -23,16 +23,16 @@ export class BaseRecipeService  {
       this.firestore,
       collectionName
     );
-  
+
     return new Observable((observer) => {
       getDocs(collectionRef)
         .then((querySnapshot) => {
           const data: BaseRecipe[] = [];
-          
+
           querySnapshot.forEach((doc) => {
             const baseRecipeData = doc.data() as BaseRecipe;
             const baseRecipeWithId = { ...baseRecipeData, id: doc.id };
-    
+
             data.push(baseRecipeWithId);
           });
           observer.next(data);
@@ -43,7 +43,7 @@ export class BaseRecipeService  {
         });
     });
 
-    
+
   }
 
   async getBaseById(baseId: string): Promise<BaseRecipe | null> {
@@ -58,7 +58,7 @@ export class BaseRecipeService  {
   }
 
 
-  
+
 }
 
 

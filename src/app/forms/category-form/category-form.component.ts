@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Category } from 'src/app/interfaces';
+import { Category } from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-category-form',
@@ -31,7 +31,7 @@ export class CategoryFormComponent {
       this.categoryForm.reset();
     }else{
       console.log(this.categoryForm.errors);
-      
+
     }
   }
 

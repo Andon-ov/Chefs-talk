@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category, Comments, Plates, Recipe } from '../interfaces';
-import { RecipeService } from './recipe.service';
+import { Category, Comments, Plates, Recipe } from '../shared/interfaces/interfaces';
+import { RecipeService } from '../shared/recipe.services/recipe.service';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { CommentService } from './comment.service';
+import { CommentService } from '../shared/comments.services/comment.service';
 
 @Component({
   selector: 'app-recipe',

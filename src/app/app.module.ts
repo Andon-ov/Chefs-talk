@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
-import { ListCategoriesComponent } from './list-categories/list-categories.component';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryComponent } from './category/category.component';
 import { RecipeComponent } from './recipe/recipe.component';
 
@@ -24,11 +24,12 @@ import { FormsModule } from './forms/forms.module';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CloudinaryModule } from '@cloudinary/ng';
-import { SafeUrlPipe } from './safe-url.pipe';
-import { ListBaseComponent } from './list-base/list-base.component';
+import { SafeUrlPipe } from './shared/safe-url.pipe/safe-url.pipe';
+import { BaseListComponent } from './base-list/base-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,12 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     WaitersComponent,
     ChefsComponent,
     NotFoundComponent,
-    ListCategoriesComponent,
+    CategoriesListComponent,
     CategoryComponent,
     RecipeComponent,
     BaseRecipeComponent,
     SafeUrlPipe,
-    ListBaseComponent,
+    BaseListComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +54,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
     // Cloud Firestore
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

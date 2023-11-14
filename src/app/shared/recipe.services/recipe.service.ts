@@ -5,7 +5,7 @@ import {
   doc,
   getDoc
 } from '@angular/fire/firestore';
-import { Recipe } from '../interfaces';
+import { Recipe } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',

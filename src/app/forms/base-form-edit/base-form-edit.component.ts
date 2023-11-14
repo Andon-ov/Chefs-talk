@@ -6,9 +6,9 @@ import {
   Ingredient,
   PreparationMethodItem,
   VideoRecipeItem,
-} from '../../interfaces';
+} from '../../shared/interfaces/interfaces';
 import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
-import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
+import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
@@ -70,7 +70,6 @@ export class BaseFormEditComponent implements OnInit {
       if (baseId) {
         try {
           this.base = await this.baseRecipeService.getBaseById(baseId);
-          console.log(this.base);
 
           this.patchFormWithBaseData();
         } catch (error) {
@@ -100,11 +99,15 @@ export class BaseFormEditComponent implements OnInit {
       const methodsFormArray = this.baseFormEdit.get(
         'preparation_method'
       ) as FormArray;
+      const allergensFormArray = this.baseFormEdit.get(
+        'allergens'
+      ) as FormArray;
 
       ingredientsFormArray.clear();
       imagesFormArray.clear();
       videosFormArray.clear();
       methodsFormArray.clear();
+      allergensFormArray.clear();
 
       this.base.ingredients.forEach((ingredient: Ingredient) => {
         ingredientsFormArray.push(
@@ -155,6 +158,14 @@ export class BaseFormEditComponent implements OnInit {
         );
       }
 
+      if (this.base.allergens && this.base.allergens.length > 0) {
+        this.base.allergens.forEach((allergen: any) => {
+          allergensFormArray.push(this.fb.group({
+            allergen: [allergen]
+          }));
+        });
+      }
+
       this.baseFormEdit.patchValue({
         title: this.base.title,
         base_type: this.base.base_type,
@@ -201,6 +212,9 @@ export class BaseFormEditComponent implements OnInit {
   }
   get preparation_method() {
     return this.baseFormEdit.get('preparation_method') as FormArray;
+  }
+  get allergens() {
+    return this.baseFormEdit.get('allergens') as FormArray;
   }
 
   onSubmit() {

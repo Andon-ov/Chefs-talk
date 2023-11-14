@@ -14,9 +14,9 @@ import {
   CollectionReference,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { BaseRecipeService } from 'src/app/base-recipe/base-recipe.service';
-import { CategoriesService } from 'src/app/list-categories/categories.service';
-import { Allergens, BaseRecipe, Category, Plates } from 'src/app/interfaces';
+import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
+import { CategoriesService } from 'src/app/shared/categories.services/categories.service';
+import { Allergens, BaseRecipe, Category, Plates } from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-recipe-form',

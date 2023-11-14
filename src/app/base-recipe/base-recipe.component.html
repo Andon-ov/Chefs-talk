@@ -1,15 +1,15 @@
 <div class="mainLong">
   <div class="recipe-container">
-    <h1 class="title">{{ base?.title }}</h1>
+    <h1 class="title-black">{{ base?.title }}</h1>
 
     <!-- summary -->
     <div *ngIf="base?.summary">
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Резюме&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
-      <br />
+      <br/>
       <div class="recipe-summary">{{ base?.summary }}</div>
     </div>
     <!-- summary -->
@@ -20,18 +20,18 @@
       *ngIf="base?.image_recipe && base?.image_recipe?.length! > 0"
     >
       <li *ngFor="let img of base?.image_recipe">
-        <img [src]="img.image_recipe" alt="Изображение на рецепта" />
+        <img [src]="img.image_recipe" alt="Изображение на рецепта"/>
       </li>
     </ul>
 
     <!-- description require-->
     <div *ngIf="base?.description" class="recipe-description">
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
-      <br />
+      <br/>
       <p class="recipe-description-text">{{ base?.description }}</p>
     </div>
     <!-- description require-->
@@ -39,11 +39,11 @@
     <!-- ingredients -->
     <div *ngIf="base?.ingredients">
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
-      <br />
+      <br/>
 
       <ul
         class="recipe-ingredients"
@@ -55,18 +55,18 @@
 
           <!-- quantity -->
           <span *ngIf="ingredient.quantity"
-            >({{ ingredient.quantity }} бр.)</span
+          >({{ ingredient.quantity }} бр.)</span
           >
 
           <!-- base -->
           <span class="value" *ngIf="ingredient.base">
             <a [routerLink]="['/base', ingredient.base]">
-              &nbsp;&nbsp;<i class="fa-solid fa-forward"></i>
-              &nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass fa-beat-fade"></i>
-              &nbsp;&nbsp;<i class="fa-solid fa-backward"></i>
-              </a
-          ></span>
-          <br />
+              &nbsp;&nbsp;<i class="fa-solid fa-forward"></i> &nbsp;&nbsp;<i
+              class="fa-solid fa-magnifying-glass fa-beat-fade"
+            ></i>
+              &nbsp;&nbsp;<i class="fa-solid fa-backward"></i> </a
+            ></span>
+          <br/>
           <!-- preparation_method -->
           <span class="key" *ngIf="ingredient.preparation_method">
             <i> {{ ingredient.preparation_method }}</i>
@@ -83,11 +83,11 @@
       *ngIf="base?.preparation_method && base?.preparation_method?.length! > 0"
     >
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Методи&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
-      <br />
+      <br/>
       <ul
         class="recipe-preparation-method"
         *ngFor="let method of base?.preparation_method"
@@ -111,9 +111,7 @@
         <td><span class="key">Порций</span></td>
         <!-- base_recipe_portions -->
         <td>
-          <span class="value"
-            >{{ base?.base_recipe_portions }} &nbsp; бр.
-          </span>
+          <span class="value">{{ base?.base_recipe_portions }}&nbsp;бр. </span>
         </td>
       </tr>
 
@@ -124,8 +122,10 @@
         <!-- serving_value, unit -->
         <td>
           <span class="value"
-            >{{ base?.base_yield }}
-            <span class="value" *ngIf="base?.unit">&nbsp;{{ base?.unit }}</span>
+          >{{ base?.base_yield
+            }}<span class="value" *ngIf="base?.unit"
+            >&nbsp;{{ base?.unit }}</span
+            >
           </span>
         </td>
       </tr>
@@ -146,11 +146,11 @@
       *ngIf="base?.video_recipe && base?.video_recipe?.length! > 0"
     >
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
-      <br />
+      <br/>
       <ul>
         <li *ngFor="let video of base?.video_recipe">
           <iframe
@@ -164,12 +164,12 @@
       </ul>
     </div>
 
-    <br />
+    <br/>
     <a class="btn" href="javascript:history.back()"
-      ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+    ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
       назад</a
     >
     <button (click)="navigateToEdit()">Edit</button>
   </div>
-  <br />
+  <br/>
 </div>

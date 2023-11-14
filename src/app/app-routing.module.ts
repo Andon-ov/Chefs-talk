@@ -11,7 +11,7 @@ import { RecipeFormComponent } from './forms/recipe-form/recipe-form.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { BaseFormComponent } from './forms/base-form/base-form.component';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
-import { ListBaseComponent } from './list-base/list-base.component';
+import { BaseListComponent } from './base-list/base-list.component';
 import { BaseFormEditComponent } from './forms/base-form-edit/base-form-edit.component';
 
 const routes: Routes = [
@@ -50,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'base',
-    component: ListBaseComponent,
+    component: BaseListComponent,
   },
 
   {
