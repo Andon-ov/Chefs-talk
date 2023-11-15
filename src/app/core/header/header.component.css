@@ -72,7 +72,7 @@
 }
 
 .dropdown-content a:hover {
-  background-color: var(--mainWhiteColor);
+  background-color: var(--backgroundColor);
 }
 
 .dropdown:hover .dropdown-content {

@@ -11,7 +11,6 @@
   /* color: var(--mainWhiteColor); */
 }
 
-
 .recipe-summary {
   font-size: 16px;
   margin-bottom: 10px;
@@ -49,7 +48,6 @@
   border-radius: 5px;
 }
 
-
 .recipe-description h2 {
   font-size: 20px;
   font-weight: bold;
@@ -70,7 +68,6 @@
 }
 
 .recipe-ingredients li a {
-
   color: var(--mainColor);
 }
 
@@ -82,7 +79,6 @@
   font-size: 16px;
   /* margin-bottom: 10px; */
 }
-
 
 
 .recipe-other-details p {
@@ -129,7 +125,7 @@
 }
 
 .comments ul li:nth-child(even) {
-  background-color:  var(--mainMagnoliaColor);
+  background-color: var(--mainMagnoliaColor);
   font-style: italic;
   border-radius: 5px;
 }

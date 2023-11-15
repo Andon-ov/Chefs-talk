@@ -121,6 +121,18 @@ body {
 
   --secondColor: #00C0A3;
   /* --secondColor: #7FD1AE; */
+  --backgroundColor: #D5CABD;
+
+
+  /* first */
+  --mainRGBColor: 6, 174, 213;
+  --alpha: 0.8;
+
+  --mainColor: #06aed5;
+  --secondColor: #086788;
+  --backgroundColor: #D5CABD;
+
+
 
   --mainWhiteColor: #FFFFFF;
   --mainBlackColor: #000000;
@@ -132,14 +144,15 @@ body {
   --mainCoralColor: #FFEDCB;
 
 
-  --animatedTitleBackground: rgba(0, 192, 163, 0.8);
+  --animatedTitleBackground: rgba(var(--mainRGBColor), var(--alpha));
+  /* --animatedTitleBackground: rgba(0, 192, 163, 0.8); */
   /* --animatedTitleBackground: rgba(255, 137, 96, 0.8); */
 
   --borderColor: #ddd;
-  --backgroundColor: #D5CABD;
 
   --titleFont: Georgia, Times, serif;
 }
+
 
 .main {
   height: 87vh;
@@ -153,6 +166,10 @@ body {
   background-color: var(--backgroundColor);
   background-repeat: no-repeat;
   min-height: 87vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-container {
@@ -167,8 +184,7 @@ form {
   max-width: 600px;
   margin: 0 auto 50px auto;
   padding: 20px;
-  background-color: var(--mainWhiteColor);
-  padding: 20px;
+  background-color: var(--mainMagnoliaColor);
   border: 1px solid var(--borderColor);
   border-radius: 10px;
 }
@@ -188,7 +204,7 @@ textarea {
   border: unset;
   border-bottom: 1px solid var(--mainColor);
   border-color: var(--mainColor);
-  background: var(--mainWhiteColor);
+  background: var(--mainMagnoliaColor);
 }
 
 textarea {
@@ -213,13 +229,12 @@ input[type="checkbox"]:focus-visible {
 
 select:hover {
   background: var(--mainWhiteColor);
-  color: (--secondColor);
-
+  color: var(--secondColor);
 }
 
 select:checked {
   background: var(--mainWhiteColor);
-  color: (--secondColor);
+  color: var(--secondColor);
 }
 
 select:active,
@@ -283,7 +298,8 @@ button:hover,
 .hint {
   font-size: 12px;
   font-style: italic;
-  color: var(--mainGreyColor);
+  color: var(--mainColor);
+  display: block;
 }
 
 .errors {
@@ -348,12 +364,9 @@ th {
 }
 
 tr:hover {
-  background-color:
-    var(--mainCoralColor);
+  background-color: var(--mainCoralColor);
   transition: background-color 0.3s;
 }
-
-
 
 
 @media (max-width: 768px) {}

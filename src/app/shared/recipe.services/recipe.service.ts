@@ -1,17 +1,17 @@
-
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   Firestore,
   doc,
   getDoc
 } from '@angular/fire/firestore';
-import { Recipe } from '../interfaces/interfaces';
+import {Recipe} from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) {
+  }
 
   async getRecipeById(recipeId: string): Promise<Recipe | null> {
     const recipeDocRef = doc(this.firestore, 'Recipe', recipeId);

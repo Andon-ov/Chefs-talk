@@ -1,378 +1,365 @@
 <div class="mainLong">
-  <h1 class="title-black">Добавяне на рецепта</h1>
-  <form [formGroup]="recipeForm">
-    <!-- Title required-->
-    <label>
-      Заглавие (задължително):
-      <input type="text" id="title" formControlName="title" />
-    </label>
+  <div class="wrapper">
+    <h1 class="title-black">Добавяне на рецепта</h1>
+    <form [formGroup]="recipeForm">
+      <!-- Title required-->
+      <label>
+        Заглавие (задължително):
+        <input type="text" id="title" formControlName="title" />
+      </label>
 
-    <div *ngIf="recipeForm.get('title')?.touched">
-      <div class="errors" *ngIf="recipeForm.get('title')?.errors?.['required']">
-        Моля попълнете заглавието!
+      <div *ngIf="recipeForm.get('title')?.touched">
+        <div
+          class="errors"
+          *ngIf="recipeForm.get('title')?.errors?.['required']"
+        >
+          Моля попълнете заглавието!
+        </div>
       </div>
-    </div>
-    <!-- Title -->
+      <!-- Title -->
 
-    <!-- Category required-->
-    <label for="category">Категория (задължително):</label>
-    <p class="hint">Към коя категория пренадлежи тази рецепта?</p>
+      <!-- Category required-->
+      <label for="category">Категория (задължително):</label>
+      <p class="hint">Към коя категория пренадлежи тази рецепта?</p>
 
-    <select id="category" formControlName="category">
-      <option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </option>
-    </select>
-
-    <div *ngIf="recipeForm.get('category')?.touched">
-      <div
-        class="errors"
-        *ngIf="recipeForm.get('category')?.errors?.['required']"
-      >
-        Моля изберете категория!
-      </div>
-    </div>
-    <!-- Category -->
-
-    <!-- Summary -->
-    <div>
-      <label for="summary">Резюме:</label>
-      <p class="hint">Кратко изложение на рецепта</p>
-      <input type="text" id="summary" formControlName="summary" />
-    </div>
-    <!-- Summary -->
-
-    <!-- Description required-->
-
-    <div>
-      <label for="description">Начин на приготвяне (задължително):</label>
-      <textarea
-        name="text"
-        id="description"
-        formControlName="description"
-        cols="30"
-        rows="5"
-      ></textarea>
-    </div>
-    <div *ngIf="recipeForm.get('description')?.touched">
-      <div
-        class="errors"
-        *ngIf="recipeForm.get('description')?.errors?.['required']"
-      >
-        Моля попълнете начин на приготвяне!
-      </div>
-    </div>
-    <!-- Description -->
-
-    <!-- Season required-->
-    <div>
-      <label for="season">Сезон (задължително):</label>
-      <p class="hint">В кой сезон ще приготвяме рецепта?</p>
-      <select id="season" formControlName="season">
-        <option value="Пролет">Пролет</option>
-        <option value="Лято">Лято</option>
-        <option value="Есен">Есен</option>
-        <option value="Зима">Зима</option>
+      <select id="category" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
       </select>
-    </div>
 
-    <div *ngIf="recipeForm.get('season')?.touched">
-      <div
-        class="errors"
-        *ngIf="recipeForm.get('season')?.errors?.['required']"
-      >
-        Моля изберете сезон!
+      <div *ngIf="recipeForm.get('category')?.touched">
+        <div
+          class="errors"
+          *ngIf="recipeForm.get('category')?.errors?.['required']"
+        >
+          Моля изберете категория!
+        </div>
       </div>
-    </div>
+      <!-- Category -->
 
-    <!-- Season -->
-
-    <!-- Release Time -->
-    <div>
-      <label for="release_time">Време за изпълнение: </label>
-      <p class="hint">За колко време трябва да приготвяме рецепта?</p>
-      <input type="text" id="release_time" formControlName="release_time" />
-    </div>
-    <!-- Release Time -->
-
-    <!-- Serving Value -->
-    <div>
-      <label for="serving_value">Готово количество: </label>
-      <p class="hint">Колко тежи готовото ястие?</p>
-      <input type="text" id="serving_value" formControlName="serving_value" />
-    </div>
-    <!-- Serving Value -->
-    <br />
-
-    <!-- Unit required-->
-    <label for="unit">Мерна еденица (задължително):</label>
-    <p class="hint">В която измерваме добивът</p>
-    <select id="unit" formControlName="unit">
-      <option value="гр.">Грам</option>
-      <option value="кг.">Килограм</option>
-      <option value="мл.">Милилитър</option>
-      <option value="л.">Литър</option>
-    </select>
-    <div *ngIf="recipeForm.get('unit')?.touched">
-      <div class="errors" *ngIf="recipeForm.get('unit')?.errors?.['required']">
-        Моля изберете мерна еденица!
-      </div>
-    </div>
-
-    <!-- Allergen -->
-    <!-- <div>
+      <!-- Summary -->
       <div>
+        <label for="summary">Резюме:</label>
+        <p class="hint">Кратко изложение на рецепта</p>
+        <input type="text" id="summary" formControlName="summary" />
+      </div>
+      <!-- Summary -->
+
+      <!-- Description required-->
+
+      <div>
+        <label for="description">Начин на приготвяне (задължително):</label>
+        <textarea
+          name="text"
+          id="description"
+          formControlName="description"
+          cols="30"
+          rows="5"
+        ></textarea>
+      </div>
+      <div *ngIf="recipeForm.get('description')?.touched">
+        <div
+          class="errors"
+          *ngIf="recipeForm.get('description')?.errors?.['required']"
+        >
+          Моля попълнете начин на приготвяне!
+        </div>
+      </div>
+      <!-- Description -->
+
+      <!-- Season required-->
+      <div>
+        <label for="season">Сезон (задължително):</label>
+        <p class="hint">В кой сезон ще приготвяме рецепта?</p>
+        <select id="season" formControlName="season">
+          <option value="Пролет">Пролет</option>
+          <option value="Лято">Лято</option>
+          <option value="Есен">Есен</option>
+          <option value="Зима">Зима</option>
+        </select>
+      </div>
+
+      <div *ngIf="recipeForm.get('season')?.touched">
+        <div
+          class="errors"
+          *ngIf="recipeForm.get('season')?.errors?.['required']"
+        >
+          Моля изберете сезон!
+        </div>
+      </div>
+
+      <!-- Season -->
+
+      <!-- Release Time -->
+      <div>
+        <label for="release_time">Време за изпълнение: </label>
+        <p class="hint">За колко време трябва да приготвяме рецепта?</p>
+        <input type="text" id="release_time" formControlName="release_time" />
+      </div>
+      <!-- Release Time -->
+
+      <!-- Serving Value -->
+      <div>
+        <label for="serving_value">Готово количество: </label>
+        <p class="hint">Колко тежи готовото ястие?</p>
+        <input type="text" id="serving_value" formControlName="serving_value" />
+      </div>
+      <!-- Serving Value -->
+      <br />
+
+      <!-- Unit required-->
+      <label for="unit">Мерна еденица (задължително):</label>
+      <p class="hint">В която измерваме добивът</p>
+      <select id="unit" formControlName="unit">
+        <option value="гр.">Грам</option>
+        <option value="кг.">Килограм</option>
+        <option value="мл.">Милилитър</option>
+        <option value="л.">Литър</option>
+      </select>
+      <div *ngIf="recipeForm.get('unit')?.touched">
+        <div
+          class="errors"
+          *ngIf="recipeForm.get('unit')?.errors?.['required']"
+        >
+          Моля изберете мерна еденица!
+        </div>
+      </div>
+
+      <!-- Allergen -->
+      <div>
+        <label>Алергени: </label>
+        <p class="hint">Добавете алергените, който садържа основната рецепта</p>
         <select formControlName="selectedAllergen">
           <option *ngFor="let allergen of allergens" [value]="allergen.id">
             {{ allergen.name }}
           </option>
         </select>
         <button type="button" (click)="addSelectedAllergen()">
-          Add Allergen
+          Добавете избраният алерген
         </button>
       </div>
       <div>
-        <label>Selected Allergens:</label>
+        <p *ngIf="recipeForm.get('selectedAllergen')?.touched" class="hint">
+          Алергени, който вече сте добавили:
+        </p>
         <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
-      </div> -->
-    <div>
-      <label for="selectedAllergen">Алергени: </label>
-      <p class="hint">Добавете алергените, който садържа основната рецепта</p>
-      <select formControlName="selectedAllergen">
-        <option *ngFor="let allergen of allergens" [value]="allergen.id">
-          {{ allergen.name }}
-        </option>
-      </select>
-      <button type="button" (click)="addSelectedAllergen()">
-        Добавете избраният алерген
-      </button>
-    </div>
-    <div>
-      <p *ngIf="recipeForm.get('selectedAllergen')?.touched" class="hint">
-        Алергени, който вече сте добавили:
-      </p>
-      <div>{{ recipeForm.get("selectedAllergenNames")?.value }}</div>
-      <!-- Allergen -->
+        <!-- Allergen -->
 
-         <!-- Image Upload -->
+        <!-- Image Upload -->
 
-         <app-image-upload (imageUploaded)="addImageToForm($event)" />
+        <app-image-upload (imageUploaded)="addImageToForm($event)" />
 
-         <!-- Image Upload -->
-   
-         <!-- Image -->
-         <div formArrayName="image_recipe">
-           <div
-             *ngFor="let image of image_recipe.controls; let i = index"
-             [formGroupName]="i"
-           >
-             <p class="hint">Добавена снимка</p>
-             <input type="text" id="image_recipe" formControlName="image_recipe" />
-             <button type="button" (click)="removeImage(i)">
-               Премахнете добавената снимка
-             </button>
-           </div>
-         </div>
-         <!-- Image -->
+        <!-- Image Upload -->
 
-     <!-- Video -->
-      <div formArrayName="video_recipe">
-        <div
-          *ngFor="let video of video_recipe.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <p class="hint">Поставете тук видео линкът</p>
-          <input type="text" id="video_recipe" formControlName="video_recipe" />
-          <button type="button" (click)="removeVideo(i)">
-            Премахнете видео линкът
-          </button>
-        </div>
-        <button type="button" (click)="addVideo()">
-          Добавете линк към видео
-        </button>
-      </div>
-      <!-- Video -->
-
-      <!-- Preparation -->
-      <div formArrayName="preparation_method">
-        <div
-          *ngFor="let preparation of preparation_method.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <p class="hint">
-            Добавете метод използван при приготвяне на основната рецептата
-          </p>
-          <input
-            type="text"
-            id="preparation_method"
-            formControlName="preparation_method"
-          />
-          <button type="button" (click)="removePreparation(i)">
-            Премахнете метода
-          </button>
-        </div>
-        <button type="button" (click)="addPreparation()">
-          Добавете метод на приготвяне
-        </button>
-      </div>
-      <!-- <div formArrayName="preparation_method">
-        <div
-          *ngFor="let preparation of preparation_method.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <label for="preparation_method">Preparation Method</label>
-          <input
-            type="text"
-            id="preparation_method"
-            formControlName="preparation_method"
-          />
-          <button type="button" (click)="removePreparation(i)">
-            Remove Preparation
-          </button>
-        </div>
-        <button type="button" (click)="addPreparation()">
-          Add Preparation
-        </button>
-      </div> -->
-      <!-- Preparation -->
-
-      <!-- Plate required-->
-      <label for="food_plate">Чиния (задължително):</label>
-      <p class="hint">В коя чиния ще се сервира ястието?</p>
-      <select id="food_plate" formControlName="food_plate">
-        <option *ngFor="let plate of plates" [value]="plate.id">
-          {{ plate.name }}
-        </option>
-      </select>
-
-      <div *ngIf="recipeForm.get('food_plate')?.touched">
-        <div
-          class="errors"
-          *ngIf="recipeForm.get('food_plate')?.errors?.['required']"
-        >
-          Моля изберете чиния!
-        </div>
-      </div>
-      <!-- Plate -->
-
-      <!-- Order Index -->
-      <div>
-        <label for="order_index">Последователност: </label>
-        <p class="hint">Редът по който се показват рецептите в категорията</p>
-        <input type="number" id="order_index" formControlName="order_index" />
-      </div>
-      <!-- Order Index -->
-    </div>
-
-    <div class="ingredients" formArrayName="ingredients">
-      <div
-        *ngFor="let ingredient of ingredients.controls; let i = index"
-        [formGroupName]="i"
-      >
-        <!-- Ingredient титле-->
-        <div class="divider">
-          <hr />
-          <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
-          <hr />
-        </div>
-
-        <!-- Name required-->
-
-        <label for="name">Име (задължително):</label>
-        <input type="text" id="name" formControlName="name" />
-
-        <div *ngIf="recipeForm.get('ingredients.' + i + '.name')?.touched">
+        <!-- Image -->
+        <div formArrayName="image_recipe">
           <div
-            class="errors"
-            *ngIf="recipeForm.get('ingredients.' + i + '.name')?.errors?.['required']"
+            *ngFor="let image of image_recipe.controls; let i = index"
+            [formGroupName]="i"
           >
-            Моля попълнете име на съставката!
+            <p class="hint">Добавена снимка</p>
+            <input
+              type="text"
+              id="image_recipe"
+              formControlName="image_recipe"
+            />
+            <button type="button" (click)="removeImage(i)">
+              Премахнете добавената снимка
+            </button>
           </div>
         </div>
+        <!-- Image -->
 
-        <!-- Amount required-->
-
-        <label for="amount">Количество (задължително):</label>
-        <input type="number" id="amount" formControlName="amount" />
-
-        <div *ngIf="recipeForm.get('ingredients.' + i + '.amount')?.touched">
+        <!-- Video -->
+        <div formArrayName="video_recipe">
           <div
-            class="errors"
-            *ngIf="recipeForm.get('ingredients.' + i + '.amount')?.errors?.['required']"
+            *ngFor="let video of video_recipe.controls; let i = index"
+            [formGroupName]="i"
           >
-            Моля попълнете количеството на съставката!
+            <p class="hint">Поставете тук видео линкът</p>
+            <input
+              type="text"
+              id="video_recipe"
+              formControlName="video_recipe"
+            />
+            <button type="button" (click)="removeVideo(i)">
+              Премахнете видео линкът
+            </button>
           </div>
+          <button type="button" (click)="addVideo()">
+            Добавете линк към видео
+          </button>
         </div>
+        <!-- Video -->
 
-        <!-- Unit required-->
-
-        <label for="unit">Мерна еденица (задължително):</label>
-        <p class="hint">В която измерваме съставката</p>
-        <select id="unit" formControlName="unit">
-          <option value="гр.">Грам</option>
-          <option value="кг.">Килограм</option>
-          <option value="мл.">Милилитър</option>
-          <option value="л.">Литър</option>
-        </select>
-
-        <div *ngIf="recipeForm.get('ingredients.' + i + '.unit')?.touched">
+        <!-- Preparation -->
+        <div formArrayName="preparation_method">
           <div
-            class="errors"
-            *ngIf="recipeForm.get('ingredients.' + i + '.unit')?.errors?.['required']"
+            *ngFor="
+              let preparation of preparation_method.controls;
+              let i = index
+            "
+            [formGroupName]="i"
           >
-            Моля изберете мерна еденица!
+            <p class="hint">
+              Добавете метод използван при приготвяне на основната рецептата
+            </p>
+            <input
+              type="text"
+              id="preparation_method"
+              formControlName="preparation_method"
+            />
+            <button type="button" (click)="removePreparation(i)">
+              Премахнете метода
+            </button>
           </div>
+          <button type="button" (click)="addPreparation()">
+            Добавете метод на приготвяне
+          </button>
         </div>
+        <!-- Preparation -->
 
-        <!-- Quantity -->
-
-        <label for="quantity">Бройка: </label>
-        <p class="hint">
-          Използва се когато съставка има точно определени бройки
-        </p>
-        <input type="number" id="quantity" formControlName="quantity" />
-
-        <!-- Preparation Method -->
-
-        <label for="preparation_method"
-        >Допълнителна информация:</label
-      >
-      <p class="hint">
-        Въведете информация, разделена със запетайка и интервал:
-        <br />
-        Пример: Почистване, измиване, нарязване.
-      </p>
-
-        <input
-          type="text"
-          id="preparation_method"
-          formControlName="preparation_method"
-        />
-
-        <!-- Base link -->
-
-        <label for="base">Избери основна рецепта:</label>
-        <p class="hint">
-          Ако тази съставка е част от основна рецепта моля изберете коя?
-        </p>
-        <select id="base" formControlName="base">
-          <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
-            {{ recipe.title }}
+        <!-- Plate required-->
+        <label for="food_plate">Чиния (задължително):</label>
+        <p class="hint">В коя чиния ще се сервира ястието?</p>
+        <select id="food_plate" formControlName="food_plate">
+          <option *ngFor="let plate of plates" [value]="plate.id">
+            {{ plate.name }}
           </option>
         </select>
 
+        <div *ngIf="recipeForm.get('food_plate')?.touched">
+          <div
+            class="errors"
+            *ngIf="recipeForm.get('food_plate')?.errors?.['required']"
+          >
+            Моля изберете чиния!
+          </div>
+        </div>
+        <!-- Plate -->
+
         <!-- Order Index -->
-
-        <label for="order_index">Последователност:</label>
-        <p class="hint">Редът по който се показват съставките в рецептата</p>
-        <input type="number" id="order_index" formControlName="order_index" />
+        <div>
+          <label for="order_index">Последователност: </label>
+          <p class="hint">Редът по който се показват рецептите в категорията</p>
+          <input type="number" id="order_index" formControlName="order_index" />
+        </div>
+        <!-- Order Index -->
       </div>
-    </div>
-    <br />
 
-    <button type="button" (click)="addIngredient()">
-      Добавете още една съставка
-    </button>
-    <button type="button" (click)="onSubmit()">Добавете рецепта</button>
-  </form>
+      <div class="ingredients" formArrayName="ingredients">
+        <div
+          *ngFor="let ingredient of ingredients.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <!-- Ingredient титле-->
+          <div class="divider">
+            <hr />
+            <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
+            <hr />
+          </div>
+
+          <!-- Name required-->
+
+          <label for="name">Име (задължително):</label>
+          <input type="text" id="name" formControlName="name" />
+
+          <div *ngIf="recipeForm.get('ingredients.' + i + '.name')?.touched">
+            <div
+              class="errors"
+              *ngIf="recipeForm.get('ingredients.' + i + '.name')?.errors?.['required']"
+            >
+              Моля попълнете име на съставката!
+            </div>
+          </div>
+
+          <!-- Amount required-->
+
+          <label for="amount">Количество (задължително):</label>
+          <input type="number" id="amount" formControlName="amount" />
+
+          <div *ngIf="recipeForm.get('ingredients.' + i + '.amount')?.touched">
+            <div
+              class="errors"
+              *ngIf="recipeForm.get('ingredients.' + i + '.amount')?.errors?.['required']"
+            >
+              Моля попълнете количеството на съставката!
+            </div>
+          </div>
+
+          <!-- Unit required-->
+
+          <label for="unit">Мерна еденица (задължително):</label>
+          <p class="hint">В която измерваме съставката</p>
+          <select id="ingredient_unit" formControlName="unit">
+            <option value="гр.">Грам</option>
+            <option value="кг.">Килограм</option>
+            <option value="мл.">Милилитър</option>
+            <option value="л.">Литър</option>
+          </select>
+
+          <div *ngIf="recipeForm.get('ingredients.' + i + '.unit')?.touched">
+            <div
+              class="errors"
+              *ngIf="recipeForm.get('ingredients.' + i + '.unit')?.errors?.['required']"
+            >
+              Моля изберете мерна еденица!
+            </div>
+          </div>
+
+          <!-- Quantity -->
+
+          <label for="quantity">Бройка: </label>
+          <p class="hint">
+            Използва се когато съставка има точно определени бройки
+          </p>
+          <input type="number" id="quantity" formControlName="quantity" />
+
+          <!-- Preparation Method -->
+
+          <label for="preparation_method">Допълнителна информация:</label>
+          <p class="hint">
+            Въведете информация, разделена със запетайка и интервал:
+            <br />
+            Пример: Почистване, измиване, нарязване.
+          </p>
+
+          <input
+            type="text"
+            id="ingredient_preparation_method"
+            formControlName="preparation_method"
+          />
+
+          <!-- Base link -->
+
+          <label for="base">Избери основна рецепта:</label>
+          <p class="hint">
+            Ако тази съставка е част от основна рецепта моля изберете коя?
+          </p>
+          <select id="base" formControlName="base">
+            <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
+              {{ recipe.title }}
+            </option>
+          </select>
+
+          <!-- Order Index -->
+
+          <label for="order_index">Последователност:</label>
+          <p class="hint">Редът по който се показват съставките в рецептата</p>
+          <input
+            type="number"
+            id="ingredient_order_index"
+            formControlName="order_index"
+          />
+        </div>
+      </div>
+      <br />
+
+      <button type="button" (click)="addIngredient()">
+        Добавете още една съставка
+      </button>
+      <button type="button" (click)="onSubmit()">Добавете рецепта</button>
+    </form>
+  </div>
 </div>

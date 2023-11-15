@@ -73,7 +73,6 @@
   height: 30%;
   color: var(--mainBlackColor);
   background: var(--mainMagnoliaColor);
-  font-size: 14px;
   transition: 1s ease-in-out;
 }
 

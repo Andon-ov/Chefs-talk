@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-// import { environment } from '../environments/environment';
+import {Component, Output, EventEmitter} from '@angular/core';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-image-upload',
@@ -7,9 +7,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./image-upload.component.css'],
 })
 export class ImageUploadComponent {
-  // TODO!
-  cloudName = 'dsla98vyk';
-  uploadPreset = 'chefs_talks';
+
+  cloudName = environment.cloudinaryConfig.cloudName
+  uploadPreset = environment.cloudinaryConfig.uploadPreset
   myWidget: any;
   @Output() imageUploaded = new EventEmitter<string>();
 

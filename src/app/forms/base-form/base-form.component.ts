@@ -1,21 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormArray,
-  FormControl,
-  Validators,
-} from '@angular/forms';
-import {
-  Firestore,
-  collection,
-  addDoc,
-  getDocs,
-  CollectionReference,
-} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {FormGroup, FormBuilder, FormArray, Validators} from '@angular/forms';
+import {Firestore, collection, addDoc} from '@angular/fire/firestore';
 import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
 import {Allergens, BaseRecipe} from 'src/app/shared/interfaces/interfaces';
+import {AllergensService} from 'src/app/shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-base-form',
@@ -28,12 +16,12 @@ export class BaseFormComponent implements OnInit {
   allergens: Allergens[] = [];
   baseRecipes: BaseRecipe[] = [];
   currentOrderIndex = 1;
-  isBaseControl: any;
 
   constructor(
     firestore: Firestore,
     private fb: FormBuilder,
-    private baseRecipeService: BaseRecipeService
+    private baseRecipeService: BaseRecipeService,
+    private allergenService: AllergensService
   ) {
     this.firestore = firestore;
 
@@ -66,14 +54,11 @@ export class BaseFormComponent implements OnInit {
         }),
       ]),
     });
-
-    this.getAllergens().subscribe((data) => {
-      this.allergens = data;
-    });
   }
 
   ngOnInit(): void {
     this.getBaseRecipe();
+    this.getAllergens();
   }
 
   // image
@@ -175,11 +160,6 @@ export class BaseFormComponent implements OnInit {
     }
   }
 
-  // onIsBaseChange() {
-  //   const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
-  //   this.isBaseControl = ingredientsArray.value[0].is_base;
-  // }
-
   get ingredients() {
     return this.baseForm.get('ingredients') as FormArray;
   }
@@ -204,32 +184,14 @@ export class BaseFormComponent implements OnInit {
     }
   }
 
-
-  getAllergens(): Observable<Allergens[]> {
-    const collectionName = 'Allergens';
-    const collectionRef: CollectionReference = collection(
-      this.firestore,
-      collectionName
-    );
-
-    return new Observable((observer) => {
-      getDocs(collectionRef)
-        .then((querySnapshot) => {
-          const data: Allergens[] = [];
-
-          querySnapshot.forEach((doc) => {
-            const allergensData = doc.data() as any;
-
-            const allergensWithId = {...allergensData, id: doc.id};
-
-            data.push(allergensWithId);
-          });
-          observer.next(data);
-          observer.complete();
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
+  getAllergens(): void {
+    this.allergenService.getAllergens().subscribe({
+      next: (allergens) => {
+        this.allergens = allergens;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
     });
   }
 
@@ -243,7 +205,6 @@ export class BaseFormComponent implements OnInit {
       },
     });
   }
-
 
   addBaseRecipe(baseRecipeData: any) {
     const collectionName = 'BaseRecipe';

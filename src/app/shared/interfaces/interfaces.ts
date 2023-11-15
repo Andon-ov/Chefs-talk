@@ -79,9 +79,11 @@ export interface Plates {
 export interface ImageRecipeItem {
   image_recipe: string;
 }
+
 export interface VideoRecipeItem {
   video_recipe: string;
 }
+
 export interface PreparationMethodItem {
   preparation_method: string;
 }

@@ -6,17 +6,18 @@ import {
   getDocs,
   CollectionReference,
 } from '@angular/fire/firestore';
-import {Category} from '../interfaces/interfaces';
+import {Allergens, Category} from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CategoriesService {
+export class AllergensService {
   constructor(private firestore: Firestore) {
   }
 
-  getCategories(): Observable<Category[]> {
-    const collectionName = 'Category';
+
+  getAllergens(): Observable<Allergens[]> {
+    const collectionName = 'Allergens';
     const collectionRef: CollectionReference = collection(
       this.firestore,
       collectionName
@@ -25,13 +26,14 @@ export class CategoriesService {
     return new Observable((observer) => {
       getDocs(collectionRef)
         .then((querySnapshot) => {
-          const data: Category[] = [];
+          const data: Allergens[] = [];
 
           querySnapshot.forEach((doc) => {
-            const categoryData = doc.data() as Category;
-            const categoryWithId = {...categoryData, id: doc.id};
+            const allergensData = doc.data() as any;
 
-            data.push(categoryWithId);
+            const allergensWithId = {...allergensData, id: doc.id};
+
+            data.push(allergensWithId);
           });
           observer.next(data);
           observer.complete();
