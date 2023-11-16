@@ -155,13 +155,14 @@ body {
 
 
 .main {
-  height: 87vh;
+  height: 87dvh;
   background-color: var(--backgroundColor);
-
 }
 
 
 .mainLong {
+  position: relative;
+
   border: 1px solid var(--borderColor);
   background-color: var(--backgroundColor);
   background-repeat: no-repeat;
@@ -172,13 +173,19 @@ body {
   justify-content: center;
 }
 
-.logo-container {
-  width: 1600px;
-  height: 1200px;
+/* .watermark {
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-image: url('./assets/logo.png');
-  background-size: contain;
   background-repeat: no-repeat;
-}
+  background-position: center;
+  background-size: contain;
+} */
+
 
 form {
   max-width: 600px;
@@ -196,6 +203,8 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="password"],
+
 select,
 textarea {
   width: 100%;
@@ -219,6 +228,7 @@ textarea {
 
 input[type="text"]:focus-visible,
 input[type="number"]:focus-visible,
+input[type="password"]:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 input[type="checkbox"]:focus-visible {

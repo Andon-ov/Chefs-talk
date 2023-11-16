@@ -1,0 +1,34 @@
+<div class="mainLong">
+  <div class="wrapper">
+    <h1 class="title-white">Login Form</h1>
+    <form #loginForm="ngForm" (ngSubmit)="submitHandler(loginForm)">
+      <div class="formGroup">
+        <label for="email">Email</label>
+
+        <input
+          type="text"
+          id="email"
+          name="email"
+          autocomplete="email"
+          ngModel
+          required
+        />
+      </div>
+      <div class="formGroup">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          autocomplete="current-password"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="formGroup">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

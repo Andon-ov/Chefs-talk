@@ -31,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 
+import {AngularFireAuthModule} from '@angular/fire/compat/auth'
+import { AuthModule } from './auth/auth.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,17 +47,19 @@ import { SharedModule } from './shared/shared.module';
     BaseRecipeComponent,
     SafeUrlPipe,
     BaseListComponent,
+   
   ],
   imports: [
     BrowserModule,
+    AngularFireAuthModule,
     AppRoutingModule,
     CoreModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
     SharedModule,
+    FormsModule,
+    RouterModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AuthModule,
     // Cloud Firestore
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

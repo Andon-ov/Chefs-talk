@@ -1,7 +1,10 @@
 .category {
   width: 1200px;
   margin: 0 auto;
+  position: relative;
 }
+
+
 
 .category-title {
   text-align: center;

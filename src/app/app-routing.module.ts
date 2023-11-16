@@ -13,6 +13,7 @@ import { BaseFormComponent } from './forms/base-form/base-form.component';
 import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { BaseListComponent } from './base-list/base-list.component';
 import { BaseFormEditComponent } from './forms/base-form-edit/base-form-edit.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,7 @@ const routes: Routes = [
     path: 'base-edit/:id',
     component: BaseFormEditComponent,
   },
+  { path: 'sign-in', component: SignInComponent },
   // {
   //   path: '**',
   //   component: NotFoundComponent,
@@ -73,7 +75,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

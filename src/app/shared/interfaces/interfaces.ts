@@ -94,3 +94,11 @@ export interface Comments {
   recipe: string;
   text: string;
 }
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+}
