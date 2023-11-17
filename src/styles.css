@@ -204,6 +204,8 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="password"],
+input[type="email"],
+
 
 select,
 textarea {
@@ -229,6 +231,8 @@ textarea {
 input[type="text"]:focus-visible,
 input[type="number"]:focus-visible,
 input[type="password"]:focus-visible,
+input[type="email"]:focus-visible,
+
 select:focus-visible,
 textarea:focus-visible,
 input[type="checkbox"]:focus-visible {

@@ -10,7 +10,6 @@
         <li><a routerLink="/chefs">Chefs</a></li>
         <!-- <li><a routerLink="/waiters">Waiters</a></li> -->
         <li><a routerLink="/base">Base</a></li>
-        <li><a routerLink="/sign-in">Sign&nbsp;In</a></li>
 
 
         
@@ -26,13 +25,45 @@
           *ngIf="isMenuOpen"
           (click)="closeMenu()"
         >
+        <!-- (click)="handleMenuItemClick('Link 1')" -->
           <a
-            (click)="handleMenuItemClick('Link 1')"
             href="#"
             routerLink="/add-base"
           >Add Base</a
           >
+          <!-- (click)="handleMenuItemClick('Link 2')" -->
           <a
+            href="#"
+            routerLink="/add-recipe"
+          >Add Recipe</a
+          >
+          <!-- (click)="handleMenuItemClick('Link 3')" -->
+          <a
+            href="#"
+            routerLink="/add-category"
+          >Add Category</a
+          >
+        </div>
+      </div>
+
+
+      <div class="dropdown">
+        <button class="dropBtn" (click)="toggleMenu()">
+          User
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div
+          class="dropdown-content"
+          *ngIf="isMenuOpen"
+          (click)="closeMenu()"
+        >
+        <a routerLink="/sign-up">Sign&nbsp;Up</a>
+
+        <a routerLink="/sign-in">Sign&nbsp;In</a>
+        <a (click)="logout()">SignOut</a>
+          <!-- (click)="handleMenuItemClick('Link 1')"
+          href="#" -->
+          <!-- <a
             (click)="handleMenuItemClick('Link 2')"
             href="#"
             routerLink="/add-recipe"
@@ -43,7 +74,7 @@
             href="#"
             routerLink="/add-category"
           >Add Category</a
-          >
+          > -->
         </div>
       </div>
     </nav>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isMenuOpen = false;
-
+  constructor(private authService: AuthService){}
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -15,9 +16,13 @@ export class HeaderComponent {
   closeMenu() {
     this.isMenuOpen = false;
   }
-
-  handleMenuItemClick(item: string) {
-    console.log('Clicked on ' + item);
-    this.closeMenu();
+  
+  logout(){
+    this.authService.SignOutAuth()
   }
+
+  // handleMenuItemClick(item: string) {
+  //   console.log('Clicked on ' + item);
+  //   this.closeMenu();
+  // }
 }

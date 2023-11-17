@@ -14,6 +14,7 @@ import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { BaseListComponent } from './base-list/base-list.component';
 import { BaseFormEditComponent } from './forms/base-form-edit/base-form-edit.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,7 @@ const routes: Routes = [
     component: BaseFormEditComponent,
   },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
   // {
   //   path: '**',
   //   component: NotFoundComponent,

@@ -10,11 +10,11 @@ import { NgForm } from '@angular/forms';
 export class SignInComponent {
   constructor(private authService: AuthService) {}
 
-  submitHandler(loginForm: NgForm): void {
-    if (loginForm.valid) {
-      const value: { email: string; password: string } = loginForm.value;
+  submitHandler(signInForm: NgForm): void {
+    if (signInForm.valid) {
+      const value: { email: string; password: string } = signInForm.value;
       this.authService.SignInWithEmailAndPassword(value.email, value.password);
-      loginForm.reset();
+      signInForm.reset();
     }
   }
 }
