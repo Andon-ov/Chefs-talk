@@ -102,3 +102,7 @@ export interface User {
   photoURL: string;
   emailVerified: boolean;
 }
+
+
+// user data
+

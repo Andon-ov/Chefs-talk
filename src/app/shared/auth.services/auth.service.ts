@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  User,
 } from 'firebase/auth';
 
 @Injectable({
@@ -12,6 +13,7 @@ import {
 })
 export class AuthService {
   userData: any; // Save logged in user data
+
   constructor(public router: Router) {}
 
   SignInWithEmailAndPassword(email: string, password: string) {
@@ -26,7 +28,6 @@ export class AuthService {
           JSON.parse(localStorage.getItem('user')!);
           this.router.navigate(['home']);
           console.log(this.userData);
-          
         } else {
           localStorage.setItem('user', 'null');
           JSON.parse(localStorage.getItem('user')!);
@@ -39,23 +40,9 @@ export class AuthService {
       });
   }
 
-  SignOutAuth() {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        localStorage.removeItem('user');
-        this.router.navigate(['sign-in']);
-        console.log(this.userData);
-        
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  }
   CreateUserWithEmailAndPassword(email: string, password: string) {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
@@ -66,5 +53,23 @@ export class AuthService {
         const errorMessage = error.message;
         // ..
       });
+  }
+
+  SignOutAuth() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        localStorage.removeItem('user');
+        this.router.navigate(['sign-in']);
+        console.log(this.userData);
+
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
+  public getUser(): string {
+    return this.userData;
   }
 }

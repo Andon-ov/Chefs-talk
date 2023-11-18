@@ -8,7 +8,13 @@ import { AuthService } from 'src/app/shared/auth.services/auth.service';
 })
 export class HeaderComponent {
   isMenuOpen = false;
-  constructor(private authService: AuthService){}
+  userData = {}
+  constructor(private authService: AuthService) {
+    const userData = this.authService.getUser();
+    if (userData) {
+      console.log(userData);
+    }
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -16,9 +22,9 @@ export class HeaderComponent {
   closeMenu() {
     this.isMenuOpen = false;
   }
-  
-  logout(){
-    this.authService.SignOutAuth()
+
+  logout() {
+    this.authService.SignOutAuth();
   }
 
   // handleMenuItemClick(item: string) {

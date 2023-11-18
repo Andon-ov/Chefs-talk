@@ -1,4 +1,19 @@
-<div class="mainLong">
+<form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
+  <!-- Your authentication form fields -->
+  <label for="email">Email:</label>
+  <input type="email" id="email" formControlName="email" />
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" formControlName="password" />
+
+  <label for="repeatPassword">Repeat Password:</label>
+  <input type="password" id="repeatPassword" formControlName="repeatPassword" />
+
+  <button type="submit">Register</button>
+</form>
+
+
+<!-- <div class="mainLong">
     <div class="wrapper">
       <h1 class="title-white">Sign Up</h1>
       <form #signUpForm="ngForm" (ngSubmit)="submitHandler(signUpForm)">
@@ -45,7 +60,7 @@
       </form>
     </div>
   </div>
-  
+   -->
 
 <!-- <div class="form-group">
       <label for="createdOn">Created On:</label>
