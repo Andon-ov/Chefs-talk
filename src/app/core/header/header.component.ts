@@ -1,20 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.services/auth.service';
+import { User } from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuOpen = false;
-  userData = {}
+  userData: any | null = null;
+  private userDataSubject: BehaviorSubject<any | null> = new BehaviorSubject<
+    any | null
+  >(null);
+  private userDataSubscription: Subscription;
+
   constructor(private authService: AuthService) {
-    const userData = this.authService.getUser();
-    if (userData) {
-      console.log(userData);
-    }
+    this.userDataSubscription = this.userDataSubject.subscribe((value) => {
+      this.userData = value;
+    });
   }
+
+  ngOnInit(): void {
+    this.authService.userData$.subscribe({
+      next: (value) => {
+        if (value) {
+          this.userDataSubject.next(value);
+          console.log('Имате потребител:', value);
+        } else {
+          console.log('Нямате потребител.');
+        }
+      },
+      error: (err) => {},
+    });
+  }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -26,9 +47,4 @@ export class HeaderComponent {
   logout() {
     this.authService.SignOutAuth();
   }
-
-  // handleMenuItemClick(item: string) {
-  //   console.log('Clicked on ' + item);
-  //   this.closeMenu();
-  // }
 }

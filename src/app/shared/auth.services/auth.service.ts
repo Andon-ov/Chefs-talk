@@ -6,70 +6,109 @@ import {
   signInWithEmailAndPassword,
   signOut,
   User,
+  UserCredential,
 } from 'firebase/auth';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Firestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
+import { AdditionalAuthData } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any; // Save logged in user data
+  private userDataSubject: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
 
-  constructor(public router: Router) {}
+  userData$: Observable<User | null> = this.userDataSubject.asObservable();
 
-  SignInWithEmailAndPassword(email: string, password: string) {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+  constructor(private firestore: Firestore, public router: Router) {}
 
-        if (user) {
-          this.userData = user;
-          localStorage.setItem('user', JSON.stringify(this.userData));
-          JSON.parse(localStorage.getItem('user')!);
-          this.router.navigate(['home']);
-          console.log(this.userData);
-        } else {
-          localStorage.setItem('user', 'null');
-          JSON.parse(localStorage.getItem('user')!);
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+  async SignInWithEmailAndPassword(email: string, password: string) {
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      const additionalAuthDataUid = user.uid;
+      const additionalAuthData = await this.getAdditionalAuthDataById(
+        additionalAuthDataUid
+      );
+      const fullAuthData = { ...user, ...additionalAuthData };
+
+      if (fullAuthData) {
+        localStorage.setItem('user', JSON.stringify(fullAuthData));
+        JSON.parse(localStorage.getItem('user')!);
+        this.userDataSubject.next(fullAuthData);
+        this.router.navigate(['home']);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        const errorCode = (error as Error).name;
+        const errorMessage = (error as Error).message;
         console.error(`Error (${errorCode}): ${errorMessage}`);
-      });
+      } else {
+        console.error('Unknown error:', error);
+      }
+    }
   }
 
-  CreateUserWithEmailAndPassword(email: string, password: string) {
+  CreateUserWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<UserCredential> {
     const auth = getAuth();
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  SignOutAuth() {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        localStorage.removeItem('user');
-        this.router.navigate(['sign-in']);
-        console.log(this.userData);
-
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+  async SignOutAuth() {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+  
+      localStorage.removeItem('user');
+      this.userDataSubject.next(null);
+      this.router.navigate(['sign-in']);
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
+
   public getUser(): string {
-    return this.userData;
+    return JSON.parse(localStorage.getItem('user')!);
+  }
+
+  addAdditionalAuthData(additionalAuthData: AdditionalAuthData) {
+    const collectionName = 'Auth';
+    const userId = additionalAuthData.uid;
+    console.log(userId);
+
+    setDoc(doc(this.firestore, collectionName, userId), additionalAuthData)
+      .then(() => {
+        console.log('Document written with ID: ', userId);
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
+  }
+
+  async getAdditionalAuthDataById(
+    additionalAuthDataId: string
+  ): Promise<AdditionalAuthData | null> {
+    const authDocRef = doc(this.firestore, 'Auth', additionalAuthDataId);
+    const authSnapshot = await getDoc(authDocRef);
+
+    if (authSnapshot.exists()) {
+      return authSnapshot.data() as AdditionalAuthData;
+    } else {
+      return null;
+    }
   }
 }

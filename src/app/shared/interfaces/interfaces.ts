@@ -106,3 +106,13 @@ export interface User {
 
 // user data
 
+export interface AdditionalAuthData {
+  createdOn: Date;
+  firstName: string;
+  lastName: string;
+  fromRestaurant: string;
+  isActive: boolean;
+  isAdmin: boolean;
+  isCook: boolean;
+  uid: string;
+}

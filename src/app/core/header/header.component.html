@@ -1,68 +1,42 @@
 <header class="header">
   <div class="wrapper">
-
-    <div class="logo  ">
+    <div class="logo">
       <a routerLink="/home">Chefs Talks</a>
     </div>
+    <div *ngIf="userData">{{ userData.email }}</div>
     <nav class="navigation">
-
       <ul>
         <li><a routerLink="/chefs">Chefs</a></li>
         <!-- <li><a routerLink="/waiters">Waiters</a></li> -->
         <li><a routerLink="/base">Base</a></li>
-
-
-        
-
       </ul>
       <div class="dropdown">
         <button class="dropBtn" (click)="toggleMenu()">
           Add
           <i class="fa fa-caret-down"></i>
         </button>
-        <div
-          class="dropdown-content"
-          *ngIf="isMenuOpen"
-          (click)="closeMenu()"
-        >
-        <!-- (click)="handleMenuItemClick('Link 1')" -->
-          <a
-            href="#"
-            routerLink="/add-base"
-          >Add Base</a
-          >
+        
+        <div class="dropdown-content" *ngIf="isMenuOpen" (click)="closeMenu()">
+          <!-- (click)="handleMenuItemClick('Link 1')" -->
+          <a href="#" routerLink="/add-base">Add Base</a>
           <!-- (click)="handleMenuItemClick('Link 2')" -->
-          <a
-            href="#"
-            routerLink="/add-recipe"
-          >Add Recipe</a
-          >
+          <a href="#" routerLink="/add-recipe">Add Recipe</a>
           <!-- (click)="handleMenuItemClick('Link 3')" -->
-          <a
-            href="#"
-            routerLink="/add-category"
-          >Add Category</a
-          >
+          <a href="#" routerLink="/add-category">Add Category</a>
         </div>
       </div>
-
 
       <div class="dropdown">
         <button class="dropBtn" (click)="toggleMenu()">
           User
           <i class="fa fa-caret-down"></i>
         </button>
-        <div
-          class="dropdown-content"
-          *ngIf="isMenuOpen"
-          (click)="closeMenu()"
-        >
-        <a routerLink="/sign-up">Sign&nbsp;Up</a>
+        <div class="dropdown-content" *ngIf="isMenuOpen" (click)="closeMenu()">
+          <a routerLink="/sign-up">Sign&nbsp;Up</a>
 
-        <a routerLink="/sign-in">Sign&nbsp;In</a>
-        <a (click)="logout()">SignOut</a>
-        <div>{{userData}}</div>
-        
+          <a routerLink="/sign-in">Sign&nbsp;In</a>
+          <a (click)="logout()">SignOut</a>
+
           <!-- (click)="handleMenuItemClick('Link 1')"
           href="#" -->
           <!-- <a
@@ -80,6 +54,5 @@
         </div>
       </div>
     </nav>
-
   </div>
 </header>
