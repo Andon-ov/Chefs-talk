@@ -15,7 +15,7 @@
           Add
           <i class="fa fa-caret-down"></i>
         </button>
-        
+
         <div class="dropdown-content" *ngIf="isMenuOpen" (click)="closeMenu()">
           <!-- (click)="handleMenuItemClick('Link 1')" -->
           <a href="#" routerLink="/add-base">Add Base</a>
@@ -35,22 +35,9 @@
           <a routerLink="/sign-up">Sign&nbsp;Up</a>
 
           <a routerLink="/sign-in">Sign&nbsp;In</a>
-          <a (click)="logout()">SignOut</a>
+          <a routerLink="/dashboard">Dashboard</a>
 
-          <!-- (click)="handleMenuItemClick('Link 1')"
-          href="#" -->
-          <!-- <a
-            (click)="handleMenuItemClick('Link 2')"
-            href="#"
-            routerLink="/add-recipe"
-          >Add Recipe</a
-          >
-          <a
-            (click)="handleMenuItemClick('Link 3')"
-            href="#"
-            routerLink="/add-category"
-          >Add Category</a
-          > -->
+          <a (click)="logout()">SignOut</a>
         </div>
       </div>
     </nav>

@@ -1,0 +1,19 @@
+<div class="mainLong">
+  <div class="wrapper">
+    <div>Email: {{ user.email }}</div>
+    <br />
+    <div>First Name: {{ user.firstName }}</div>
+    <br />
+    <div>Last Name: {{ user.lastName }}</div>
+    <br />
+    <div>Creation Time: {{ user.metadata.creationTime }}</div>
+    <br />
+    <div>Last SignIn Time: {{ user.metadata.lastSignInTime }}</div>
+    <br />
+    <div>Last LoginAt: {{ user.metadata.lastLoginAt }}</div>
+    <div *ngIf="user.isCook">Готвач</div>
+    <div *ngIf="!user.isCook">Сервитьор</div>
+
+    <div>From Restaurant: {{ user.fromRestaurant }}</div>
+  </div>
+</div>

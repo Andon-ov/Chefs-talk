@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.services/auth.service';
-import { User } from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +28,7 @@ export class HeaderComponent implements OnInit {
           this.userDataSubject.next(value);
           console.log('Имате потребител:', value);
         } else {
+          this.userDataSubject.next(null);
           console.log('Нямате потребител.');
         }
       },
@@ -45,6 +45,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.SignOutAuth();
+    this.authService.logoutUser();
   }
 }

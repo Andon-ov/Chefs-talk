@@ -11,7 +11,7 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Firestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
-import { AdditionalAuthData } from '../interfaces/interfaces';
+import { FirestoreUser } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -19,47 +19,55 @@ import { AdditionalAuthData } from '../interfaces/interfaces';
 export class AuthService {
   private userDataSubject: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
-
   userData$: Observable<User | null> = this.userDataSubject.asObservable();
 
   constructor(private firestore: Firestore, public router: Router) {}
 
-  async SignInWithEmailAndPassword(email: string, password: string) {
+  async registerUser(
+    email: string,
+    password: string,
+    additionalAuthData: FirestoreUser
+  ) {
     try {
-      const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
+      const userCredential = await this.createUserWithEmailAndPassword(
         email,
         password
       );
-      const user = userCredential.user;
-      const additionalAuthDataUid = user.uid;
-      const additionalAuthData = await this.getAdditionalAuthDataById(
-        additionalAuthDataUid
-      );
-      const fullAuthData = { ...user, ...additionalAuthData };
-
-      if (fullAuthData) {
-        localStorage.setItem('user', JSON.stringify(fullAuthData));
-        JSON.parse(localStorage.getItem('user')!);
-        this.userDataSubject.next(fullAuthData);
-        this.router.navigate(['home']);
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
+      const uid = userCredential.user.uid;
+      await this.addAdditionalAuthData(uid, additionalAuthData);
+      await this.saveUserData(userCredential.user, additionalAuthData);
+      this.router.navigate(['home']);
     } catch (error) {
-      if (error instanceof Error) {
-        const errorCode = (error as Error).name;
-        const errorMessage = (error as Error).message;
-        console.error(`Error (${errorCode}): ${errorMessage}`);
-      } else {
-        console.error('Unknown error:', error);
-      }
+      this.handleError(error);
     }
   }
 
-  CreateUserWithEmailAndPassword(
+  async loginUser(email: string, password: string) {
+    try {
+      const userCredential = await this.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      const uid = userCredential.user.uid;
+      const additionalAuthData = await this.getAdditionalAuthDataById(uid);
+      await this.saveUserData(userCredential.user, additionalAuthData);
+      this.router.navigate(['home']);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async logoutUser() {
+    try {
+      await this.signOutAuth();
+      await this.clearUserData();
+      this.router.navigate(['sign-in']);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  private createUserWithEmailAndPassword(
     email: string,
     password: string
   ): Promise<UserCredential> {
@@ -67,48 +75,75 @@ export class AuthService {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  async SignOutAuth() {
-    try {
-      const auth = getAuth();
-      await signOut(auth);
-  
-      localStorage.removeItem('user');
-      this.userDataSubject.next(null);
-      this.router.navigate(['sign-in']);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  
-
-  public getUser(): string {
-    return JSON.parse(localStorage.getItem('user')!);
+  private signInWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<UserCredential> {
+    const auth = getAuth();
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
-  addAdditionalAuthData(additionalAuthData: AdditionalAuthData) {
+  private signOutAuth(): Promise<void> {
+    const auth = getAuth();
+    return signOut(auth);
+  }
+
+  private addAdditionalAuthData(
+    uid: string,
+    additionalAuthData: FirestoreUser
+  ): Promise<void> {
     const collectionName = 'Auth';
-    const userId = additionalAuthData.uid;
-    console.log(userId);
-
-    setDoc(doc(this.firestore, collectionName, userId), additionalAuthData)
-      .then(() => {
-        console.log('Document written with ID: ', userId);
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
-      });
+    return setDoc(doc(this.firestore, collectionName, uid), additionalAuthData);
   }
 
-  async getAdditionalAuthDataById(
-    additionalAuthDataId: string
-  ): Promise<AdditionalAuthData | null> {
-    const authDocRef = doc(this.firestore, 'Auth', additionalAuthDataId);
+  private async getAdditionalAuthDataById(
+    uid: string
+  ): Promise<FirestoreUser | null> {
+    const authDocRef = doc(this.firestore, 'Auth', uid);
     const authSnapshot = await getDoc(authDocRef);
 
     if (authSnapshot.exists()) {
-      return authSnapshot.data() as AdditionalAuthData;
+      return authSnapshot.data() as FirestoreUser;
     } else {
       return null;
+    }
+  }
+
+  private saveUserData(
+    user: User,
+    additionalAuthData: FirestoreUser | null
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (user && additionalAuthData) {
+        const fullAuthData = { ...user, ...additionalAuthData };
+        localStorage.setItem('user', JSON.stringify(fullAuthData));
+        this.userDataSubject.next(fullAuthData);
+        resolve();
+      } else {
+        localStorage.setItem('user', 'null');
+        this.userDataSubject.next(null);
+        reject();
+      }
+    });
+  }
+
+  private clearUserData(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      localStorage.removeItem('user');
+      this.userDataSubject.next(null);
+      resolve();
+    });
+  }
+
+  private handleError(error: any): void {
+    if (error instanceof Error) {
+      const errorCode = (error as Error).name;
+      const errorMessage = (error as Error).message;
+      console.error(`Error (${errorCode}): ${errorMessage}`);
+      alert(errorMessage);
+    } else {
+      console.error('Unknown error:', error);
+      alert(error);
     }
   }
 }

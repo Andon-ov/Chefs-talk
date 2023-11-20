@@ -94,25 +94,27 @@ export interface Comments {
   recipe: string;
   text: string;
 }
-
-export interface User {
-  uid: string;
-  email: string;
+export interface FirestoreUser {
+  accessToken: string;
   displayName: string;
-  photoURL: string;
+  email: string;
   emailVerified: boolean;
-}
-
-
-// user data
-
-export interface AdditionalAuthData {
-  createdOn: Date;
+  isAnonymous: boolean;
+  metadata: UserMetadata;
+  phoneNumber: string;
+  photoURL: string;
+  uid: string;
   firstName: string;
   lastName: string;
   fromRestaurant: string;
   isActive: boolean;
   isAdmin: boolean;
   isCook: boolean;
-  uid: string;
+}
+
+interface UserMetadata {
+  createdAt: string;
+  creationTime: string;
+  lastLoginAt: string;
+  lastSignInTime: string;
 }

@@ -1,5 +1,6 @@
 <div class="mainLong">
   <div class="wrapper">
+    <h1 class="title-white">Register Form</h1>
     <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
       <!-- Your authentication form fields -->
       <label for="email">Email:</label>
@@ -25,12 +26,7 @@
         formControlName="repeatPassword"
         autocomplete="new-password"
       />
-    </form>
 
-    <form
-      [formGroup]="additionalSignUpForm"
-      (ngSubmit)="submitAdditionalSignUpForm()"
-    >
       <label for="firstName">First Name:</label>
       <input type="text" id="firstName" formControlName="firstName" />
 
@@ -50,12 +46,8 @@
           <option value="Romance-5">Romance 5</option>
         </select>
       </div>
+      <button type="submit">Submit</button>
+      <a href="#" routerLink="/sign-in">Sign In</a>
     </form>
-    <button
-      type="submit"
-      (click)="submitSignUpForm(); submitAdditionalSignUpForm()"
-    >
-      Submit
-    </button>
   </div>
 </div>
