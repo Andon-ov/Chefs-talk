@@ -25,7 +25,7 @@ export class SignUpComponent {
       lastName: ['', Validators.required],
       fromRestaurant: ['', Validators.required],
       isActive: [true, Validators.required],
-      isAdmin: [true, Validators.required],
+      isAdmin: [false, Validators.required],
       isCook: [true, Validators.required],
     });
   }

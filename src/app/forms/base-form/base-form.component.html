@@ -1,6 +1,6 @@
 <div class="mainLong">
   <div class="wrapper">
-    <h1 class="title-black">Добавяне на основна рецепта</h1>
+    <h1 class="title-black">Добавяне на базова рецепта</h1>
     <form [formGroup]="baseForm">
       <!-- Title required-->
       <label>
@@ -35,7 +35,7 @@
       <!-- Summary -->
       <div>
         <label for="summary">Резюме:</label>
-        <p class="hint">Кратко изложение на основната рецепта</p>
+        <p class="hint">Кратко изложение на рецепта</p>
         <input type="text" id="summary" formControlName="summary" />
       </div>
       <!-- Summary -->
@@ -64,7 +64,7 @@
       <!--Base Yield required-->
       <div>
         <label for="base_yield">Добив (задължително):</label>
-        <p class="hint">Количесто на готовата основа</p>
+        <p class="hint">Количесто на готовата продукция</p>
         <input type="number" id="base_yield" formControlName="base_yield" />
       </div>
       <div *ngIf="baseForm.get('base_yield')?.touched">
@@ -95,7 +95,7 @@
       <!-- Base Recipe Portions -->
       <div>
         <label for="base_recipe_portions">Порций: </label>
-        <p class="hint">Колко порций получаваме от тази основна рецепта</p>
+        <p class="hint">Колко порций получаваме от тази рецепта</p>
         <input
           type="number"
           id="base_recipe_portions"
@@ -109,7 +109,7 @@
         <div>
           <label>Алергени: </label>
           <p class="hint">
-            Добавете алергените, който садържа основната рецепта
+            Добавете алергените, който садържа рецепта
           </p>
           <select formControlName="selectedAllergen">
             <option *ngFor="let allergen of allergens" [value]="allergen.id">
@@ -187,7 +187,7 @@
             [formGroupName]="i"
           >
             <p class="hint">
-              Добавете метод използван при приготвяне на основната рецептата
+              Добавете метод използван при приготвяне на рецептата
             </p>
             <input
               type="text"
@@ -291,9 +291,9 @@
 
           <!-- Base link -->
 
-          <label for="base">Избери основна рецепта:</label>
+          <label for="base">Избери базова рецепта:</label>
           <p class="hint">
-            Ако тази съставка е част от основна рецепта моля изберете коя?
+            Ако тази съставка е базова рецепта моля изберете коя?
           </p>
           <select id="base" formControlName="base">
             <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
@@ -314,7 +314,7 @@
         Добавете още една съставка
       </button>
       <button type="button" (click)="onSubmit()">
-        Добавете основната рецепта
+        Добавете базова рецепта
       </button>
     </form>
   </div>

@@ -1,0 +1,198 @@
+
+
+<div class="mainLong">
+    <div class="recipe-container">
+      <!-- title require -->
+      <h1 class="recipe-title">{{ recipe?.title }}</h1>
+  
+      <!-- summary -->
+      <div *ngIf="recipe?.summary" class="recipe-summary">
+        {{ recipe?.summary }}
+      </div>
+  
+      <!-- category require -->
+      <div class="recipe-category">
+        <a [routerLink]="['/category', recipe?.category]">
+          <i class="fa-solid fa-backward fa-beat-fade"></i> {{ category?.name }}
+        </a>
+      </div>
+  
+      <!-- image  -->
+      <div class="recipe-hero">
+        <ul
+          *ngIf="recipe?.image_recipe && recipe?.image_recipe?.length! > 0"
+          class="recipe-image"
+        >
+          <li *ngFor="let img of recipe?.image_recipe">
+            <img [src]="img.image_recipe" alt="Изображение на рецепта"/>
+          </li>
+        </ul>
+  
+        <table class="recipe-other-details">
+          <!-- season requite -->
+          <tr>
+            <td><span class="key">Сезон</span></td>
+            <td>
+              <span class="value">{{ recipe?.season }}</span>
+            </td>
+          </tr>
+          <tr *ngIf="recipe?.serving_value">
+            <td><span class="key">Готово Количество</span></td>
+            <!-- serving_value, unit -->
+            <td>
+              <span class="value"
+              >{{ recipe?.serving_value }}
+                <span class="value" *ngIf="recipe?.unit"
+                >&nbsp;{{ recipe?.unit }}</span
+                >
+              </span>
+            </td>
+          </tr>
+          <!-- release_time -->
+          <tr *ngIf="recipe?.release_time">
+            <td><span class="key">Време за издаване</span></td>
+            <td>
+              <span class="value">{{ recipe?.release_time }}&nbsp; минути</span>
+            </td>
+          </tr>
+          <!-- plate -->
+          <tr>
+            <td><span class="key">Чиния</span></td>
+            <td>
+              <span class="value">{{ plate?.name }}</span>
+            </td>
+          </tr>
+  
+          <!-- selectedAllergenNames -->
+          <tr *ngIf="recipe?.selectedAllergenNames">
+            <td><span class="key"> Алергени</span></td>
+            <td>
+              <span class="value">{{ recipe?.selectedAllergenNames }}</span>
+            </td>
+          </tr>
+        </table>
+  
+        <!-- <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+  
+        <p class="recipe-description-text description">
+          {{ recipe?.description }}
+        </p>
+        <br/> -->
+  
+        <div *ngIf="recipe?.ingredients" class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+  
+        <ul
+          class="recipe-ingredients"
+          *ngFor="let ingredient of recipe?.ingredients"
+        >
+          <li *ngIf="recipe?.ingredients">
+            <!-- name, amount, unit require -->
+            {{ ingredient.name }}
+             <!-- - {{ ingredient.amount }} {{ ingredient.unit }} -->
+  
+            <!-- quantity -->
+            <span *ngIf="ingredient.quantity"
+            >({{ ingredient.quantity }} бр.)</span
+            >
+  
+            <!-- base -->
+            <span class="value" *ngIf="ingredient.base">
+              <a [routerLink]="['/base-waiters', ingredient.base]">
+                &nbsp;&nbsp;<i class="fa-solid fa-forward"></i> &nbsp;&nbsp;<i
+                class="fa-solid fa-magnifying-glass fa-beat-fade"
+              ></i>
+                &nbsp;&nbsp;<i class="fa-solid fa-backward"></i> </a
+              ></span>
+            <br/>
+            <!-- preparation_method -->
+            <br>
+
+            <span class="key" *ngIf="ingredient.preparation_method">
+              <i> {{ ingredient.preparation_method }}</i>
+            </span>
+          </li>
+  
+          <!-- <hr *ngIf="ingredient.name || ingredient.amount || ingredient.unit" /> -->
+        </ul>
+  
+        <!-- <li>Order Index: {{ ingredient.order_index }}</li> -->
+        <!-- <div
+          *ngIf="
+            recipe?.preparation_method && recipe?.preparation_method?.length! > 0
+          "
+          class="divider"
+        >
+          <hr/>
+          <p>&nbsp;&nbsp;Методи&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+        <ul
+          class="recipe-preparation-method"
+          *ngFor="let method of recipe?.preparation_method"
+        >
+          <li>{{ method.preparation_method }}</li>
+        </ul> -->
+  
+        <!-- <div
+          class="recipe-videos"
+          *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
+        >
+          <div class="divider">
+            <hr/>
+            <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
+            <hr/>
+          </div>
+          <br/>
+  
+          <ul>
+            <li *ngFor="let video of recipe?.video_recipe">
+              <iframe
+                width="560"
+                height="315"
+                [src]="video.video_recipe | safeUrl"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </li>
+          </ul>
+        </div> -->
+  
+        <button (click)="toggleCommentForm()">Искате ли да коментирате?</button>
+        <a class="btn" href="javascript:history.back()"
+        ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+          назад</a
+        >
+        <div *ngIf="showCommentForm">
+          <app-comment-form [recipeId]="recipeId"/>
+        </div>
+  
+        <div *ngIf="comments.length > 0" class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Коментари&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+  
+        <section class="comments" *ngIf="comments.length > 0">
+          <ul *ngFor="let comment of comments">
+            <li>{{ comment.name }}</li>
+            <li>{{ comment.text }}</li>
+            <p>
+              {{ comment.create_time.toDate() | date : "dd/MM/yyyy HH:mm:ss" }}
+            </p>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+  

@@ -7,10 +7,11 @@ import {
   doc,
   getDoc,
 } from '@angular/fire/firestore';
-import {Component, OnInit} from '@angular/core';
-import {inject} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Recipe, Category} from '../shared/interfaces/interfaces';
+import { Component, OnInit } from '@angular/core';
+import { inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Recipe, Category } from '../shared/interfaces/interfaces';
+import { AuthService } from '../shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-category',
@@ -22,8 +23,23 @@ export class CategoryComponent implements OnInit {
   category: Category | null = null;
 
   firestore: Firestore = inject(Firestore);
+  userData: any;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.authService.userData$.subscribe((userData) => {
+      this.userData = userData;
+    });
+  }
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  getRecipeLink(recipe: Recipe): any[] {
+    if (this.userData?.isCook) {
+      return ['/recipe', recipe.id];
+    } else {
+      return ['/recipe-waiters', recipe.id];
+    }
   }
 
   ngOnInit() {

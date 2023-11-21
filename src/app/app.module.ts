@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
-import { WaitersComponent } from './waiters/waiters.component';
 
 import { ChefsComponent } from './chefs/chefs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -25,6 +24,9 @@ import { BaseRecipeComponent } from './base-recipe/base-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CloudinaryModule } from '@cloudinary/ng';
 import { SafeUrlPipe } from './shared/safe-url.pipe/safe-url.pipe';
+
+
+
 import { BaseListComponent } from './base-list/base-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,12 +35,13 @@ import { SharedModule } from './shared/shared.module';
 
 import {AngularFireAuthModule} from '@angular/fire/compat/auth'
 import { AuthModule } from './auth/auth.module';
+import { RecipeWaitersComponent } from './recipe-waiters/recipe-waiters.component';
+import { BaseRecipeWaitersComponent } from './base-recipe-waiters/base-recipe-waiters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    WaitersComponent,
     ChefsComponent,
     NotFoundComponent,
     CategoriesListComponent,
@@ -47,6 +50,8 @@ import { AuthModule } from './auth/auth.module';
     BaseRecipeComponent,
     SafeUrlPipe,
     BaseListComponent,
+    RecipeWaitersComponent,
+    BaseRecipeWaitersComponent,
    
   ],
   imports: [

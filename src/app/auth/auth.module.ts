@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TimestampFormatPipe } from '../shared/timestamp-format.pipe/timestamp-format.pipe';
 
 
 
@@ -12,13 +13,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   declarations: [
     SignInComponent,
     SignUpComponent,
-    DashboardComponent
+    DashboardComponent,
+    TimestampFormatPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    
     
   ]
 })

@@ -21,7 +21,13 @@ export class AuthService {
     new BehaviorSubject<User | null>(null);
   userData$: Observable<User | null> = this.userDataSubject.asObservable();
 
-  constructor(private firestore: Firestore, public router: Router) {}
+  constructor(private firestore: Firestore, public router: Router) {
+    const savedUserData = localStorage.getItem('user');
+    if (savedUserData) {
+      const parsedUserData = JSON.parse(savedUserData);
+      this.userDataSubject.next(parsedUserData);
+    }
+  }
 
   async registerUser(
     email: string,

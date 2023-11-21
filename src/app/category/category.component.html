@@ -10,14 +10,16 @@
 
     <div class="recipe-list">
       <div *ngFor="let recipe of recipes">
-        <a [routerLink]="['/recipe', recipe.id]">
-          <div class="recipe-item">
-            <div class="recipe-image">
-              <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
+        <ng-container *ngIf="userData">
+          <a [routerLink]="getRecipeLink(recipe)">
+            <div class="recipe-item">
+              <div class="recipe-image">
+                <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />
+              </div>
+              <p class="recipe-title">{{ recipe.title }}</p>
             </div>
-            <p class="recipe-title">{{ recipe.title }}</p>
-          </div>
-        </a>
+          </a>
+        </ng-container>
       </div>
     </div>
   </div>

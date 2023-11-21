@@ -1,0 +1,177 @@
+<div class="mainLong">
+    <!-- <div class="watermark"></div> -->
+    <div class="recipe-container">
+      <h1 class="title-black">{{ base?.title }}</h1>
+  
+      <!-- summary -->
+      <div *ngIf="base?.summary">
+        <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Резюме&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+        <div class="recipe-summary">{{ base?.summary }}</div>
+      </div>
+      <!-- summary -->
+  
+      <!-- image -->
+      <!-- <ul
+        class="recipe-image"
+        *ngIf="base?.image_recipe && base?.image_recipe?.length! > 0"
+      >
+        <li *ngFor="let img of base?.image_recipe">
+          <img [src]="img.image_recipe" alt="Изображение на рецепта"/>
+        </li>
+      </ul> -->
+  
+      <!-- description require-->
+      <!-- <div *ngIf="base?.description" class="recipe-description">
+        <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+        <p class="recipe-description-text">{{ base?.description }}</p>
+      </div> -->
+      <!-- description require-->
+  
+      <!-- ingredients -->
+      <div *ngIf="base?.ingredients">
+        <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+  
+        <ul
+          class="recipe-ingredients"
+          *ngFor="let ingredient of base?.ingredients"
+        >
+          <li *ngIf="base?.ingredients">
+            <!-- name, amount, unit require -->
+            {{ ingredient.name }} 
+            <!-- - {{ ingredient.amount }} {{ ingredient.unit }} -->
+  
+            <!-- quantity -->
+            <span *ngIf="ingredient.quantity"
+            >({{ ingredient.quantity }} бр.)</span
+            >
+  
+            <!-- base -->
+            <span class="value" *ngIf="ingredient.base">
+              <a [routerLink]="['/base-waiters', ingredient.base]">
+                &nbsp;&nbsp;<i class="fa-solid fa-forward"></i> &nbsp;&nbsp;<i
+                class="fa-solid fa-magnifying-glass fa-beat-fade"
+              ></i>
+                &nbsp;&nbsp;<i class="fa-solid fa-backward"></i> </a
+              ></span>
+            <br/>
+            <!-- preparation_method -->
+            <span class="key" *ngIf="ingredient.preparation_method">
+              <i> {{ ingredient.preparation_method }}</i>
+            </span>
+          </li>
+  
+          <!-- <hr *ngIf="ingredient.name || ingredient.preparation_method" /> -->
+        </ul>
+      </div>
+      <!-- ingredients -->
+  
+      <!-- preparation_method -->
+      <!-- <div
+        *ngIf="base?.preparation_method && base?.preparation_method?.length! > 0"
+      >
+        <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Методи&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+        <ul
+          class="recipe-preparation-method"
+          *ngFor="let method of base?.preparation_method"
+        >
+          <li>{{ method.preparation_method }}</li>
+        </ul>
+      </div> -->
+      <!-- preparation_method -->
+  
+      <!-- recipe-other-details -->
+  
+      <table class="recipe-other-details">
+        <!-- base_type requite -->
+        <tr>
+          <td><span class="key">Тип</span></td>
+          <td>
+            <span class="value">{{ base?.base_type }}</span>
+          </td>
+        </tr>
+        <!-- base_recipe_portions -->
+        <!-- <tr *ngIf="base?.base_recipe_portions">
+          <td><span class="key">Порций</span></td>
+          <td>
+            <span class="value">{{ base?.base_recipe_portions }}&nbsp;бр. </span>
+          </td>
+        </tr> -->
+  
+        <!-- base_yield, unit -->
+  
+        <!-- serving_value, unit -->
+        <!-- <tr *ngIf="base?.base_yield">
+          <td><span class="key">Готово Количество</span></td>
+          <td>
+            <span class="value"
+            >{{ base?.base_yield
+              }}<span class="value" *ngIf="base?.unit"
+              >&nbsp;{{ base?.unit }}</span
+              >
+            </span>
+          </td>
+        </tr> -->
+  
+        <!-- selectedAllergenNames -->
+        <tr *ngIf="base?.selectedAllergenNames">
+          <td><span class="key"> Алергени</span></td>
+          <td>
+            <span class="value">{{ base?.selectedAllergenNames }}</span>
+          </td>
+        </tr>
+      </table>
+  
+      <!-- recipe-other-details -->
+  
+      <!-- <div
+        class="recipe-videos"
+        *ngIf="base?.video_recipe && base?.video_recipe?.length! > 0"
+      >
+        <div class="divider">
+          <hr/>
+          <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
+          <hr/>
+        </div>
+        <br/>
+        <ul>
+          <li *ngFor="let video of base?.video_recipe">
+            <iframe
+              width="560"
+              height="315"
+              [src]="video.video_recipe | safeUrl"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </li>
+        </ul>
+      </div> -->
+  
+      <br/>
+      <a class="btn" href="javascript:history.back()"
+      ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+        назад</a
+      >
+    </div>
+    <br/>
+  </div>
+  

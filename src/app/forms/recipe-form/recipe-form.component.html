@@ -129,7 +129,7 @@
       <!-- Allergen -->
       <div>
         <label>Алергени: </label>
-        <p class="hint">Добавете алергените, който садържа основната рецепта</p>
+        <p class="hint">Добавете алергените, който садържа рецепта</p>
         <select formControlName="selectedAllergen">
           <option *ngFor="let allergen of allergens" [value]="allergen.id">
             {{ allergen.name }}
@@ -203,7 +203,7 @@
             [formGroupName]="i"
           >
             <p class="hint">
-              Добавете метод използван при приготвяне на основната рецептата
+              Добавете метод използван при приготвяне на рецептата
             </p>
             <input
               type="text"
@@ -333,9 +333,9 @@
 
           <!-- Base link -->
 
-          <label for="base">Избери основна рецепта:</label>
+          <label for="base">Избери базова рецепта:</label>
           <p class="hint">
-            Ако тази съставка е част от основна рецепта моля изберете коя?
+            Ако тази съставка е базова рецепта моля изберете коя?
           </p>
           <select id="base" formControlName="base">
             <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">

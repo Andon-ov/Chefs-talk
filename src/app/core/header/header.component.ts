@@ -47,4 +47,8 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logoutUser();
   }
+  
+  getUserDisplayName(): string {
+    return this.userData ? this.userData.lastName : 'Anonymous';
+  }
 }

@@ -1,19 +1,48 @@
-<div class="mainLong">
-  <div class="wrapper">
-    <div>Email: {{ user.email }}</div>
-    <br />
-    <div>First Name: {{ user.firstName }}</div>
-    <br />
-    <div>Last Name: {{ user.lastName }}</div>
-    <br />
-    <div>Creation Time: {{ user.metadata.creationTime }}</div>
-    <br />
-    <div>Last SignIn Time: {{ user.metadata.lastSignInTime }}</div>
-    <br />
-    <div>Last LoginAt: {{ user.metadata.lastLoginAt }}</div>
-    <div *ngIf="user.isCook">Готвач</div>
-    <div *ngIf="!user.isCook">Сервитьор</div>
 
-    <div>From Restaurant: {{ user.fromRestaurant }}</div>
+ <div class="mainLong">
+  <div class="wrapper">
+    <h1 class="title-white">Информация за Потребителя</h1>
+    <div class="user-details">
+      <div class="detail">
+        <span>Имейл:</span>
+        <span>{{ user.email }}</span>
+      </div>
+
+      <div class="detail">
+        <span>Име:</span>
+        <span>{{ user.firstName }}</span>
+      </div>
+
+      <div class="detail">
+        <span>Фамилия:</span>
+        <span>{{ user.lastName }}</span>
+      </div>
+
+      <div class="detail">
+        <span>Време на Създаване:</span>
+        <span>{{ user.metadata.createdAt | timestampFormat }}</span>
+      </div>
+
+      <div class="detail">
+        <span>Последно Влизане:</span>
+        <span>{{ user.metadata.lastLoginAt | timestampFormat }}</span>
+      </div>
+
+      <div class="detail" *ngIf="user.isCook">
+        <span>Роля:</span>
+        <span>Готвач</span>
+      </div>
+
+      <div class="detail" *ngIf="!user.isCook">
+        <span>Роля:</span>
+        <span>Сервитьор</span>
+      </div>
+
+      <div class="detail">
+        <span>От Ресторант:</span>
+        <span>{{ user.fromRestaurant }}</span>
+      </div>
+    </div>
+    <button>Редакция</button>
   </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="mainLong">
   <div class="wrapper">
-    <h1 class="title-white">Login Form</h1>
+    <h1 class="title-white">Вход</h1>
     <form [formGroup]="signInForm" (ngSubmit)="submitSignInForm()">
       <div class="formGroup">
-        <label for="email">Email</label>
+        <label for="email">Имейл</label>
         <input
           type="text"
           id="email"
@@ -20,18 +20,18 @@
             class="errors"
             *ngIf=" signInForm.get('email')?.errors?.['required']"
           >
-            Email is required.
+            Имейлът е задължителен.
           </div>
           <div
             class="errors"
             *ngIf=" signInForm.get('email')?.errors?.['email']"
           >
-            Email is invalid.
+            Невалиден имейл.
           </div>
         </div>
       </div>
       <div class="formGroup">
-        <label for="password">Password</label>
+        <label for="password">Парола</label>
         <input
           type="password"
           id="password"
@@ -49,24 +49,26 @@
             class="errors"
             *ngIf=" signInForm.get('password')?.errors?.['required']"
           >
-            Password is required.
+            Паролата е задължителна.
           </div>
           <div
             class="errors"
             *ngIf=" signInForm.get('password')?.errors?.['minlength']"
           >
-            Password must be at least 6 characters long.
+            Паролата трябва да е поне 6 знака дълга.
           </div>
         </div>
       </div>
 
       <div class="formGroup">
-        <button type="submit">Login</button>
+        <button type="submit">Влез</button>
       </div>
       <div *ngIf="loginError">{{ loginError }}</div>
       <div class="formGroup">
         <!-- <a href="#" (click)="forgotPassword()">Forgot password?</a> -->
-        <a href="#" routerLink="/sign-up">Sign Up</a>
+        <a href="#" routerLink="/sign-up">
+          <div class="hint">Все още нямате Регистрация?</div>
+        </a>
       </div>
     </form>
   </div>

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Category} from '../shared/interfaces/interfaces';
-import {CategoriesService} from '../shared/categories.services/categories.service';
+import { Component, OnInit } from '@angular/core';
+import { Category } from '../shared/interfaces/interfaces';
+import { CategoriesService } from '../shared/categories.services/categories.service';
 
 @Component({
   selector: 'app-categories-list',
@@ -10,8 +10,7 @@ import {CategoriesService} from '../shared/categories.services/categories.servic
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoriesService) {
-  }
+  constructor(private categoryService: CategoriesService) {}
 
   ngOnInit(): void {
     this.getCategory();
@@ -20,7 +19,9 @@ export class CategoriesListComponent implements OnInit {
   getCategory(): void {
     this.categoryService.getCategories().subscribe({
       next: (data) => {
-        this.categories = data.sort((a, b) => a.order_index - b.order_index);
+        this.categories = data
+          .sort((a, b) => a.order_index - b.order_index)
+          .filter((a) => a.is_active);
       },
       error: (error) => {
         console.error('Error fetching categories:', error);

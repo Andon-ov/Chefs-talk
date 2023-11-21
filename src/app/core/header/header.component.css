@@ -45,6 +45,11 @@
 
 /* dropdown */
 
+.dropdown-menu {
+  display: flex;
+  gap: 15px;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -52,6 +57,9 @@
 
 .dropBtn {
   all: unset;
+}
+.fa.fa-caret-down{
+  padding-left: 5px;
 }
 
 .dropdown-content {

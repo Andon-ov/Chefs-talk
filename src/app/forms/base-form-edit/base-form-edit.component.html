@@ -1,6 +1,6 @@
 <div class="mainLong">
   <div class="wrapper">
-    <h1 class="title-black">Редактиране на основна рецепта</h1>
+    <h1 class="title-black">Редактиране на базова рецепта</h1>
     <form [formGroup]="baseFormEdit">
       <!-- Title -->
       <label for="title"> Заглавие (задължително): </label>
@@ -13,7 +13,7 @@
 
       <!-- Summary -->
       <label for="summary"> Резюме: </label>
-      <p class="hint">Кратко изложение на основната рецепта</p>
+      <p class="hint">Кратко изложение на рецепта</p>
       <textarea id="summary" formControlName="summary"></textarea>
 
       <!-- Description -->
@@ -26,7 +26,7 @@
 
       <!-- Base Yield -->
       <label for="base_yield"> Добив (задължително): </label>
-      <p class="hint">Количесто на готовата основа</p>
+      <p class="hint">Количесто на готовата продукция</p>
       <input type="number" id="base_yield" formControlName="base_yield" />
 
       <!-- Unit -->
@@ -36,7 +36,7 @@
 
       <!-- Base Recipe Portions -->
       <label for="unit"> Порций: </label>
-      <p class="hint">Колко порций получаваме от тази основна рецепта</p>
+      <p class="hint">Колко порций получаваме от тази рецепта</p>
       <input
         type="text"
         id="base_recipe_portions"
@@ -100,7 +100,7 @@
 
       <!-- Preparation -->
       <p class="hint">
-        Добавете метод използван при приготвяне на основната рецептата
+        Добавете метод използван при приготвяне на рецептата
       </p>
 
       <!-- Ingredients -->
@@ -155,9 +155,9 @@
           />
 
           <!-- Base link -->
-          <label [for]="'base' + i">Избери основна рецепта:</label>
+          <label [for]="'base' + i">Избери базова рецепта:</label>
           <p class="hint">
-            Ако тази съставка е част от основна рецепта моля изберете коя?
+            Ако тази съставка е базова рецепта моля изберете коя?
           </p>
           <input type="text" [id]="'base' + i" formControlName="base" />
 

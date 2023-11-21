@@ -3,41 +3,62 @@
     <div class="logo">
       <a routerLink="/home">Chefs Talks</a>
     </div>
-    <div *ngIf="userData">{{ userData.email }}</div>
     <nav class="navigation">
       <ul>
-        <li><a routerLink="/chefs">Chefs</a></li>
-        <!-- <li><a routerLink="/waiters">Waiters</a></li> -->
-        <li><a routerLink="/base">Base</a></li>
+        <li><a routerLink="/categories">Меню</a></li>
+        <li *ngIf="userData"><a routerLink="/base">Бази</a></li>
       </ul>
-      <div class="dropdown">
-        <button class="dropBtn" (click)="toggleMenu()">
-          Add
-          <i class="fa fa-caret-down"></i>
-        </button>
+      <div class="dropdown-menu">
+        <ng-container *ngIf="userData && userData.isAdmin">
+          <div class="dropdown">
+            <button class="dropBtn" (click)="toggleMenu()">
+              Добави<i class="fa fa-caret-down"></i>
+            </button>
 
-        <div class="dropdown-content" *ngIf="isMenuOpen" (click)="closeMenu()">
-          <!-- (click)="handleMenuItemClick('Link 1')" -->
-          <a href="#" routerLink="/add-base">Add Base</a>
-          <!-- (click)="handleMenuItemClick('Link 2')" -->
-          <a href="#" routerLink="/add-recipe">Add Recipe</a>
-          <!-- (click)="handleMenuItemClick('Link 3')" -->
-          <a href="#" routerLink="/add-category">Add Category</a>
-        </div>
-      </div>
+            <div
+              class="dropdown-content"
+              *ngIf="isMenuOpen"
+              (click)="closeMenu()"
+            >
+              <a href="#" routerLink="/add-base">Добави База</a>
+              <a href="#" routerLink="/add-recipe">Добави Рецепта</a>
+              <a href="#" routerLink="/add-category">Добави Категория</a>
+            </div>
+          </div>
+        </ng-container>
 
-      <div class="dropdown">
-        <button class="dropBtn" (click)="toggleMenu()">
-          User
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" *ngIf="isMenuOpen" (click)="closeMenu()">
-          <a routerLink="/sign-up">Sign&nbsp;Up</a>
+        <div>
+          <div class="dropdown" *ngIf="userData; else anonymousUser">
+            <button class="dropBtn" (click)="toggleMenu()">
+              <span>{{ getUserDisplayName() }}</span
+              ><i class="fa fa-caret-down"></i>
+            </button>
+            <div
+              class="dropdown-content"
+              *ngIf="isMenuOpen"
+              (click)="closeMenu()"
+            >
+              <a routerLink="/dashboard">Профил</a>
+              <a (click)="logout()">Изход</a>
+            </div>
+          </div>
 
-          <a routerLink="/sign-in">Sign&nbsp;In</a>
-          <a routerLink="/dashboard">Dashboard</a>
-
-          <a (click)="logout()">SignOut</a>
+          <ng-template #anonymousUser>
+            <div class="dropdown">
+              <button class="dropBtn" (click)="toggleMenu()">
+                <span><i class="fa-regular fa-user fa-flip"></i></span
+                ><i class="fa fa-caret-down"></i>
+              </button>
+              <div
+                class="dropdown-content"
+                *ngIf="isMenuOpen"
+                (click)="closeMenu()"
+              >
+                <a routerLink="/sign-up">Регистрация</a>
+                <a routerLink="/sign-in">Вход</a>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </nav>

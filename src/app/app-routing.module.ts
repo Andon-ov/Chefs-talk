@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { ChefsComponent } from './chefs/chefs.component';
-import { WaitersComponent } from './waiters/waiters.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { CategoryFormComponent } from './forms/category-form/category-form.component';
@@ -16,6 +14,9 @@ import { BaseFormEditComponent } from './forms/base-form-edit/base-form-edit.com
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { DashboardComponent } from './auth/dashboard/dashboard.component';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { RecipeWaitersComponent } from './recipe-waiters/recipe-waiters.component';
+import { BaseRecipeWaitersComponent } from './base-recipe-waiters/base-recipe-waiters.component';
 
 const routes: Routes = [
   {
@@ -28,12 +29,12 @@ const routes: Routes = [
     component: MainComponent,
   },
   {
-    path: 'chefs',
-    component: ChefsComponent,
+    path: 'categories',
+    component: CategoriesListComponent,
   },
   {
-    path: 'waiters',
-    component: WaitersComponent,
+    path: 'recipe-waiters/:id',
+    component: RecipeWaitersComponent,
   },
   {
     path: 'add-category',
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'base/:id',
     component: BaseRecipeComponent,
+  },
+  {
+    path: 'base-waiters/:id',
+    component: BaseRecipeWaitersComponent,
   },
   {
     path: 'base',

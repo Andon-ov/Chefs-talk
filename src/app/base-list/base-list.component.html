@@ -5,7 +5,8 @@
   <div class="recipe-list">
     <div *ngFor="let recipe of baseRecipes">
 
-      <a [routerLink]="['/base', recipe.id]">
+      <!-- <a [routerLink]="['/base', recipe.id]"> -->
+        <a [routerLink]="getBaseRecipeLink(recipe)">
         <div class="card">
           <h3>{{ recipe.title }}</h3>
         </div>

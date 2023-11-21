@@ -1,9 +1,9 @@
 <div class="mainLong">
   <div class="wrapper">
-    <h1 class="title-white">Register Form</h1>
+    <h1 class="title-white">Регистрация</h1>
     <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
       <!-- Your authentication form fields -->
-      <label for="email">Email:</label>
+      <label for="email">Имейл:</label>
       <input
         type="email"
         id="email"
@@ -11,7 +11,7 @@
         autocomplete="email"
       />
 
-      <label for="password">Password:</label>
+      <label for="password">Парола:</label>
       <input
         type="password"
         id="password"
@@ -19,7 +19,7 @@
         autocomplete="new-password"
       />
 
-      <label for="repeatPassword">Repeat Password:</label>
+      <label for="repeatPassword">Повтори Паролата:</label>
       <input
         type="password"
         id="repeatPassword"
@@ -27,14 +27,14 @@
         autocomplete="new-password"
       />
 
-      <label for="firstName">First Name:</label>
+      <label for="firstName">Име:</label>
       <input type="text" id="firstName" formControlName="firstName" />
 
-      <label for="lastName">Last Name:</label>
+      <label for="lastName">Фамилия:</label>
       <input type="text" id="lastName" formControlName="lastName" />
 
       <div class="form-group">
-        <label for="fromRestaurant">From Restaurant:</label>
+        <label for="fromRestaurant">От Ресторант:</label>
         <select
           id="fromRestaurant"
           name="fromRestaurant"
@@ -46,8 +46,17 @@
           <option value="Romance-5">Romance 5</option>
         </select>
       </div>
-      <button type="submit">Submit</button>
-      <a href="#" routerLink="/sign-in">Sign In</a>
+
+      <label>
+        Готвач ли си?
+        <input type="checkbox" formControlName="isCook" />
+      </label>
+      <button type="submit">Изпрати</button>
+      <a href="#" routerLink="/sign-in">
+        <div class="hint">Вече имаш регистрация?</div>
+
+      </a>
+
     </form>
   </div>
 </div>
