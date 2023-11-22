@@ -11,6 +11,11 @@
         autocomplete="email"
       />
 
+      <div *ngIf=" signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('email')?.errors?.['required']">Имейлът е задължителен!</div>
+        <div class="errors" *ngIf=" signUpForm.get('email')?.errors?.['email']">Моля въведете валиден имейл адрес!</div>
+      </div>
+
       <label for="password">Парола:</label>
       <input
         type="password"
@@ -18,6 +23,11 @@
         formControlName="password"
         autocomplete="new-password"
       />
+
+      <div *ngIf=" signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('password')?.errors?.['required']">Паролата е задължителна!</div>
+        <div class="errors" *ngIf=" signUpForm.get('password')?.errors?.['minlength']">Паролата трябва да е поне 6 знака дълга!</div>
+      </div>
 
       <label for="repeatPassword">Повтори Паролата:</label>
       <input
@@ -27,11 +37,24 @@
         autocomplete="new-password"
       />
 
+      <div *ngIf=" signUpForm.get('repeatPassword')?.invalid && signUpForm.get('repeatPassword')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('repeatPassword')?.errors?.['required']">Паролата е задължителна!</div>
+        <div class="errors" *ngIf=" signUpForm.get('repeatPassword')?.errors?.['minlength']">Паролата трябва да е поне 6 знака дълга!</div>
+      </div>
+
       <label for="firstName">Име:</label>
       <input type="text" id="firstName" formControlName="firstName" />
 
+      <div *ngIf=" signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('firstName')?.errors?.['required']">Името е задължително!</div>
+      </div>
+
       <label for="lastName">Фамилия:</label>
       <input type="text" id="lastName" formControlName="lastName" />
+
+      <div *ngIf=" signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('lastName')?.errors?.['required']">Фамилията е задължителна!</div>
+      </div>
 
       <div class="form-group">
         <label for="fromRestaurant">От Ресторант:</label>
@@ -47,16 +70,18 @@
         </select>
       </div>
 
+      <div *ngIf=" signUpForm.get('fromRestaurant')?.invalid && signUpForm.get('fromRestaurant')?.touched">
+        <div class="errors" *ngIf=" signUpForm.get('fromRestaurant')?.errors?.['required']">Моля изберете в кой ресторант работите!</div>
+      </div>
+
       <label>
         Готвач ли си?
         <input type="checkbox" formControlName="isCook" />
       </label>
       <button type="submit">Изпрати</button>
       <a href="#" routerLink="/sign-in">
-        <div class="hint">Вече имаш регистрация?</div>
-
+        <div class="hint">Вече имате регистрация?</div>
       </a>
-
     </form>
   </div>
 </div>

@@ -20,13 +20,13 @@
             class="errors"
             *ngIf=" signInForm.get('email')?.errors?.['required']"
           >
-            Имейлът е задължителен.
+            Имейлът е задължителен!
           </div>
           <div
             class="errors"
             *ngIf=" signInForm.get('email')?.errors?.['email']"
           >
-            Невалиден имейл.
+            Невалиден имейл!
           </div>
         </div>
       </div>
@@ -49,27 +49,33 @@
             class="errors"
             *ngIf=" signInForm.get('password')?.errors?.['required']"
           >
-            Паролата е задължителна.
+            Паролата е задължителна!
           </div>
           <div
             class="errors"
             *ngIf=" signInForm.get('password')?.errors?.['minlength']"
           >
-            Паролата трябва да е поне 6 знака дълга.
+            Паролата трябва да е поне 6 знака дълга!
           </div>
         </div>
       </div>
 
       <div class="formGroup">
-        <button type="submit">Влез</button>
+        <button type="submit">Влезте</button>
       </div>
+
       <div *ngIf="loginError">{{ loginError }}</div>
-      <div class="formGroup">
-        <!-- <a href="#" (click)="forgotPassword()">Forgot password?</a> -->
+
+      <div >
         <a href="#" routerLink="/sign-up">
           <div class="hint">Все още нямате Регистрация?</div>
         </a>
+        <a href="#" routerLink="/forgot-password">
+          <div class="errors">Забравихте вашата парола?</div>
+        </a>
       </div>
+
+
     </form>
   </div>
 </div>

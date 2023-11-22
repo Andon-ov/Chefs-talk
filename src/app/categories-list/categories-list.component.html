@@ -1,28 +1,23 @@
 <div class="mainLong">
   <section class="categories-list">
-    <h1 class="title-white">Категории</h1>
+    <h1 class="title-white">Меню</h1>
 
     <section class="wrapper">
-
       <ul class="cards" *ngFor="let category of categories">
         <!-- card -->
 
-        <li class="card-item" *ngIf="category.is_active">
+        <li class="card-item">
           <a [routerLink]="['/category/', category.id]">
             <div class="card" tabindex="0">
               <div class="card-image">
-                <img [src]="category.image" alt="category.name"/>
+                <img [src]="category.image" alt="category.name" />
               </div>
 
               <h3 class="card-title">{{ category.name }}</h3>
-              <!-- <p>{{ category.menu }}{{ category.note }}</p>1 -->
             </div>
           </a>
         </li>
-
       </ul>
-
     </section>
-
   </section>
 </div>

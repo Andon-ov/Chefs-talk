@@ -7,6 +7,7 @@ import {
   signOut,
   User,
   UserCredential,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -71,6 +72,22 @@ export class AuthService {
     } catch (error) {
       this.handleError(error);
     }
+  }
+
+  async forgotPassword(passwordResetEmail: string) {
+    try {
+      await this.sendPasswordResetEmail(passwordResetEmail);
+      window.alert('Password reset email sent, check your inbox.');
+      this.router.navigate(['sign-in']);
+    } catch (error) {
+      this.handleError(error);
+      window.alert(error);
+    }
+  }
+
+  private sendPasswordResetEmail(passwordResetEmail: string): Promise<void> {
+    const auth = getAuth();
+    return sendPasswordResetEmail(auth, passwordResetEmail);
   }
 
   private createUserWithEmailAndPassword(

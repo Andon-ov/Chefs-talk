@@ -17,6 +17,7 @@ import { DashboardComponent } from './auth/dashboard/dashboard.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { RecipeWaitersComponent } from './recipe-waiters/recipe-waiters.component';
 import { BaseRecipeWaitersComponent } from './base-recipe-waiters/base-recipe-waiters.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   // {
   //   path: '**',

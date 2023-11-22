@@ -43,8 +43,6 @@
   transition: transform 0.1s linear, box-shadow 0.2s;
 }
 
-/* .card-image {} */
-
 
 img {
   max-width: 100%;
@@ -67,7 +65,6 @@ a {
   border-radius: 5px 0 0 5px;
   transform: rotate(-3.3deg);
   transform-origin: left top;
-  /* text-transform: uppercase; */
   overflow: hidden;
   z-index: 1;
   background-color: var(--animatedTitleBackground);

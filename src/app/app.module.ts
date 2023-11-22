@@ -7,7 +7,6 @@ import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ChefsComponent } from './chefs/chefs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 
@@ -42,7 +41,6 @@ import { BaseRecipeWaitersComponent } from './base-recipe-waiters/base-recipe-wa
   declarations: [
     AppComponent,
     MainComponent,
-    ChefsComponent,
     NotFoundComponent,
     CategoriesListComponent,
     CategoryComponent,
