@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  Allergens,
   BaseRecipe,
   ImageRecipeItem,
   Ingredient,
@@ -10,6 +11,7 @@ import {
 import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
 import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import {AllergensService} from "../../shared/allergens.services/allergens.service";
 
 @Component({
   selector: 'app-base-form-edit',
@@ -21,12 +23,15 @@ export class BaseFormEditComponent implements OnInit {
   baseId = '';
   baseFormEdit!: FormGroup;
   firestore: Firestore;
+  baseRecipes: BaseRecipe[] = [];
+  allergens: Allergens[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private baseRecipeService: BaseRecipeService,
+    private allergenService: AllergensService,
     firestore: Firestore
   ) {
     this.firestore = firestore;
@@ -39,6 +44,8 @@ export class BaseFormEditComponent implements OnInit {
   async ngOnInit() {
     this.initializeForm();
     await this.loadData();
+    this.getBaseRecipe();
+    this.getAllergens();
   }
 
   private initializeForm() {
@@ -55,6 +62,7 @@ export class BaseFormEditComponent implements OnInit {
       base_recipe_portions: [0],
 
       allergens: this.fb.array([]),
+
       image_recipe: this.fb.array([]),
       video_recipe: this.fb.array([]),
       preparation_method: this.fb.array([]),
@@ -213,7 +221,7 @@ export class BaseFormEditComponent implements OnInit {
   get preparation_method() {
     return this.baseFormEdit.get('preparation_method') as FormArray;
   }
-  get allergens() {
+  get added_allergens() {
     return this.baseFormEdit.get('allergens') as FormArray;
   }
 
@@ -223,6 +231,123 @@ export class BaseFormEditComponent implements OnInit {
       this.addBaseRecipe(baseRecipeData);
       this.baseFormEdit.reset();
     }
+  }
+
+
+  addPreparation() {
+    const preparationArray = this.baseFormEdit.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.push(
+      this.fb.group({
+        preparation_method: '',
+      })
+    );
+  }
+
+  removePreparation(index: number) {
+    const preparationArray = this.baseFormEdit.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.removeAt(index);
+  }
+  addVideo() {
+    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
+
+    videoArray.push(
+      this.fb.group({
+        video_recipe: '',
+      })
+    );
+  }
+
+  removeVideo(index: number) {
+    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
+    videoArray.removeAt(index);
+  }
+
+  removeImage(index: number) {
+    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
+    imageArray.removeAt(index);
+  }
+
+  addImageToForm(imageUrl: string) {
+    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
+    imageArray.push(
+      this.fb.group({
+        image_recipe: imageUrl,
+      })
+    );
+  }
+
+  addReferenceToSelectedAllergen(event: any) {
+    const selectedAllergenId = event.target.value;
+    const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
+    allergensArray.push(this.fb.control(selectedAllergenId));
+  }
+
+  // addSelectedAllergen() {
+  //   const selectedAllergenId = this.baseFormEdit.get('selectedAllergen')?.value;
+  //   const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
+  //   allergensArray.push(this.fb.control(selectedAllergenId));
+  //   // console.log(selectedAllergenId)
+  //
+  //   const selectedAllergenNames = this.baseFormEdit.get('selectedAllergenNames');
+  //   const selectedAllergen = this.allergens.find(
+  //       (a) => a.id === selectedAllergenId
+  //   );
+  //   if (selectedAllergen) {
+  //     selectedAllergenNames?.setValue(
+  //         selectedAllergenNames.value
+  //             ? selectedAllergenNames.value + ', ' + selectedAllergen.name
+  //             : selectedAllergen.name
+  //     );
+  //   }
+  // }
+
+
+  addSelectedAllergen() {
+    const selectedAllergenId = this.baseFormEdit.get('selectedAllergen')?.value;
+    const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
+
+    const selectedAllergen = this.allergens.find((a) => a.id === selectedAllergenId);
+
+    if (selectedAllergen) {
+      allergensArray.push(this.fb.group({
+        allergenId: selectedAllergenId,
+        allergenName: selectedAllergen.name,
+      }));
+
+      const selectedAllergenNames = this.baseFormEdit.get('selectedAllergenNames');
+      selectedAllergenNames?.setValue(
+        selectedAllergenNames.value
+          ? selectedAllergenNames.value + ', ' + selectedAllergen.name
+          : selectedAllergen.name
+      );
+    }
+  }
+
+
+  getAllergens(): void {
+    this.allergenService.getAllergens().subscribe({
+      next: (allergens) => {
+        this.allergens = allergens;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
+  }
+
+  getBaseRecipe(): void {
+    this.baseRecipeService.getBaseRecipe().subscribe({
+      next: (baseRecipes) => {
+        this.baseRecipes = baseRecipes;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
   }
 
   addBaseRecipe(baseRecipeData: any) {

@@ -12,7 +12,10 @@ export class BaseListComponent implements OnInit {
   baseRecipes: BaseRecipe[] = [];
   userData: any;
 
-  constructor(private baseRecipeService: BaseRecipeService,private authService: AuthService) {
+  constructor(
+    private baseRecipeService: BaseRecipeService,
+    private authService: AuthService
+    ) {
     this.authService.userData$.subscribe((userData) => {
       this.userData = userData;
     });

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseRecipe} from '../shared/interfaces/interfaces';
 import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.service';
+import { AuthService } from '../shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-base-recipe',
@@ -11,11 +12,13 @@ import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.serv
 export class BaseRecipeComponent {
   base: BaseRecipe | null = null;
   baseId = '';
+  userData: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private baseRecipeService: BaseRecipeService
+    private baseRecipeService: BaseRecipeService,
+    private authService: AuthService
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const baseId = params.get('id');
@@ -33,6 +36,11 @@ export class BaseRecipeComponent {
       } else {
         console.error('Recipe ID not provided.');
       }
+    });
+
+    this.authService.userData$.subscribe((userData) => {
+      this.userData = userData;
+    
     });
   }
 

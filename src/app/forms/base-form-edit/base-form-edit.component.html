@@ -2,21 +2,36 @@
   <div class="wrapper">
     <h1 class="title-black">Редактиране на базова рецепта</h1>
     <form [formGroup]="baseFormEdit">
-      <!-- Title -->
+      <!-- Title required-->
       <label for="title"> Заглавие (задължително): </label>
-      <input type="text" id="title" formControlName="title" />
+      <input type="text" id="title" formControlName="title"/>
 
-      <!-- Base Type -->
+      <div *ngIf="baseFormEdit.get('title')?.touched">
+        <div class="errors" *ngIf="baseFormEdit.get('title')?.errors?.['required']">
+          Моля попълнете заглавието!
+        </div>
+      </div>
+
+      <!-- Base Type required-->
       <label for="base_type"> Вид (задължително): </label>
       <p class="hint">Сос, Дресин, Основа и др.</p>
-      <input type="text" id="base_type" formControlName="base_type" />
+      <input type="text" id="base_type" formControlName="base_type"/>
+
+      <div *ngIf="baseFormEdit.get('base_type')?.touched">
+        <div
+          class="errors"
+          *ngIf="baseFormEdit.get('base_type')?.errors?.['required']"
+        >
+          Моля попълнете вид!
+        </div>
+      </div>
 
       <!-- Summary -->
       <label for="summary"> Резюме: </label>
       <p class="hint">Кратко изложение на рецепта</p>
       <textarea id="summary" formControlName="summary"></textarea>
 
-      <!-- Description -->
+      <!-- Description required-->
       <label for="description"> Начин на приготвяне (задължително): </label>
       <textarea
         rows="10"
@@ -24,15 +39,45 @@
         formControlName="description"
       ></textarea>
 
-      <!-- Base Yield -->
+      <div *ngIf="baseFormEdit.get('description')?.touched">
+        <div
+          class="errors"
+          *ngIf="baseFormEdit.get('description')?.errors?.['required']"
+        >
+          Моля попълнете начин на приготвяне!
+        </div>
+      </div>
+
+      <!--Base Yield required-->
       <label for="base_yield"> Добив (задължително): </label>
       <p class="hint">Количесто на готовата продукция</p>
-      <input type="number" id="base_yield" formControlName="base_yield" />
+      <input type="number" id="base_yield" formControlName="base_yield"/>
 
-      <!-- Unit -->
+      <div *ngIf="baseFormEdit.get('base_yield')?.touched">
+        <div
+          class="errors"
+          *ngIf="baseFormEdit.get('base_yield')?.errors?.['required']"
+        >
+          Моля попълнете добив!
+        </div>
+      </div>
+
+      <!-- Unit required-->
       <label for="unit"> Мерна еденица (задължително): </label>
       <p class="hint">В която измерваме добивът</p>
-      <input type="text" id="unit" formControlName="unit" />
+      <!--      <input type="text" id="unit" formControlName="unit"/>-->
+      <select id="unit" formControlName="unit">
+        <option value="гр.">Грам</option>
+        <option value="кг.">Килограм</option>
+        <option value="мл.">Милилитър</option>
+        <option value="л.">Литър</option>
+      </select>
+
+      <div *ngIf="baseFormEdit.get('unit')?.touched">
+        <div class="errors" *ngIf="baseFormEdit.get('unit')?.errors?.['required']">
+          Моля изберете мерна еденица!
+        </div>
+      </div>
 
       <!-- Base Recipe Portions -->
       <label for="unit"> Порций: </label>
@@ -43,6 +88,9 @@
         formControlName="base_recipe_portions"
       />
 
+      <!-- Allergen -->
+      <!-- show all in base recipe -->
+      <!--todo!-->
       <div
         *ngIf="base?.allergens && base?.allergens?.length! > 0"
         formArrayName="allergens"
@@ -50,10 +98,11 @@
         <p class="hint">Алергени, който вече сте добавили:</p>
 
         <div
-          *ngFor="let allergen of allergens.controls; let i = index"
+          *ngFor="let allergen of added_allergens.controls; let i = index"
           [formGroupName]="i"
         >
-          <label [for]="'allergens' + i">Алергени</label>
+
+
           <input
             type="text"
             [id]="'allergens' + i"
@@ -62,8 +111,32 @@
         </div>
       </div>
 
+      <!-- add more-->
+      <div>
+        <label>Алергени: </label>
+        <p class="hint">
+          Добавете алергените, който садържа рецепта
+        </p>
+        <select formControlName="selectedAllergen">
+          <option *ngFor="let allergen of allergens" [value]="allergen.id">
+            {{ allergen.name }}
+          </option>
+        </select>
+        <button type="button" (click)="addSelectedAllergen()">
+          Добавете избраният алерген
+        </button>
+      </div>
+
+      <div>
+        <p *ngIf="baseFormEdit.get('selectedAllergen')?.touched" class="hint">
+          Алергени, който вече сте добавили:
+        </p>
+        <div>{{ baseFormEdit.get("selectedAllergenNames")?.value }}</div>
+      </div>
+
+
       <!-- Image Upload -->
-      <p class="hint">Добавена снимка</p>
+      <app-image-upload (imageUploaded)="addImageToForm($event)"/>
 
       <!-- Image -->
       <div formArrayName="image_recipe">
@@ -71,6 +144,7 @@
           *ngFor="let image of image_recipe.controls; let i = index"
           [formGroupName]="i"
         >
+          <p class="hint">Добавена снимка</p>
           <!-- Name required-->
           <label [for]="'image_recipe' + i">Снимка</label>
           <input
@@ -78,11 +152,14 @@
             [id]="'image_recipe' + i"
             formControlName="image_recipe"
           />
+          <button type="button" (click)="removeImage(i)">
+            Премахнете добавената снимка
+          </button>
         </div>
       </div>
 
       <!-- Video -->
-      <p class="hint">Поставете тук видео линкът</p>
+<!--      <p class="hint">Поставете тук видео линкът</p>-->
       <div formArrayName="video_recipe">
         <div
           *ngFor="let video of video_recipe.controls; let i = index"
@@ -95,19 +172,47 @@
             [id]="'video_recipe' + i"
             formControlName="video_recipe"
           />
+          <button type="button" (click)="removeVideo(i)">
+            Премахнете видео линкът
+          </button>
         </div>
+        <button type="button" (click)="addVideo()">
+          Добавете линк към видео
+        </button>
       </div>
 
       <!-- Preparation -->
-      <p class="hint">
-        Добавете метод използван при приготвяне на рецептата
-      </p>
+
+      <div
+        *ngIf="base?.preparation_method && base?.preparation_method?.length! > 0"
+        formArrayName="preparation_method"
+      >
+
+        <p class="hint">Методите, който вече сте добавили:</p>
+        <div
+          *ngFor="let method of preparation_method.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <label [for]="'method' + i">Метод</label>
+          <input
+            type="text"
+            [id]="'method' + i"
+            formControlName="preparation_method"
+          />
+          <button type="button" (click)="removePreparation(i)">
+            Премахнете метода
+          </button>
+        </div>
+        <button type="button" (click)="addPreparation()">
+          Добавете метод на приготвяне
+        </button>
+      </div>
 
       <!-- Ingredients -->
       <div class="divider">
-        <hr />
+        <hr/>
         <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
-        <hr />
+        <hr/>
       </div>
 
       <div formArrayName="ingredients">
@@ -117,16 +222,48 @@
         >
           <!-- Name required-->
           <label [for]="'name' + i">Име (задължително):</label>
-          <input type="text" [id]="'name' + i" formControlName="name" />
+          <input type="text" [id]="'name' + i" formControlName="name"/>
+
+          <div *ngIf="baseFormEdit.get('ingredients.' + i + '.name')?.touched">
+            <div
+                    class="errors"
+                    *ngIf="baseFormEdit.get('ingredients.' + i + '.name')?.errors?.['required']"
+            >
+              Моля попълнете име на съставката!
+            </div>
+          </div>
 
           <!-- Amount required-->
           <label [for]="'amount' + i">Количество (задължително):</label>
-          <input type="number" [id]="'amount' + i" formControlName="amount" />
+          <input type="number" [id]="'amount' + i" formControlName="amount"/>
+
+          <div *ngIf="baseFormEdit.get('ingredients.' + i + '.amount')?.touched">
+            <div
+                    class="errors"
+                    *ngIf="baseFormEdit.get('ingredients.' + i + '.amount')?.errors?.['required']"
+            >
+              Моля попълнете количеството на съставката!
+            </div>
+          </div>
 
           <!-- Unit required-->
           <label [for]="'unit' + i">Мерна еденица (задължително):</label>
           <p class="hint">В която измерваме съставката</p>
-          <input type="text" [id]="'unit' + i" formControlName="unit" />
+          <select [id]="'unit' + i" formControlName="unit">
+            <option value="гр.">Грам</option>
+            <option value="кг.">Килограм</option>
+            <option value="мл.">Милилитър</option>
+            <option value="л.">Литър</option>
+          </select>
+
+          <div *ngIf="baseFormEdit.get('ingredients.' + i + '.unit')?.touched">
+            <div
+                    class="errors"
+                    *ngIf="baseFormEdit.get('ingredients.' + i + '.unit')?.errors?.['required']"
+            >
+              Моля изберете мерна еденица!
+            </div>
+          </div>
 
           <!-- Quantity -->
           <label [for]="'quantity' + i">Бройка:</label>
@@ -141,11 +278,11 @@
 
           <!-- Preparation Method -->
           <label [for]="'preparation_method' + i"
-            >Допълнителна информация:</label
+          >Допълнителна информация:</label
           >
           <p class="hint">
             Въведете информация, разделена със запетайка и интервал:
-            <br />
+            <br/>
             Пример: Почистване, измиване, нарязване.
           </p>
           <input
@@ -159,7 +296,11 @@
           <p class="hint">
             Ако тази съставка е базова рецепта моля изберете коя?
           </p>
-          <input type="text" [id]="'base' + i" formControlName="base" />
+          <select [id]="'base' + i"  formControlName="base">
+            <option *ngFor="let recipe of baseRecipes" [value]="recipe.id">
+              {{ recipe.title }}
+            </option>
+          </select>
 
           <!-- Order Index -->
 
@@ -187,9 +328,9 @@
       <button type="button" (click)="onSubmit()">Запазете промените</button>
 
       <a class="btn" href="javascript:history.back()"
-    ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
-      назад</a
-    >
+      ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+        назад</a
+      >
     </form>
   </div>
 </div>
