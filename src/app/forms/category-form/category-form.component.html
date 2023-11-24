@@ -15,12 +15,16 @@
       </div>
 
       <!-- Image -->
+      <div class="checkbox-wrapper">
+        <input
+        class="sc-gJwTLC ikxBAC"
+        type="checkbox"
+        formControlName="is_active"
+        />
+        <label class="checkbox-label hint">Ще бъде ли категорията видима във сайта?</label>
+        <!-- <label class="checkbox-label">Активна ли е категрия?</label> -->
 
-      <label>
-        Активна ли е категрия?
-        <input type="checkbox" formControlName="is_active" />
-        <span class="hint">Ще бъде ли категорията видима във сайта?</span>
-      </label>
+      </div>
 
       <label>
         Заглавие (задължително):
@@ -43,7 +47,6 @@
         <option value="Сезонно Меню">Сезонно</option>
         <option value="Седмично Меню">Седмично</option>
         <option value="Тестово Меню">Тестово</option>
-
       </select>
 
       <div *ngIf="categoryForm.get('menu')?.touched">

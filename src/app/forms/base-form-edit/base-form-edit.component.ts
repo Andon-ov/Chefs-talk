@@ -8,10 +8,10 @@ import {
   PreparationMethodItem,
   VideoRecipeItem,
 } from '../../shared/interfaces/interfaces';
-import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
+import { Firestore, updateDoc, doc, setDoc } from '@angular/fire/firestore';
 import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import {AllergensService} from "../../shared/allergens.services/allergens.service";
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { AllergensService } from '../../shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-base-form-edit',
@@ -166,11 +166,16 @@ export class BaseFormEditComponent implements OnInit {
         );
       }
 
+      // if (this.base.allergens && this.base.allergens.length > 0) {
+      //   this.base.allergens.forEach((allergen: any) => {
+      //     allergensFormArray.push(this.fb.group({
+      //       allergen: [allergen]
+      //     }));
+      //   });
+      // }
       if (this.base.allergens && this.base.allergens.length > 0) {
         this.base.allergens.forEach((allergen: any) => {
-          allergensFormArray.push(this.fb.group({
-            allergen: [allergen]
-          }));
+          allergensFormArray.push(this.fb.control(allergen));
         });
       }
 
@@ -187,6 +192,21 @@ export class BaseFormEditComponent implements OnInit {
       });
     }
   }
+
+isAllergenSelected(allergenId: string): boolean {
+  return this.added_allergens.value.some((addedAllergenId: string) => addedAllergenId === allergenId);
+}
+
+toggleAllergenSelection(allergenId: string): void {
+  const index = this.added_allergens.value.indexOf(allergenId);
+
+  if (index === -1) {
+    this.added_allergens.push(new FormControl(allergenId));
+  } else {
+    this.added_allergens.removeAt(index);
+  }
+}
+
 
   addIngredient() {
     const ingredients = this.baseFormEdit.get('ingredients') as FormArray;
@@ -225,6 +245,7 @@ export class BaseFormEditComponent implements OnInit {
     return this.baseFormEdit.get('allergens') as FormArray;
   }
 
+
   onSubmit() {
     if (this.baseFormEdit.valid) {
       const baseRecipeData = this.baseFormEdit.value;
@@ -232,7 +253,6 @@ export class BaseFormEditComponent implements OnInit {
       this.baseFormEdit.reset();
     }
   }
-
 
   addPreparation() {
     const preparationArray = this.baseFormEdit.get(
@@ -280,53 +300,32 @@ export class BaseFormEditComponent implements OnInit {
     );
   }
 
-  addReferenceToSelectedAllergen(event: any) {
-    const selectedAllergenId = event.target.value;
-    const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
-    allergensArray.push(this.fb.control(selectedAllergenId));
-  }
+  // addReferenceToSelectedAllergen(event: any) {
+  //   const selectedAllergenId = event.target.value;
+  //   const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
+  //   allergensArray.push(this.fb.control(selectedAllergenId));
+  // }
 
   // addSelectedAllergen() {
   //   const selectedAllergenId = this.baseFormEdit.get('selectedAllergen')?.value;
   //   const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
   //   allergensArray.push(this.fb.control(selectedAllergenId));
   //   // console.log(selectedAllergenId)
-  //
-  //   const selectedAllergenNames = this.baseFormEdit.get('selectedAllergenNames');
+
+  //   const selectedAllergenNames = this.baseFormEdit.get(
+  //     'selectedAllergenNames'
+  //   );
   //   const selectedAllergen = this.allergens.find(
-  //       (a) => a.id === selectedAllergenId
+  //     (a) => a.id === selectedAllergenId
   //   );
   //   if (selectedAllergen) {
   //     selectedAllergenNames?.setValue(
-  //         selectedAllergenNames.value
-  //             ? selectedAllergenNames.value + ', ' + selectedAllergen.name
-  //             : selectedAllergen.name
+  //       selectedAllergenNames.value
+  //         ? selectedAllergenNames.value + ', ' + selectedAllergen.name
+  //         : selectedAllergen.name
   //     );
   //   }
   // }
-
-
-  addSelectedAllergen() {
-    const selectedAllergenId = this.baseFormEdit.get('selectedAllergen')?.value;
-    const allergensArray = this.baseFormEdit.get('allergens') as FormArray;
-
-    const selectedAllergen = this.allergens.find((a) => a.id === selectedAllergenId);
-
-    if (selectedAllergen) {
-      allergensArray.push(this.fb.group({
-        allergenId: selectedAllergenId,
-        allergenName: selectedAllergen.name,
-      }));
-
-      const selectedAllergenNames = this.baseFormEdit.get('selectedAllergenNames');
-      selectedAllergenNames?.setValue(
-        selectedAllergenNames.value
-          ? selectedAllergenNames.value + ', ' + selectedAllergen.name
-          : selectedAllergen.name
-      );
-    }
-  }
-
 
   getAllergens(): void {
     this.allergenService.getAllergens().subscribe({
@@ -356,4 +355,10 @@ export class BaseFormEditComponent implements OnInit {
     updateDoc(docRef, baseRecipeData);
     this.router.navigate(['/base', this.baseId]);
   }
+  // addBaseRecipe(baseRecipeData: any) {
+  //   const collectionName = 'BaseRecipe';
+  //   const docRef = doc(this.firestore, collectionName, this.baseId);
+  //   setDoc(docRef, baseRecipeData, {merge: true});
+  //   this.router.navigate(['/base', this.baseId]);
+  // }
 }

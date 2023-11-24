@@ -15,7 +15,7 @@ export interface Category {
 }
 
 export interface Recipe {
-  allergen: DocumentReference<DocumentData>[];
+  allergens: DocumentReference<DocumentData>[];
   category: DocumentReference<DocumentData>;
   description: string;
   food_plate: DocumentReference<DocumentData>;

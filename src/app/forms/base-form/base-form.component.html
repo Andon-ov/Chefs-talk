@@ -104,9 +104,9 @@
       </div>
       <!-- Base Recipe Portions -->
 
-      <!-- Allergen -->
       <div>
-        <div>
+        <!-- Allergen -->
+        <!-- <div>
           <label>Алергени: </label>
           <p class="hint">
             Добавете алергените, който садържа рецепта
@@ -126,7 +126,26 @@
             Алергени, който вече сте добавили:
           </p>
           <div>{{ baseForm.get("selectedAllergenNames")?.value }}</div>
+        </div> -->
+
+        <!-- Allergens checkbox -->
+      <div formArrayName="allergens">
+        <label >Алергени: </label>
+
+        <div class="checkbox-wrapper" *ngFor="let allergen of allergens; let i = index">
+          <input
+            type="checkbox"
+            [id]="'allergen' + i"
+            [value]="allergen.id"
+            [checked]="isAllergenSelected(allergen.id)"
+            (change)="toggleAllergenSelection(allergen.id)"
+            class="sc-gJwTLC ikxBAC"
+          />
+          <label class="checkbox-label" for="{{ 'allergen' + i }}">{{ allergen.name }}</label>
         </div>
+      </div>
+
+      <!-- Allergens checkbox -->
 
         <!-- Allergen -->
 

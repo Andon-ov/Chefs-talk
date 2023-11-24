@@ -22,7 +22,7 @@
         class="recipe-image"
       >
         <li *ngFor="let img of recipe?.image_recipe">
-          <img [src]="img.image_recipe" alt="Изображение на рецепта"/>
+          <img [src]="img.image_recipe" alt="Изображение на рецепта" />
         </li>
       </ul>
 
@@ -39,9 +39,9 @@
           <!-- serving_value, unit -->
           <td>
             <span class="value"
-            >{{ recipe?.serving_value }}
+              >{{ recipe?.serving_value }}
               <span class="value" *ngIf="recipe?.unit"
-              >&nbsp;{{ recipe?.unit }}</span
+                >&nbsp;{{ recipe?.unit }}</span
               >
             </span>
           </td>
@@ -61,34 +61,37 @@
           </td>
         </tr>
 
-        <!-- selectedAllergenNames -->
-        <tr *ngIf="recipe?.selectedAllergenNames">
+        <!-- Allergens -->
+        <tr *ngIf="recipe?.allergens?.length! > 0">
           <td><span class="key"> Алергени</span></td>
           <td>
-            <span class="value">{{ recipe?.selectedAllergenNames }}</span>
+
+            <div *ngFor="let allergenId of recipe?.allergens">
+              <span class="value">{{ getAllergenNameById(allergenId)}}</span>
+            </div>
           </td>
         </tr>
       </table>
 
       <div class="divider">
-        <hr/>
+        <hr />
         <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
-        <hr/>
+        <hr />
       </div>
-      <br/>
+      <br />
 
       <!-- description require -->
       <p class="recipe-description-text description">
         {{ recipe?.description }}
       </p>
-      <br/>
+      <br />
 
       <div *ngIf="recipe?.ingredients" class="divider">
-        <hr/>
+        <hr />
         <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
-        <hr/>
+        <hr />
       </div>
-      <br/>
+      <br />
 
       <ul
         class="recipe-ingredients"
@@ -100,18 +103,18 @@
 
           <!-- quantity -->
           <span *ngIf="ingredient.quantity"
-          >({{ ingredient.quantity }} бр.)</span
+            >({{ ingredient.quantity }} бр.)</span
           >
 
           <!-- base -->
           <span class="value" *ngIf="ingredient.base">
             <a [routerLink]="['/base', ingredient.base]">
               &nbsp;&nbsp;<i class="fa-solid fa-forward"></i> &nbsp;&nbsp;<i
-              class="fa-solid fa-magnifying-glass fa-beat-fade"
-            ></i>
+                class="fa-solid fa-magnifying-glass fa-beat-fade"
+              ></i>
               &nbsp;&nbsp;<i class="fa-solid fa-backward"></i> </a
-            ></span>
-          <br/>
+          ></span>
+          <br />
           <!-- preparation_method -->
           <span class="key" *ngIf="ingredient.preparation_method">
             <i> {{ ingredient.preparation_method }}</i>
@@ -128,11 +131,11 @@
         "
         class="divider"
       >
-        <hr/>
+        <hr />
         <p>&nbsp;&nbsp;Методи&nbsp;&nbsp;</p>
-        <hr/>
+        <hr />
       </div>
-      <br/>
+      <br />
       <ul
         class="recipe-preparation-method"
         *ngFor="let method of recipe?.preparation_method"
@@ -145,11 +148,11 @@
         *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
       >
         <div class="divider">
-          <hr/>
+          <hr />
           <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
-          <hr/>
+          <hr />
         </div>
-        <br/>
+        <br />
 
         <ul>
           <li *ngFor="let video of recipe?.video_recipe">
@@ -166,17 +169,17 @@
 
       <button (click)="toggleCommentForm()">Искате ли да коментирате?</button>
       <a class="btn" href="javascript:history.back()"
-      ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+        ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
         назад</a
       >
       <div *ngIf="showCommentForm">
-        <app-comment-form [recipeId]="recipeId"/>
+        <app-comment-form [recipeId]="recipeId" />
       </div>
 
       <div *ngIf="comments.length > 0" class="divider">
-        <hr/>
+        <hr />
         <p>&nbsp;&nbsp;Коментари&nbsp;&nbsp;</p>
-        <hr/>
+        <hr />
       </div>
 
       <section class="comments" *ngIf="comments.length > 0">
