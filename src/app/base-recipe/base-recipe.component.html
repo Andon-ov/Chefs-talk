@@ -131,11 +131,16 @@
         </td>
       </tr>
 
-      <!-- selectedAllergenNames -->
-      <tr *ngIf="base?.selectedAllergenNames">
+      <!-- Allergens -->
+      <tr *ngIf="base?.allergens?.length! > 0">
         <td><span class="key"> Алергени</span></td>
         <td>
-          <span class="value">{{ base?.selectedAllergenNames }}</span>
+          <div *ngIf="allergens.length > 0">
+            <ng-container *ngFor="let allergen of allergens; let last = last">
+              <span class="value">{{ allergen.name }}</span>
+              <ng-container *ngIf="!last">, </ng-container>
+            </ng-container>
+          </div>
         </td>
       </tr>
     </table>
@@ -170,7 +175,9 @@
     ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
       назад</a
     >
-    <button *ngIf="userData && userData.isAdmin" (click)="navigateToEdit()">Редактирайте</button>
+    <button *ngIf="userData && userData.isAdmin" (click)="navigateToEdit()">
+      Редактирайте
+    </button>
   </div>
   <br/>
 </div>

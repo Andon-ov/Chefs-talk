@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BaseRecipe } from '../shared/interfaces/interfaces';
-import { BaseRecipeService } from '../shared/base-recipe.services/base-recipe.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Allergens, BaseRecipe} from '../shared/interfaces/interfaces';
+import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.service';
+import {AllergensService} from '../shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-base-recipe-waiters',
   templateUrl: './base-recipe-waiters.component.html',
   styleUrls: ['./base-recipe-waiters.component.css'],
 })
-export class BaseRecipeWaitersComponent {
+export class BaseRecipeWaitersComponent implements OnInit {
+
   base: BaseRecipe | null = null;
   baseId = '';
+  allergens: Allergens[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private baseRecipeService: BaseRecipeService
+    private baseRecipeService: BaseRecipeService,
+    private allergenService: AllergensService
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const baseId = params.get('id');
@@ -36,5 +40,37 @@ export class BaseRecipeWaitersComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.getAllergens();
+  }
 
+  getAllergens(): void {
+    this.allergenService.getAllergens().subscribe({
+      next: (allergens) => {
+        const recipeAllergenRefs = this.base?.allergens || [];
+
+        // Remove undefined elements from the recipe allergens array
+        const filteredRecipeAllergenRefs = recipeAllergenRefs.filter(Boolean);
+
+        allergens.forEach((allergen) => {
+          // all allergen id
+          const allergenId = allergen.id;
+
+          const result = filteredRecipeAllergenRefs.filter((ref) => {
+            // this is a recipe allergens id
+            const refId = ref as unknown as string;
+            return refId === allergenId;
+          });
+
+          // Add allergen only if there is a match
+          if (result.length > 0) {
+            this.allergens.push(allergen);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
+  }
 }

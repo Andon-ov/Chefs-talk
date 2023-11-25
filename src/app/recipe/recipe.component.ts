@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {
   Allergens,
   Category,
@@ -7,16 +7,14 @@ import {
   Plates,
   Recipe,
 } from '../shared/interfaces/interfaces';
-import { RecipeService } from '../shared/recipe.services/recipe.service';
+import {RecipeService} from '../shared/recipe.services/recipe.service';
 import {
-  DocumentData,
-  DocumentReference,
   Firestore,
   doc,
   getDoc,
 } from '@angular/fire/firestore';
-import { CommentService } from '../shared/comments.services/comment.service';
-import { AllergensService } from '../shared/allergens.services/allergens.service';
+import {CommentService} from '../shared/comments.services/comment.service';
+import {AllergensService} from '../shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-recipe',
@@ -70,6 +68,7 @@ export class RecipeComponent implements OnInit {
       this.loadCommentsForRecipe();
     });
   }
+
   ngOnInit(): void {
     this.getAllergens();
   }
@@ -89,7 +88,7 @@ export class RecipeComponent implements OnInit {
   private async loadCategoryAndPlateData() {
     const selectedPlateId = this.recipe?.food_plate;
     const selectedCategoryId = this.recipe?.category;
-  
+
     if (selectedPlateId) {
       const platesDocRef = doc(this.firestore, 'Plates/' + selectedPlateId);
       const platesSnapshot = await getDoc(platesDocRef);
@@ -113,7 +112,26 @@ export class RecipeComponent implements OnInit {
   getAllergens(): void {
     this.allergenService.getAllergens().subscribe({
       next: (allergens) => {
-        this.allergens = allergens;
+        const recipeAllergenRefs = this.recipe?.allergens || [];
+
+        // Remove undefined elements from the recipe allergens array
+        const filteredRecipeAllergenRefs = recipeAllergenRefs.filter(Boolean);
+
+        allergens.forEach((allergen) => {
+          // all allergen id
+          const allergenId = allergen.id;
+
+          const result = filteredRecipeAllergenRefs.filter((ref) => {
+            // this is a recipe allergens id
+            const refId = ref as unknown as string;
+            return refId === allergenId;
+          });
+
+          // Add allergen only if there is a match
+          if (result.length > 0) {
+            this.allergens.push(allergen);
+          }
+        });
       },
       error: (error) => {
         console.error('Error fetching recipes:', error);
@@ -121,15 +139,4 @@ export class RecipeComponent implements OnInit {
     });
   }
 
-  getAllergenNameById(
-    allergenRef: DocumentReference<DocumentData> | string
-  ): string {
-    const allergenId =
-      typeof allergenRef === 'string' ? allergenRef : allergenRef.id;
-    const allergen = this.allergens.find((a) => a.id === allergenId);
-    const result = allergen ? allergen.name : 'Няма такъв алерген';
-    console.log(result);
-    
-    return result
-  }
 }

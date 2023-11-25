@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Category } from 'src/app/shared/interfaces/interfaces';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Firestore, collection, addDoc} from '@angular/fire/firestore';
+import {Category} from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-category-form',
@@ -29,7 +29,7 @@ export class CategoryFormComponent {
       const categoryData = this.categoryForm.value;
       this.addCategory(categoryData);
       this.categoryForm.reset();
-    }else{
+    } else {
       console.log(this.categoryForm.errors);
 
     }

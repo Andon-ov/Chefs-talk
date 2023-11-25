@@ -17,10 +17,6 @@
   margin-bottom: 10px;
 }
 
-/* .detail span {
-  font-weight: bold;
-} */
-
 .detail span:nth-child(2) {
   margin-left: 10px;
 }

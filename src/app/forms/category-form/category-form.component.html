@@ -3,12 +3,12 @@
     <h1 class="title-black">Добавяне на категория</h1>
     <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
       <!-- Image Upload -->
-      <app-image-upload (imageUploaded)="addImageToForm($event)" />
+      <app-image-upload (imageUploaded)="addImageToForm($event)"/>
 
       <div *ngIf="categoryForm.get('image')?.value !== ''">
         <p class="hint">Вие добавихте снимка</p>
         <!-- <label for="image">Добавена снимка</label> -->
-        <input type="text" id="image" formControlName="image" />
+        <input type="text" id="image" formControlName="image"/>
         <button type="button" (click)="removeImage()">
           Премахни добавената снимка
         </button>
@@ -17,9 +17,9 @@
       <!-- Image -->
       <div class="checkbox-wrapper">
         <input
-        class="sc-gJwTLC ikxBAC"
-        type="checkbox"
-        formControlName="is_active"
+          class="sc-gJwTLC ikxBAC"
+          type="checkbox"
+          formControlName="is_active"
         />
         <label class="checkbox-label hint">Ще бъде ли категорията видима във сайта?</label>
         <!-- <label class="checkbox-label">Активна ли е категрия?</label> -->
@@ -28,7 +28,7 @@
 
       <label>
         Заглавие (задължително):
-        <input type="text" formControlName="name" required />
+        <input type="text" formControlName="name" required/>
       </label>
 
       <div *ngIf="categoryForm.get('name')?.touched">
@@ -67,12 +67,11 @@
       <label>
         Последователност:
         <span class="hint">Ред на подредба на категориите</span>
-        <input type="number" formControlName="order_index" />
+        <input type="number" formControlName="order_index"/>
       </label>
 
       <button type="submit">Добавете категорията</button>
 
-      <!-- {{ categoryForm.value | json }} -->
     </form>
   </div>
 </div>

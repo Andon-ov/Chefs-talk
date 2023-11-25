@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/auth.services/auth.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from 'src/app/shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,7 +20,7 @@ export class SignInComponent {
 
   async submitSignInForm() {
     if (this.signInForm.valid) {
-      const { email, password } = this.signInForm.value;
+      const {email, password} = this.signInForm.value;
 
       try {
         await this.authService.loginUser(email, password);

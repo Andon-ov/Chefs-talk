@@ -72,8 +72,8 @@ export interface Allergens {
 }
 
 export interface Plates {
-  name: string;
   id: string;
+  name: string;
 }
 
 export interface ImageRecipeItem {

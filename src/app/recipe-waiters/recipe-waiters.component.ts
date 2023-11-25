@@ -1,33 +1,37 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {
+  Allergens,
   Category,
   Comments,
   Plates,
   Recipe,
 } from '../shared/interfaces/interfaces';
-import { RecipeService } from '../shared/recipe.services/recipe.service';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { CommentService } from '../shared/comments.services/comment.service';
+import {RecipeService} from '../shared/recipe.services/recipe.service';
+import {Firestore, doc, getDoc} from '@angular/fire/firestore';
+import {CommentService} from '../shared/comments.services/comment.service';
+import {AllergensService} from '../shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-recipe-waiters',
   templateUrl: './recipe-waiters.component.html',
   styleUrls: ['./recipe-waiters.component.css'],
 })
-export class RecipeWaitersComponent {
+export class RecipeWaitersComponent implements OnInit {
   recipe: Recipe | null = null;
   category: Category | null = null;
   plate: Plates | null = null;
   comments: Comments[] = [];
   recipeId: string | null = '';
   showCommentForm = false;
+  allergens: Allergens[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private firestore: Firestore,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private allergenService: AllergensService
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const recipeId = params.get('id');
@@ -59,6 +63,10 @@ export class RecipeWaitersComponent {
       console.log('Comment successfully added.');
       this.loadCommentsForRecipe();
     });
+  }
+
+  ngOnInit(): void {
+    this.getAllergens();
   }
 
   toggleCommentForm() {
@@ -95,5 +103,35 @@ export class RecipeWaitersComponent {
         this.category = categorySnapshot.data() as Category;
       }
     }
+  }
+
+  getAllergens(): void {
+    this.allergenService.getAllergens().subscribe({
+      next: (allergens) => {
+        const recipeAllergenRefs = this.recipe?.allergens || [];
+
+        // Remove undefined elements from the recipe allergens array
+        const filteredRecipeAllergenRefs = recipeAllergenRefs.filter(Boolean);
+
+        allergens.forEach((allergen) => {
+          // all allergen id
+          const allergenId = allergen.id;
+
+          const result = filteredRecipeAllergenRefs.filter((ref) => {
+            // this is a recipe allergens id
+            const refId = ref as unknown as string;
+            return refId === allergenId;
+          });
+
+          // Add allergen only if there is a match
+          if (result.length > 0) {
+            this.allergens.push(allergen);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
   }
 }

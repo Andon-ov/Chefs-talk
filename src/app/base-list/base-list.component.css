@@ -21,7 +21,8 @@
   justify-content: center;
   cursor: pointer;
 }
-.card:hover{
+
+.card:hover {
   transform: scale(0.96);
 }
 
@@ -64,9 +65,6 @@
 }
 
 
-
-
-
 @media (max-width: 767px) {
   .recipe-list {
     grid-template-columns: repeat(1, 1fr);
@@ -74,8 +72,6 @@
 
   }
 }
-
-
 
 
 @media (min-width: 768px) and (max-width: 1023px) {

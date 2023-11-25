@@ -62,12 +62,15 @@
         </tr>
 
         <!-- Allergens -->
+
         <tr *ngIf="recipe?.allergens?.length! > 0">
           <td><span class="key"> Алергени</span></td>
           <td>
-
-            <div *ngFor="let allergenId of recipe?.allergens">
-              <span class="value">{{ getAllergenNameById(allergenId)}}</span>
+            <div *ngIf="allergens.length > 0">
+              <ng-container *ngFor="let allergen of allergens; let last = last">
+                <span class="value">{{ allergen.name }}</span>
+                <ng-container *ngIf="!last">, </ng-container>
+              </ng-container>
             </div>
           </td>
         </tr>

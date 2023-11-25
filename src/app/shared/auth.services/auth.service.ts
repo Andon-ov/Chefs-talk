@@ -43,7 +43,7 @@ export class AuthService {
       const uid = userCredential.user.uid;
       await this.addAdditionalAuthData(uid, additionalAuthData);
       await this.saveUserData(userCredential.user, additionalAuthData);
-      this.router.navigate(['home']);
+      this.router.navigate(['categories']);
     } catch (error) {
       this.handleError(error);
     }
@@ -58,7 +58,7 @@ export class AuthService {
       const uid = userCredential.user.uid;
       const additionalAuthData = await this.getAdditionalAuthDataById(uid);
       await this.saveUserData(userCredential.user, additionalAuthData);
-      this.router.navigate(['home']);
+      this.router.navigate(['categories']);
     } catch (error) {
       this.handleError(error);
     }

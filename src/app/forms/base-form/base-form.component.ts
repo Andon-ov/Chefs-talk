@@ -34,13 +34,9 @@ export class BaseFormComponent implements OnInit {
       base_yield: ['', [Validators.required]],
       unit: ['', [Validators.required]],
 
-      selectedAllergen: null,
-      allergens: this.fb.array([]),
-      selectedAllergenNames: '',
-
-
       base_recipe_portions: [0],
 
+      allergens: this.fb.array([]),
       image_recipe: this.fb.array([]),
       video_recipe: this.fb.array([]),
       preparation_method: this.fb.array([]),
@@ -142,40 +138,16 @@ export class BaseFormComponent implements OnInit {
   isAllergenSelected(allergenId: string): boolean {
     return this.added_allergens.value.some((addedAllergenId: string) => addedAllergenId === allergenId);
   }
-  
+
   toggleAllergenSelection(allergenId: string): void {
     const index = this.added_allergens.value.indexOf(allergenId);
-  
+
     if (index === -1) {
       this.added_allergens.push(new FormControl(allergenId));
     } else {
       this.added_allergens.removeAt(index);
     }
   }
-
-  // addReferenceToSelectedAllergen(event: any) {
-  //   const selectedAllergenId = event.target.value;
-  //   const allergensArray = this.baseForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-  // }
-
-  // addSelectedAllergen() {
-  //   const selectedAllergenId = this.baseForm.get('selectedAllergen')?.value;
-  //   const allergensArray = this.baseForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-
-  //   const selectedAllergenNames = this.baseForm.get('selectedAllergenNames');
-  //   const selectedAllergen = this.allergens.find(
-  //     (a) => a.id === selectedAllergenId
-  //   );
-  //   if (selectedAllergen) {
-  //     selectedAllergenNames?.setValue(
-  //       selectedAllergenNames.value
-  //         ? selectedAllergenNames.value + ', ' + selectedAllergen.name
-  //         : selectedAllergen.name
-  //     );
-  //   }
-  // }
 
   get ingredients() {
     return this.baseForm.get('ingredients') as FormArray;

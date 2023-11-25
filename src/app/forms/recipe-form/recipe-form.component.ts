@@ -10,10 +10,7 @@ import {
   Firestore,
   collection,
   addDoc,
-  getDocs,
-  CollectionReference,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
 import { CategoriesService } from 'src/app/shared/categories.services/categories.service';
 import { Allergens, BaseRecipe, Category, Plates } from 'src/app/shared/interfaces/interfaces';
@@ -48,7 +45,6 @@ export class RecipeFormComponent implements OnInit {
     this.recipeForm = this.fb.group({
       title: ['', [Validators.required]],
       category: this.fb.control([null, [Validators.required]]),
-      // category: this.fb.control(null),
 
       description: ['', [Validators.required]],
       season: ['', [Validators.required]],
@@ -59,11 +55,10 @@ export class RecipeFormComponent implements OnInit {
       serving_value: [0],
       order_index: [0],
 
-      selectedAllergen: null,
       allergens: this.fb.array([]),
-      selectedAllergenNames: '',
+      // selectedAllergen: null,
+      // selectedAllergenNames: '',
 
-      // food_plate: this.fb.control(null),
       food_plate: this.fb.control([null, [Validators.required]]),
 
       image_recipe: this.fb.array([]),
