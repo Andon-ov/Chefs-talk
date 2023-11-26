@@ -12,7 +12,8 @@
         <ng-container *ngIf="userData && userData.isAdmin">
           <div class="dropdown">
             <button class="dropBtn" (click)="toggleMenu()">
-              Добави<i class="fa fa-caret-down"></i>
+              Добави
+              <!-- <i class="fa fa-caret-down"></i> -->
             </button>
 
             <div
@@ -31,7 +32,8 @@
           <div class="dropdown" *ngIf="userData; else anonymousUser">
             <button class="dropBtn" (click)="toggleMenu()">
               <span>{{ getUserDisplayName() }}</span
-              ><i class="fa fa-caret-down"></i>
+              >
+              <!-- <i class="fa fa-caret-down"></i> -->
             </button>
             <div
               class="dropdown-content"

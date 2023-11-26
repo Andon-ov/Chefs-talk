@@ -169,22 +169,10 @@ body {
   min-height: 87vh;
 
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 }
 
-/* .watermark {
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-image: url('./assets/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-} */
 
 
 form {
@@ -339,7 +327,6 @@ select option:hover {
   color: var(--mainWhiteColor);
 }
 
-/*  */
 
 button,
 .btn {
@@ -453,5 +440,3 @@ tr:hover {
   transition: background-color 0.3s;
 }
 
-
-@media (max-width: 768px) {}
