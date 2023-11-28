@@ -1,5 +1,5 @@
 .category {
-  width: 1200px;
+  width: 1440px;
   margin: 0 auto;
   position: relative;
 }
@@ -110,7 +110,7 @@
   .recipe-list {
     display: flex;
     flex-direction: column;
-    padding: 0 5%;
+    padding: 0 10%;
   }
 
   .recipe-item {
@@ -121,6 +121,8 @@
   .recipe-title {
     text-transform: uppercase;
     font-size: 16px;
+    height: 20%;
+    top: 79%;
   }
 
   .category {

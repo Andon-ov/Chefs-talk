@@ -1,9 +1,9 @@
 .recipe-list {
-  width: 1200px;
+  width: 1440px;
   margin: 0 auto;
-  padding: 0 50px 20px 50px;
+  /* padding: 0 50px 20px 50px; */
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
 }
 

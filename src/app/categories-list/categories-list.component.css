@@ -1,6 +1,6 @@
 .categories-list {
   margin: 0 auto 50px auto;
-  max-width: 1200px;
+  max-width: 1440px;
 }
 
 .category-title {
@@ -15,7 +15,7 @@
   place-self: center;
   margin: 0 auto 50px 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 
 }

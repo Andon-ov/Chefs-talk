@@ -440,3 +440,24 @@ tr:hover {
   transition: background-color 0.3s;
 }
 
+
+@media (max-width: 460px) {
+  .mainLong {
+    min-height: 70dvh;
+  }
+}
+
+
+@media (min-width: 461px) and (max-width: 767px) {
+  .mainLong {
+    min-height: 78dvh;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+
+}
