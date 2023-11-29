@@ -1,5 +1,5 @@
 .category {
-  width: 1440px;
+  width: 1200px;
   margin: 0 auto;
   position: relative;
 }
@@ -101,7 +101,9 @@
 
   .recipe-title {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
+    height: 25%;
+    top: 75%;
   }
 }
 

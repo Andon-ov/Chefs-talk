@@ -1,5 +1,5 @@
 .recipe-list {
-  width: 1440px;
+  width: 1200px;
   margin: 0 auto;
   /* padding: 0 50px 20px 50px; */
   display: grid;
@@ -70,6 +70,9 @@
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
 
+  }
+  .wrapper{
+    padding:0 20px;
   }
 }
 
