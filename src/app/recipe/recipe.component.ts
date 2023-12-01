@@ -1,5 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Allergens,
   Category,
@@ -7,14 +7,11 @@ import {
   Plates,
   Recipe,
 } from '../shared/interfaces/interfaces';
-import {RecipeService} from '../shared/recipe.services/recipe.service';
-import {
-  Firestore,
-  doc,
-  getDoc,
-} from '@angular/fire/firestore';
-import {CommentService} from '../shared/comments.services/comment.service';
-import {AllergensService} from '../shared/allergens.services/allergens.service';
+import { RecipeService } from '../shared/recipe.services/recipe.service';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { CommentService } from '../shared/comments.services/comment.service';
+import { AllergensService } from '../shared/allergens.services/allergens.service';
+import { AuthService } from '../shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-recipe',
@@ -29,13 +26,16 @@ export class RecipeComponent implements OnInit {
   recipeId: string | null = '';
   showCommentForm = false;
   allergens: Allergens[] = [];
+  userData: any;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private firestore: Firestore,
     private commentService: CommentService,
-    private allergenService: AllergensService
+    private allergenService: AllergensService,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.route.paramMap.subscribe(async (params) => {
       const recipeId = params.get('id');
@@ -61,12 +61,19 @@ export class RecipeComponent implements OnInit {
       } else {
         console.error('Recipe ID not provided.');
       }
+      this.authService.userData$.subscribe((userData) => {
+        this.userData = userData;
+      });
     });
 
     commentService.getCommentAddedObservable().subscribe(() => {
       console.log('Comment successfully added.');
       this.loadCommentsForRecipe();
     });
+  }
+
+  navigateToEdit() {
+    this.router.navigate(['/recipe-edit', this.recipeId]);
   }
 
   ngOnInit(): void {
@@ -138,5 +145,4 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
-
 }

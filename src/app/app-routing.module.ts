@@ -17,6 +17,7 @@ import {CategoriesListComponent} from './categories-list/categories-list.compone
 import {RecipeWaitersComponent} from './recipe-waiters/recipe-waiters.component';
 import {BaseRecipeWaitersComponent} from './base-recipe-waiters/base-recipe-waiters.component';
 import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import { RecipeFormEditComponent } from './forms/recipe-form-edit/recipe-form-edit.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,10 @@ const routes: Routes = [
   {
     path: 'base-edit/:id',
     component: BaseFormEditComponent,
+  },
+  {
+    path: 'recipe-edit/:id',
+    component: RecipeFormEditComponent,
   },
   {
     path: 'sign-in',

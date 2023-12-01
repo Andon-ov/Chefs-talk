@@ -56,8 +56,6 @@ export class RecipeFormComponent implements OnInit {
       order_index: [0],
 
       allergens: this.fb.array([]),
-      // selectedAllergen: null,
-      // selectedAllergenNames: '',
 
       food_plate: this.fb.control([null, [Validators.required]]),
 

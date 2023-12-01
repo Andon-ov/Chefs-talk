@@ -8,6 +8,10 @@
       {{ recipe?.summary }}
     </div>
 
+    <div *ngIf="!recipe?.summary">
+      <br />
+    </div>
+
     <!-- category require -->
     <div class="recipe-category">
       <a [routerLink]="['/category', recipe?.category]">
@@ -175,6 +179,10 @@
         ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
         назад</a
       >
+      <button *ngIf="userData && userData.isAdmin" (click)="navigateToEdit()">
+        Редактирайте
+      </button>
+      
       <div *ngIf="showCommentForm">
         <app-comment-form [recipeId]="recipeId" />
       </div>
