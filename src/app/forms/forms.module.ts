@@ -8,23 +8,24 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { BaseFormEditComponent } from './base-form-edit/base-form-edit.component';
 import { RecipeFormEditComponent } from './recipe-form-edit/recipe-form-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [
-    CategoryFormComponent,
-    RecipeFormComponent,
-    BaseFormComponent,
-    CommentFormComponent,
-    ImageUploadComponent,
-    BaseFormEditComponent,
-    RecipeFormEditComponent,
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-
-  ],
-  exports: [CategoryFormComponent, CommentFormComponent],
+    declarations: [
+        CategoryFormComponent,
+        RecipeFormComponent,
+        BaseFormComponent,
+        CommentFormComponent,
+        ImageUploadComponent,
+        BaseFormEditComponent,
+        RecipeFormEditComponent,
+    ],
+    exports: [CategoryFormComponent, CommentFormComponent],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SharedModule
+    ]
 })
 export class FormsModule {}

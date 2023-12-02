@@ -21,7 +21,6 @@ import {FormsModule} from './forms/forms.module';
 import {BaseRecipeComponent} from './base-recipe/base-recipe.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CloudinaryModule} from '@cloudinary/ng';
-import {SafeUrlPipe} from './shared/safe-url.pipe/safe-url.pipe';
 
 
 import {BaseListComponent} from './base-list/base-list.component';
@@ -43,7 +42,7 @@ import {BaseRecipeWaitersComponent} from './base-recipe-waiters/base-recipe-wait
     CategoryComponent,
     RecipeComponent,
     BaseRecipeComponent,
-    SafeUrlPipe,
+    
     BaseListComponent,
     RecipeWaitersComponent,
     BaseRecipeWaitersComponent,
