@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore } from '@angular/fire/firestore';
 import { CommentService } from 'src/app/shared/comments.services/comment.service';
+import { AuthService } from 'src/app/shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -13,13 +14,16 @@ export class CommentFormComponent implements OnInit {
   commentForm!: FormGroup;
   firestore: Firestore;
   timestamp = new Date();
+  fullName = '';
+  userData: any | null = null;
 
   @Input() recipeId!: string | null;
 
   constructor(
     private fb: FormBuilder,
     firestore: Firestore,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private authService: AuthService
   ) {
     this.firestore = firestore;
   }
@@ -30,6 +34,20 @@ export class CommentFormComponent implements OnInit {
       text: ['', Validators.required],
       recipeId: [this.recipeId],
       create_time: [this.timestamp],
+      uid: [''],
+    });
+
+    this.authService.userData$.subscribe({
+      next: (value) => {
+        if (value) {
+          this.userData = value;
+          this.fullName =
+            this.userData.firstName + ' ' + this.userData.lastName;
+        } else {
+          this.fullName = 'Анонимен';
+        }
+      },
+      error: (err) => {},
     });
   }
 
@@ -37,8 +55,10 @@ export class CommentFormComponent implements OnInit {
     this.timestamp = new Date();
 
     if (this.commentForm.valid) {
+      this.commentForm.patchValue({ name: this.fullName });
       this.commentForm.patchValue({ recipeId: this.recipeId });
       this.commentForm.patchValue({ create_time: this.timestamp });
+      this.commentForm.patchValue({ uid: this.userData.uid });
 
       try {
         const result = await this.commentService.addComment(

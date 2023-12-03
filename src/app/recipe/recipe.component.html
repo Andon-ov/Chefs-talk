@@ -182,7 +182,7 @@
       <button *ngIf="userData && userData.isAdmin" (click)="navigateToEdit()">
         Редактирайте
       </button>
-      
+
       <div *ngIf="showCommentForm">
         <app-comment-form [recipeId]="recipeId" />
       </div>
@@ -200,6 +200,15 @@
           <p>
             {{ comment.create_time.toDate() | date : "dd/MM/yyyy HH:mm:ss" }}
           </p>
+          <p>{{ comment.uid }}</p>
+          <p>{{ userData.uid }}</p>
+          <p>{{ comment.id }}</p>
+          <button
+            *ngIf="comment.uid == userData.uid"
+            (click)="deleteComment(comment.id)"
+          >
+            Delete
+          </button>
         </ul>
       </section>
     </div>

@@ -61,9 +61,7 @@ export class RecipeComponent implements OnInit {
       } else {
         console.error('Recipe ID not provided.');
       }
-      this.authService.userData$.subscribe((userData) => {
-        this.userData = userData;
-      });
+     
     });
 
     commentService.getCommentAddedObservable().subscribe(() => {
@@ -78,10 +76,18 @@ export class RecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllergens();
+    this.authService.userData$.subscribe((userData) => {
+      this.userData = userData;
+    });
   }
 
   toggleCommentForm() {
     this.showCommentForm = !this.showCommentForm;
+  }
+
+  deleteComment(id:string){
+    this.commentService.deleteComment(id)
+    this.loadCommentsForRecipe()
   }
 
   private async loadCommentsForRecipe() {

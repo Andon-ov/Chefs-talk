@@ -10,10 +10,10 @@ import { AuthService } from 'src/app/shared/auth.services/auth.service';
 export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   userData: any | null = null;
-  private userDataSubject: BehaviorSubject<any | null> = new BehaviorSubject<
-    any | null
-  >(null);
+  private userDataSubject: BehaviorSubject<any | null> = new BehaviorSubject< any | null >(null);
   private userDataSubscription: Subscription;
+
+  
 
   constructor(private authService: AuthService) {
     this.userDataSubscription = this.userDataSubject.subscribe((value) => {

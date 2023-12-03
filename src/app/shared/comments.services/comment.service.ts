@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Firestore,
   collection,
@@ -6,9 +6,11 @@ import {
   where,
   getDocs,
   addDoc,
+  deleteDoc,
+  doc,
 } from '@angular/fire/firestore';
-import {Comments} from '../interfaces/interfaces';
-import {Subject} from 'rxjs';
+import { Comments } from '../interfaces/interfaces';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +18,7 @@ import {Subject} from 'rxjs';
 export class CommentService {
   private commentAddedSubject = new Subject<void>();
 
-  constructor(private firestore: Firestore) {
-  }
+  constructor(private firestore: Firestore) {}
 
   async getCommentsForRecipe(recipeId: string): Promise<Comments[]> {
     try {
@@ -28,11 +29,15 @@ export class CommentService {
       const comments: Comments[] = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
+        const commentId = doc.id;
+
         const comment: any = {
           create_time: data['create_time'],
           name: data['name'],
           recipeId: data['recipeId'],
           text: data['text'],
+          uid: data['uid'],
+          id: commentId,
         };
         comments.push(comment);
       });
@@ -52,10 +57,6 @@ export class CommentService {
 
   async addComment(commentData: Comments): Promise<string | null> {
     try {
-      if (!commentData.name) {
-        commentData.name = 'Анонимен';
-      }
-
       const collectionName = 'Comments';
       const docRef = await addDoc(
         collection(this.firestore, collectionName),
@@ -66,6 +67,17 @@ export class CommentService {
     } catch (error) {
       console.error('Error adding comment:', error);
       return null;
+    }
+  }
+
+  async deleteComment(commentId: string): Promise<void> {
+    try {
+      const collectionPath = 'Comments';
+      const docRef = doc(this.firestore, collectionPath, commentId);
+      await deleteDoc(docRef);
+      console.log('Comment deleted successfully:', commentId);
+    } catch (error) {
+      console.error('Error deleting comment:', error);
     }
   }
 

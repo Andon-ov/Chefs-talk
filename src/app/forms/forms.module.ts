@@ -9,6 +9,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { BaseFormEditComponent } from './base-form-edit/base-form-edit.component';
 import { RecipeFormEditComponent } from './recipe-form-edit/recipe-form-edit.component';
 import { SharedModule } from '../shared/shared.module';
+import { CommentFormEditComponent } from './comment-form-edit/comment-form-edit.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
         ImageUploadComponent,
         BaseFormEditComponent,
         RecipeFormEditComponent,
+        CommentFormEditComponent
     ],
     exports: [CategoryFormComponent, CommentFormComponent],
     imports: [

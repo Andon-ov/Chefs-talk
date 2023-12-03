@@ -93,6 +93,8 @@ export interface Comments {
   name: string;
   recipe: string;
   text: string;
+  uid:string;
+  id:string;
 }
 export interface FirestoreUser {
   accessToken: string;
