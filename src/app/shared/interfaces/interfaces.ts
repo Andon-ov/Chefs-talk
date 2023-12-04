@@ -91,7 +91,7 @@ export interface PreparationMethodItem {
 export interface Comments {
   create_time: Timestamp;
   name: string;
-  recipe: string;
+  recipeId: string;
   text: string;
   uid:string;
   id:string;

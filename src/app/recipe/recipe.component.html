@@ -179,7 +179,10 @@
         ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
         назад</a
       >
-      <button *ngIf="userData && userData.isAdmin" (click)="navigateToEdit()">
+      <button
+        *ngIf="userData && userData.isAdmin"
+        (click)="navigateToRecipeEdit()"
+      >
         Редактирайте
       </button>
 
@@ -197,18 +200,28 @@
         <ul *ngFor="let comment of comments">
           <li>{{ comment.name }}</li>
           <li>{{ comment.text }}</li>
-          <p>
-            {{ comment.create_time.toDate() | date : "dd/MM/yyyy HH:mm:ss" }}
-          </p>
-          <p>{{ comment.uid }}</p>
-          <p>{{ userData.uid }}</p>
-          <p>{{ comment.id }}</p>
-          <button
-            *ngIf="comment.uid == userData.uid"
-            (click)="deleteComment(comment.id)"
-          >
-            Delete
-          </button>
+
+          <li class="comments-last">
+            <p>
+              {{ comment.create_time.toDate() | date : "dd/MM/yyyy HH:mm:ss" }}
+            </p>
+
+            <div class="commentBtnWrapper">
+              <span
+                *ngIf="comment.uid == userData.uid"
+                (click)="deleteComment(comment.id)"
+              >
+                <i class="fa-solid fa-trash fa-shake"></i>
+              </span>
+
+              <span
+                *ngIf="comment.uid == userData.uid"
+                (click)="navigateToCommentEdit(comment.id)"
+              >
+                <i class="fa-regular fa-pen-to-square fa-flip"></i>
+              </span>
+            </div>
+          </li>
         </ul>
       </section>
     </div>

@@ -131,3 +131,23 @@
   font-style: italic;
   border-radius: 5px;
 }
+
+
+.commentBtnWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+
+.fa-regular,
+.fa-solid{
+  cursor: pointer;
+  color: var(--mainColor);
+}
+
+
+
+.comments-last {
+  display: flex;
+  justify-content: space-between;
+}

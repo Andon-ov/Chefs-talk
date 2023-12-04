@@ -8,6 +8,8 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  getDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Comments } from '../interfaces/interfaces';
 import { Subject } from 'rxjs';
@@ -78,6 +80,31 @@ export class CommentService {
       console.log('Comment deleted successfully:', commentId);
     } catch (error) {
       console.error('Error deleting comment:', error);
+    }
+  }
+
+  async getCommentById(commentId: string): Promise<Comments | null> {
+    const commentDocRef = doc(this.firestore, 'Comments', commentId);
+    const commentSnapshot = await getDoc(commentDocRef);
+
+    if (commentSnapshot.exists()) {
+      const commentDataId = commentSnapshot.data()
+      console.log(commentDataId['recipeId']);
+      
+      return commentSnapshot.data() as Comments;
+    } else {
+      return null;
+    }
+  }
+
+  async editComment(commentId: string, updatedCommentData: Partial<Comments>): Promise<void> {
+    try {
+      const collectionPath = 'Comments';
+      const docRef = doc(this.firestore, collectionPath, commentId);
+      await updateDoc(docRef, updatedCommentData);
+      console.log('Comment edited successfully:', commentId);
+    } catch (error) {
+      console.error('Error editing comment:', error);
     }
   }
 

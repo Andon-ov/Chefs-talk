@@ -54,9 +54,9 @@ export class RecipeFormEditComponent implements OnInit {
     this.firestore = firestore;
   }
 
-  navigateToEdit() {
-    this.router.navigate(['/recipe-edit', this.recipeId]);
-  }
+  // navigateToEdit() {
+  //   this.router.navigate(['/recipe-edit', this.recipeId]);
+  // }
 
   async ngOnInit() {
     this.initializeForm();

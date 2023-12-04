@@ -61,7 +61,6 @@ export class RecipeComponent implements OnInit {
       } else {
         console.error('Recipe ID not provided.');
       }
-     
     });
 
     commentService.getCommentAddedObservable().subscribe(() => {
@@ -70,8 +69,12 @@ export class RecipeComponent implements OnInit {
     });
   }
 
-  navigateToEdit() {
+  navigateToRecipeEdit() {
     this.router.navigate(['/recipe-edit', this.recipeId]);
+  }
+
+  navigateToCommentEdit(commentId: string) {
+    this.router.navigate(['/comment-edit', commentId]);
   }
 
   ngOnInit(): void {
@@ -85,9 +88,9 @@ export class RecipeComponent implements OnInit {
     this.showCommentForm = !this.showCommentForm;
   }
 
-  deleteComment(id:string){
-    this.commentService.deleteComment(id)
-    this.loadCommentsForRecipe()
+  deleteComment(id: string) {
+    this.commentService.deleteComment(id);
+    this.loadCommentsForRecipe();
   }
 
   private async loadCommentsForRecipe() {
