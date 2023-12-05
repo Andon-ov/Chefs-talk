@@ -1,11 +1,11 @@
-<div class="commentWrapper">
-    <form [formGroup]="commentFormEdit" id="commentFormEdit" (ngSubmit)="onSubmit()">
-      <div class="divider">
-        <hr />
-        <p>&nbsp;&nbsp;Коментирайте&nbsp;&nbsp;</p>
-        <hr />
-      </div>
-  
+<div class="mainLong">
+  <div class="wrapper">
+    <h1 class="title-white">Редактирайте коментара</h1>
+    <form
+      [formGroup]="commentFormEdit"
+      id="commentFormEdit"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="form-group">
         <label for="text">Коментар (задължително):</label>
         <textarea
@@ -15,11 +15,19 @@
         ></textarea>
       </div>
       <div *ngIf="commentFormEdit.get('text')?.touched">
-        <div class="errors" *ngIf="commentFormEdit.get('text')?.errors?.['required']">
+        <div
+          class="errors"
+          *ngIf="commentFormEdit.get('text')?.errors?.['required']"
+        >
           Моля напишете коментар!
         </div>
       </div>
-  
-      <button type="submit">Публикувайте коментара</button>
+
+      <button type="submit">Редактирайте коментара</button>
+      <a class="btn" href="javascript:history.back()"
+        ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се
+        назад</a
+      >
     </form>
   </div>
+</div>

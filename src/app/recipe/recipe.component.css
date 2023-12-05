@@ -98,6 +98,9 @@
   max-width: 800px;
   height: 450px;
 }
+.btn .fa-solid{
+  color: var(--mainWhiteColor)
+}
 
 .comments {
   border: 1px solid var(--borderColor);
@@ -137,14 +140,6 @@
   display: flex;
   gap: 10px;
 }
-
-
-.fa-regular,
-.fa-solid{
-  cursor: pointer;
-  color: var(--mainColor);
-}
-
 
 
 .comments-last {

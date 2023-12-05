@@ -20,3 +20,7 @@
 .detail span:nth-child(2) {
   margin-left: 10px;
 }
+
+.wrapper{
+  padding: 0 5%;
+}

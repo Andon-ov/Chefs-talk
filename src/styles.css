@@ -225,7 +225,7 @@ label.checkbox-label {
 
 .checkbox-wrapper .ikxBAC {
   appearance: none;
-  background-color: var(--backgroundColor);
+  background-color: var(--mainColor);
   border-radius: 72px;
   border-style: none;
   flex-shrink: 0;
@@ -296,7 +296,6 @@ select:focus-visible,
 textarea:focus-visible,
 input[type="checkbox"]:focus-visible {
   outline: 1px solid var(--secondColor);
-  /* border: 1px solid var(--mainColor); */
   border: unset;
 }
 
