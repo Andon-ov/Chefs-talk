@@ -31,8 +31,6 @@ import {SharedModule} from './shared/shared.module';
 
 import {AngularFireAuthModule} from '@angular/fire/compat/auth'
 import {AuthModule} from './auth/auth.module';
-import {RecipeWaitersComponent} from './recipe-waiters/recipe-waiters.component';
-import {BaseRecipeWaitersComponent} from './base-recipe-waiters/base-recipe-waiters.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +42,6 @@ import {BaseRecipeWaitersComponent} from './base-recipe-waiters/base-recipe-wait
     BaseRecipeComponent,
     
     BaseListComponent,
-    RecipeWaitersComponent,
-    BaseRecipeWaitersComponent,
 
   ],
   imports: [

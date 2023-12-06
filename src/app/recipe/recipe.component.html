@@ -80,18 +80,20 @@
         </tr>
       </table>
 
-      <div class="divider">
-        <hr />
-        <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
-        <hr />
-      </div>
-      <br />
+      <ng-container *ngIf="userData.isCook">
+        <div class="divider">
+          <hr />
+          <p>&nbsp;&nbsp;Приготвяне&nbsp;&nbsp;</p>
+          <hr />
+        </div>
+        <br />
 
-      <!-- description require -->
-      <p class="recipe-description-text description">
-        {{ recipe?.description }}
-      </p>
-      <br />
+        <!-- description require -->
+        <p class="recipe-description-text description">
+          {{ recipe?.description }}
+        </p>
+        <br />
+      </ng-container>
 
       <div *ngIf="recipe?.ingredients" class="divider">
         <hr />
@@ -106,7 +108,10 @@
       >
         <li *ngIf="recipe?.ingredients">
           <!-- name, amount, unit require -->
-          {{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.unit }}
+          {{ ingredient.name }}
+          <ng-container *ngIf="userData.isCook">
+            - {{ ingredient.amount }} {{ ingredient.unit }}
+          </ng-container>
 
           <!-- quantity -->
           <span *ngIf="ingredient.quantity"
@@ -150,30 +155,32 @@
         <li>{{ method.preparation_method }}</li>
       </ul>
 
-      <div
-        class="recipe-videos"
-        *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
-      >
-        <div class="divider">
-          <hr />
-          <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
-          <hr />
+      <ng-container *ngIf="userData.isCook">
+        <div
+          class="recipe-videos"
+          *ngIf="recipe?.video_recipe && recipe?.video_recipe?.length! > 0"
+        >
+          <div class="divider">
+            <hr />
+            <p>&nbsp;&nbsp;Видео&nbsp;&nbsp;</p>
+            <hr />
+          </div>
+          <br />
+
+          <ul>
+            <li *ngFor="let video of recipe?.video_recipe">
+              <iframe
+                width="560"
+                height="315"
+                [src]="video.video_recipe | safeUrl"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </li>
+          </ul>
         </div>
-        <br />
-
-        <ul>
-          <li *ngFor="let video of recipe?.video_recipe">
-            <iframe
-              width="560"
-              height="315"
-              [src]="video.video_recipe | safeUrl"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </li>
-        </ul>
-      </div>
-
+        
+      </ng-container>
       <button (click)="toggleCommentForm()">Искате ли да коментирате?</button>
       <a class="btn" href="javascript:history.back()"
         ><i class="fa-solid fa-backward fa-beat-fade"></i>&nbsp;&nbsp;Върни се

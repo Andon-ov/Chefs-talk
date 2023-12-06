@@ -11,7 +11,9 @@
     <div class="recipe-list">
       <div *ngFor="let recipe of recipes">
         <ng-container *ngIf="userData">
-          <a [routerLink]="getRecipeLink(recipe)">
+          <!-- <a [routerLink]="getRecipeLink(recipe)"> -->
+          <a [routerLink]="['/recipe', recipe.id]">
+
             <div class="recipe-item">
               <div class="recipe-image">
                 <img [src]="recipe.image_recipe" alt="{{ recipe.title }}" />

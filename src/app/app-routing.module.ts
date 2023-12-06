@@ -14,8 +14,6 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { DashboardComponent } from './auth/dashboard/dashboard.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
-import { RecipeWaitersComponent } from './recipe-waiters/recipe-waiters.component';
-import { BaseRecipeWaitersComponent } from './base-recipe-waiters/base-recipe-waiters.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { RecipeFormEditComponent } from './forms/recipe-form-edit/recipe-form-edit.component';
 import { CommentFormEditComponent } from './forms/comment-form-edit/comment-form-edit.component';
@@ -32,10 +30,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'recipe-waiters/:id',
-    component: RecipeWaitersComponent,
-  },
-  {
     path: 'add-category',
     component: CategoryFormComponent,
   },
@@ -50,10 +44,6 @@ const routes: Routes = [
   {
     path: 'base/:id',
     component: BaseRecipeComponent,
-  },
-  {
-    path: 'base-waiters/:id',
-    component: BaseRecipeWaitersComponent,
   },
   {
     path: 'base',

@@ -34,13 +34,13 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  getRecipeLink(recipe: Recipe): any[] {
-    if (this.userData?.isCook) {
-      return ['/recipe', recipe.id];
-    } else {
-      return ['/recipe-waiters', recipe.id];
-    }
-  }
+  // getRecipeLink(recipe: Recipe): any[] {
+  //   if (this.userData?.isCook) {
+  //     return ['/recipe', recipe.id];
+  //   } else {
+  //     return ['/recipe-waiters', recipe.id];
+  //   }
+  // }
 
   ngOnInit() {
     this.route.params.subscribe(async (params) => {
