@@ -18,9 +18,9 @@ import { FirestoreUser } from '../interfaces/interfaces';
   providedIn: 'root',
 })
 export class AuthService {
-  private userDataSubject: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
-  userData$: Observable<User | null> = this.userDataSubject.asObservable();
+  private userDataSubject: BehaviorSubject<FirestoreUser | null> =
+    new BehaviorSubject<FirestoreUser | null>(null);
+  userData$: Observable<FirestoreUser | null> = this.userDataSubject.asObservable();
 
   constructor(private firestore: Firestore, public router: Router) {
     const savedUserData = localStorage.getItem('user');

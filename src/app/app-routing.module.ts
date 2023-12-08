@@ -17,6 +17,7 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { RecipeFormEditComponent } from './forms/recipe-form-edit/recipe-form-edit.component';
 import { CommentFormEditComponent } from './forms/comment-form-edit/comment-form-edit.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -56,7 +57,7 @@ const routes: Routes = [
   },
   {
     path: 'recipe/:id',
-    component: RecipeComponent,
+    component: RecipeComponent,canActivate: [authGuard]
   },
 
   {

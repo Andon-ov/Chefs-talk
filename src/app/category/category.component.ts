@@ -34,14 +34,6 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  // getRecipeLink(recipe: Recipe): any[] {
-  //   if (this.userData?.isCook) {
-  //     return ['/recipe', recipe.id];
-  //   } else {
-  //     return ['/recipe-waiters', recipe.id];
-  //   }
-  // }
-
   ngOnInit() {
     this.route.params.subscribe(async (params) => {
       const selectedCategoryId = params['id'];
@@ -61,7 +53,6 @@ export class CategoryComponent implements OnInit {
       }
       const q = query(
         recipesCollectionRef,
-        // where('category', '==', categoryDocRef)
         where('category', '==', selectedCategoryId)
       );
 

@@ -10,7 +10,7 @@
 
     <div class="recipe-list">
       <div *ngFor="let recipe of recipes">
-        <ng-container *ngIf="userData">
+        <!-- <ng-container *ngIf="userData"> -->
           <!-- <a [routerLink]="getRecipeLink(recipe)"> -->
           <a [routerLink]="['/recipe', recipe.id]">
 
@@ -21,7 +21,7 @@
               <p class="recipe-title">{{ recipe.title }}</p>
             </div>
           </a>
-        </ng-container>
+        <!-- </ng-container> -->
       </div>
     </div>
   </div>
