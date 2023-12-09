@@ -20,7 +20,9 @@ export const authGuard: CanActivateFn = (route, state) => {
         return true;
       } else {
         console.log('Not authorized');
-        return router.createUrlTree(['/sign-in']);
+        return router.createUrlTree(['/sign-in'], {
+          queryParams: { returnUrl: state.url },
+        });
       }
     })
   );
