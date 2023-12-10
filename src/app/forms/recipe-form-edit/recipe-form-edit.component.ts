@@ -24,6 +24,7 @@ import { RecipeService } from 'src/app/shared/recipe.services/recipe.service';
 import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
 import { CategoriesService } from 'src/app/shared/categories.services/categories.service';
 import { PlatesService } from 'src/app/shared/plates.services/plates.service';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 
 @Component({
   selector: 'app-recipe-form-edit',
@@ -49,6 +50,7 @@ export class RecipeFormEditComponent implements OnInit {
     private allergenService: AllergensService,
     private categoryService: CategoriesService,
     private plateService: PlatesService,
+    private formErrorCheckService: FormErrorCheckService,
     firestore: Firestore
   ) {
     this.firestore = firestore;
@@ -265,13 +267,19 @@ export class RecipeFormEditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.recipeFormEdit.valid) {
-      const recipeData = this.recipeFormEdit.value;
-      this.addRecipe(recipeData);
-      this.recipeFormEdit.reset();
-    } else {
-      console.log('form invalid');
+    this.formErrorCheckService.markFormGroupTouched(this.recipeFormEdit);
+    this.formErrorCheckService.markFormArrayControlsTouched(this.ingredients);
+
+    if (this.recipeFormEdit.invalid) {
+      alert(
+        'Формата не е валидна. Моля, попълнете всички задължителни полета.'
+      );
+      return;
     }
+
+    const recipeData = this.recipeFormEdit.value;
+    this.addRecipe(recipeData);
+    this.recipeFormEdit.reset();
   }
 
   addPreparation() {

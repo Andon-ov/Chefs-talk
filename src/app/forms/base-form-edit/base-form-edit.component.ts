@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Allergens,
   BaseRecipe,
@@ -8,10 +8,17 @@ import {
   PreparationMethodItem,
   VideoRecipeItem,
 } from '../../shared/interfaces/interfaces';
-import {Firestore, updateDoc, doc} from '@angular/fire/firestore';
-import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
-import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
-import {AllergensService} from '../../shared/allergens.services/allergens.service';
+import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
+import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
+import { AllergensService } from '../../shared/allergens.services/allergens.service';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 
 @Component({
   selector: 'app-base-form-edit',
@@ -32,6 +39,7 @@ export class BaseFormEditComponent implements OnInit {
     private fb: FormBuilder,
     private baseRecipeService: BaseRecipeService,
     private allergenService: AllergensService,
+    private formErrorCheckService: FormErrorCheckService,
     firestore: Firestore
   ) {
     this.firestore = firestore;
@@ -184,7 +192,9 @@ export class BaseFormEditComponent implements OnInit {
   }
 
   isAllergenSelected(allergenId: string): boolean {
-    return this.added_allergens.value.some((addedAllergenId: string) => addedAllergenId === allergenId);
+    return this.added_allergens.value.some(
+      (addedAllergenId: string) => addedAllergenId === allergenId
+    );
   }
 
   toggleAllergenSelection(allergenId: string): void {
@@ -196,7 +206,6 @@ export class BaseFormEditComponent implements OnInit {
       this.added_allergens.removeAt(index);
     }
   }
-
 
   addIngredient() {
     const ingredients = this.baseFormEdit.get('ingredients') as FormArray;
@@ -239,13 +248,20 @@ export class BaseFormEditComponent implements OnInit {
     return this.baseFormEdit.get('allergens') as FormArray;
   }
 
-
   onSubmit() {
-    if (this.baseFormEdit.valid) {
-      const baseRecipeData = this.baseFormEdit.value;
-      this.addBaseRecipe(baseRecipeData);
-      this.baseFormEdit.reset();
+    this.formErrorCheckService.markFormGroupTouched(this.baseFormEdit);
+    this.formErrorCheckService.markFormArrayControlsTouched(this.ingredients);
+
+    if (this.baseFormEdit.invalid) {
+      alert(
+        'Формата не е валидна. Моля, попълнете всички задължителни полета.'
+      );
+      return;
     }
+
+    const baseRecipeData = this.baseFormEdit.value;
+    this.addBaseRecipe(baseRecipeData);
+    this.baseFormEdit.reset();
   }
 
   addPreparation() {
@@ -294,7 +310,6 @@ export class BaseFormEditComponent implements OnInit {
       })
     );
   }
-
 
   getAllergens(): void {
     this.allergenService.getAllergens().subscribe({

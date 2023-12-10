@@ -1,9 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
-import {Firestore, collection, addDoc} from '@angular/fire/firestore';
-import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
-import {Allergens, BaseRecipe} from 'src/app/shared/interfaces/interfaces';
-import {AllergensService} from 'src/app/shared/allergens.services/allergens.service';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  Validators,
+  FormControl,
+} from '@angular/forms';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
+import { Allergens, BaseRecipe } from 'src/app/shared/interfaces/interfaces';
+import { AllergensService } from 'src/app/shared/allergens.services/allergens.service';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 
 @Component({
   selector: 'app-base-form',
@@ -21,10 +28,10 @@ export class BaseFormComponent implements OnInit {
     firestore: Firestore,
     private fb: FormBuilder,
     private baseRecipeService: BaseRecipeService,
-    private allergenService: AllergensService
+    private allergenService: AllergensService,
+    private formErrorCheckService: FormErrorCheckService
   ) {
     this.firestore = firestore;
-
 
     this.baseForm = this.fb.group({
       title: ['', [Validators.required]],
@@ -134,9 +141,10 @@ export class BaseFormComponent implements OnInit {
     this.currentOrderIndex++;
   }
 
-
   isAllergenSelected(allergenId: string): boolean {
-    return this.added_allergens.value.some((addedAllergenId: string) => addedAllergenId === allergenId);
+    return this.added_allergens.value.some(
+      (addedAllergenId: string) => addedAllergenId === allergenId
+    );
   }
 
   toggleAllergenSelection(allergenId: string): void {
@@ -170,11 +178,19 @@ export class BaseFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.baseForm.valid) {
-      const baseRecipeData = this.baseForm.value;
-      this.addBaseRecipe(baseRecipeData);
-      this.baseForm.reset();
+    this.formErrorCheckService.markFormGroupTouched(this.baseForm);
+    this.formErrorCheckService.markFormArrayControlsTouched(this.ingredients);
+
+    if (this.baseForm.invalid) {
+      alert(
+        'Формата не е валидна. Моля, попълнете всички задължителни полета.'
+      );
+      return;
     }
+
+    const baseRecipeData = this.baseForm.value;
+    this.addBaseRecipe(baseRecipeData);
+    this.baseForm.reset();
   }
 
   getAllergens(): void {

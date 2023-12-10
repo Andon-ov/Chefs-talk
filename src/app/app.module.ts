@@ -31,6 +31,7 @@ import {SharedModule} from './shared/shared.module';
 
 import {AngularFireAuthModule} from '@angular/fire/compat/auth'
 import {AuthModule} from './auth/auth.module';
+import { FormErrorCheckService } from './shared/form-error-check.service/form-error-check.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import {AuthModule} from './auth/auth.module';
     // Angular Material
     BrowserAnimationsModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, FormErrorCheckService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

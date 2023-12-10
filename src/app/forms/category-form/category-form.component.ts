@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Firestore, collection, addDoc} from '@angular/fire/firestore';
-import {Category} from 'src/app/shared/interfaces/interfaces';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Category } from 'src/app/shared/interfaces/interfaces';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 
 @Component({
   selector: 'app-category-form',
@@ -12,7 +13,11 @@ export class CategoryFormComponent {
   categoryForm: FormGroup;
   firestore: Firestore;
 
-  constructor(private fb: FormBuilder, firestore: Firestore) {
+  constructor(
+    private fb: FormBuilder,
+    firestore: Firestore,
+    private formErrorCheckService: FormErrorCheckService
+  ) {
     this.firestore = firestore;
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -25,14 +30,18 @@ export class CategoryFormComponent {
   }
 
   onSubmit() {
-    if (this.categoryForm.valid) {
-      const categoryData = this.categoryForm.value;
-      this.addCategory(categoryData);
-      this.categoryForm.reset();
-    } else {
-      console.log(this.categoryForm.errors);
+    this.formErrorCheckService.markFormGroupTouched(this.categoryForm);
 
+    if (this.categoryForm.invalid) {
+      alert(
+        'Формата не е валидна. Моля, попълнете всички задължителни полета.'
+      );
+      return;
     }
+
+    const categoryData = this.categoryForm.value;
+    this.addCategory(categoryData);
+    this.categoryForm.reset();
   }
 
   removeImage() {

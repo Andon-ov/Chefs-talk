@@ -6,16 +6,18 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import {
-  Firestore,
-  collection,
-  addDoc,
-} from '@angular/fire/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
 import { CategoriesService } from 'src/app/shared/categories.services/categories.service';
-import { Allergens, BaseRecipe, Category, Plates } from 'src/app/shared/interfaces/interfaces';
+import {
+  Allergens,
+  BaseRecipe,
+  Category,
+  Plates,
+} from 'src/app/shared/interfaces/interfaces';
 import { AllergensService } from 'src/app/shared/allergens.services/allergens.service';
 import { PlatesService } from 'src/app/shared/plates.services/plates.service';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -38,7 +40,8 @@ export class RecipeFormComponent implements OnInit {
     private baseRecipeService: BaseRecipeService,
     private categoriesService: CategoriesService,
     private allergenService: AllergensService,
-    private platesService: PlatesService
+    private platesService: PlatesService,
+    private formErrorCheckService: FormErrorCheckService
   ) {
     this.firestore = firestore;
 
@@ -76,12 +79,12 @@ export class RecipeFormComponent implements OnInit {
       ]),
     });
 
-    this.getAllergens()
+    this.getAllergens();
     // .subscribe((data) => {
     //   this.allergens = data;
     // });
 
-    this.getPlates()
+    this.getPlates();
     // .subscribe((data) => {
     //   this.plates = data;
     // });
@@ -189,12 +192,14 @@ export class RecipeFormComponent implements OnInit {
   // }
 
   isAllergenSelected(allergenId: string): boolean {
-    return this.added_allergens.value.some((addedAllergenId: string) => addedAllergenId === allergenId);
+    return this.added_allergens.value.some(
+      (addedAllergenId: string) => addedAllergenId === allergenId
+    );
   }
-  
+
   toggleAllergenSelection(allergenId: string): void {
     const index = this.added_allergens.value.indexOf(allergenId);
-  
+
     if (index === -1) {
       this.added_allergens.push(new FormControl(allergenId));
     } else {
@@ -222,11 +227,19 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.recipeForm.valid) {
-      const recipeData = this.recipeForm.value;
-      this.addRecipe(recipeData);
-      this.recipeForm.reset();
+    this.formErrorCheckService.markFormGroupTouched(this.recipeForm);
+    this.formErrorCheckService.markFormArrayControlsTouched(this.ingredients);
+
+    if (this.recipeForm.invalid) {
+      alert(
+        'Формата не е валидна. Моля, попълнете всички задължителни полета.'
+      );
+      return;
     }
+
+    const recipeData = this.recipeForm.value;
+    this.addRecipe(recipeData);
+    this.recipeForm.reset();
   }
 
   getCategory(): void {

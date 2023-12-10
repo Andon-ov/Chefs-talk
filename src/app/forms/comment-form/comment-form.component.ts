@@ -23,7 +23,7 @@ export class CommentFormComponent implements OnInit {
     private fb: FormBuilder,
     firestore: Firestore,
     private commentService: CommentService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.firestore = firestore;
   }
