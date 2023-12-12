@@ -49,13 +49,6 @@ export class BaseFormEditComponent implements OnInit {
     this.router.navigate(['/base-edit', this.baseId]);
   }
 
-  async ngOnInit() {
-    this.initializeForm();
-    await this.loadData();
-    this.getBaseRecipe();
-    this.getAllergens();
-  }
-
   private initializeForm() {
     this.baseFormEdit = this.fb.group({
       title: ['', [Validators.required]],
@@ -189,21 +182,65 @@ export class BaseFormEditComponent implements OnInit {
     }
   }
 
-  isAllergenSelected(allergenId: string): boolean {
-    return this.added_allergens.value.some(
-      (addedAllergenId: string) => addedAllergenId === allergenId
+  // Start here
+  async ngOnInit() {
+    this.initializeForm();
+    await this.loadData();
+    this.getBaseRecipe();
+    this.getAllergens();
+  }
+
+  // image
+  addImageToForm(imageUrl: string) {
+    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
+    imageArray.push(
+      this.fb.group({
+        image_recipe: imageUrl,
+      })
     );
   }
 
-  toggleAllergenSelection(allergenId: string): void {
-    const index = this.added_allergens.value.indexOf(allergenId);
-
-    if (index === -1) {
-      this.added_allergens.push(new FormControl(allergenId));
-    } else {
-      this.added_allergens.removeAt(index);
-    }
+  removeImage(index: number) {
+    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
+    imageArray.removeAt(index);
   }
+
+  // video
+  addVideo() {
+    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
+
+    videoArray.push(
+      this.fb.group({
+        video_recipe: '',
+      })
+    );
+  }
+
+  removeVideo(index: number) {
+    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
+    videoArray.removeAt(index);
+  }
+
+  // preparation
+  addPreparation() {
+    const preparationArray = this.baseFormEdit.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.push(
+      this.fb.group({
+        preparation_method: '',
+      })
+    );
+  }
+
+  removePreparation(index: number) {
+    const preparationArray = this.baseFormEdit.get(
+      'preparation_method'
+    ) as FormArray;
+    preparationArray.removeAt(index);
+  }
+
+  // ingredients
 
   addIngredient() {
     const ingredients = this.baseFormEdit.get('ingredients') as FormArray;
@@ -224,6 +261,23 @@ export class BaseFormEditComponent implements OnInit {
   removeIngredient(index: number) {
     const ingredients = this.baseFormEdit.get('ingredients') as FormArray;
     ingredients.removeAt(index);
+  }
+
+  // allergen
+  isAllergenSelected(allergenId: string): boolean {
+    return this.added_allergens.value.some(
+      (addedAllergenId: string) => addedAllergenId === allergenId
+    );
+  }
+
+  toggleAllergenSelection(allergenId: string): void {
+    const index = this.added_allergens.value.indexOf(allergenId);
+
+    if (index === -1) {
+      this.added_allergens.push(new FormControl(allergenId));
+    } else {
+      this.added_allergens.removeAt(index);
+    }
   }
 
   get ingredients() {
@@ -260,53 +314,6 @@ export class BaseFormEditComponent implements OnInit {
     const baseRecipeData = this.baseFormEdit.value;
     this.addBaseRecipe(baseRecipeData);
     this.baseFormEdit.reset();
-  }
-
-  addPreparation() {
-    const preparationArray = this.baseFormEdit.get(
-      'preparation_method'
-    ) as FormArray;
-    preparationArray.push(
-      this.fb.group({
-        preparation_method: '',
-      })
-    );
-  }
-
-  removePreparation(index: number) {
-    const preparationArray = this.baseFormEdit.get(
-      'preparation_method'
-    ) as FormArray;
-    preparationArray.removeAt(index);
-  }
-
-  addVideo() {
-    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
-
-    videoArray.push(
-      this.fb.group({
-        video_recipe: '',
-      })
-    );
-  }
-
-  removeVideo(index: number) {
-    const videoArray = this.baseFormEdit.get('video_recipe') as FormArray;
-    videoArray.removeAt(index);
-  }
-
-  removeImage(index: number) {
-    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
-    imageArray.removeAt(index);
-  }
-
-  addImageToForm(imageUrl: string) {
-    const imageArray = this.baseFormEdit.get('image_recipe') as FormArray;
-    imageArray.push(
-      this.fb.group({
-        image_recipe: imageUrl,
-      })
-    );
   }
 
   getAllergens(): void {

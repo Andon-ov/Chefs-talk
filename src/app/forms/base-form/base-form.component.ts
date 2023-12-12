@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,12 +6,12 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import {Firestore, collection, addDoc} from '@angular/fire/firestore';
-import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
-import {Allergens, BaseRecipe} from 'src/app/shared/interfaces/interfaces';
-import {AllergensService} from 'src/app/shared/allergens.services/allergens.service';
-import {FormErrorCheckService} from 'src/app/shared/form-error-check.service/form-error-check.service';
-import {Router} from "@angular/router";
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
+import { Allergens, BaseRecipe } from 'src/app/shared/interfaces/interfaces';
+import { AllergensService } from 'src/app/shared/allergens.services/allergens.service';
+import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base-form',
@@ -31,7 +31,7 @@ export class BaseFormComponent implements OnInit {
     private baseRecipeService: BaseRecipeService,
     private allergenService: AllergensService,
     private formErrorCheckService: FormErrorCheckService,
-    private router: Router,
+    private router: Router
   ) {
     this.firestore = firestore;
 
@@ -63,26 +63,13 @@ export class BaseFormComponent implements OnInit {
     });
   }
 
+  // Start here
   ngOnInit(): void {
     this.getBaseRecipe();
     this.getAllergens();
   }
 
   // image
-  addImage() {
-    const imageArray = this.baseForm.get('image_recipe') as FormArray;
-    imageArray.push(
-      this.fb.group({
-        image_recipe: [],
-      })
-    );
-  }
-
-  removeImage(index: number) {
-    const imageArray = this.baseForm.get('image_recipe') as FormArray;
-    imageArray.removeAt(index);
-  }
-
   addImageToForm(imageUrl: string) {
     const imageArray = this.baseForm.get('image_recipe') as FormArray;
     imageArray.push(
@@ -90,6 +77,11 @@ export class BaseFormComponent implements OnInit {
         image_recipe: imageUrl,
       })
     );
+  }
+
+  removeImage(index: number) {
+    const imageArray = this.baseForm.get('image_recipe') as FormArray;
+    imageArray.removeAt(index);
   }
 
   // video
@@ -127,6 +119,7 @@ export class BaseFormComponent implements OnInit {
     preparationArray.removeAt(index);
   }
 
+  // ingredients
   addIngredient() {
     const ingredientsArray = this.baseForm.get('ingredients') as FormArray;
     ingredientsArray.push(
@@ -143,6 +136,12 @@ export class BaseFormComponent implements OnInit {
     this.currentOrderIndex++;
   }
 
+  removeIngredient(index: number) {
+    const ingredients = this.baseForm.get('ingredients') as FormArray;
+    ingredients.removeAt(index);
+  }
+
+  // allergen
   isAllergenSelected(allergenId: string): boolean {
     return this.added_allergens.value.some(
       (addedAllergenId: string) => addedAllergenId === allergenId

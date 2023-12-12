@@ -5,7 +5,7 @@
       <!-- Title required-->
       <label>
         Заглавие (задължително):
-        <input type="text" id="title" formControlName="title"/>
+        <input type="text" id="title" formControlName="title" />
       </label>
 
       <div *ngIf="baseForm.get('title')?.touched">
@@ -19,7 +19,7 @@
       <div>
         <label for="base_type">Вид (задължително):</label>
         <p class="hint">Сос, Дресин, Основа и др.</p>
-        <input type="text" id="base_type" formControlName="base_type"/>
+        <input type="text" id="base_type" formControlName="base_type" />
       </div>
 
       <div *ngIf="baseForm.get('base_type')?.touched">
@@ -36,7 +36,7 @@
       <div>
         <label for="summary">Резюме:</label>
         <p class="hint">Кратко изложение на рецепта</p>
-        <input type="text" id="summary" formControlName="summary"/>
+        <input type="text" id="summary" formControlName="summary" />
       </div>
       <!-- Summary -->
 
@@ -65,7 +65,7 @@
       <div>
         <label for="base_yield">Добив (задължително):</label>
         <p class="hint">Количесто на готовата продукция</p>
-        <input type="number" id="base_yield" formControlName="base_yield"/>
+        <input type="number" id="base_yield" formControlName="base_yield" />
       </div>
       <div *ngIf="baseForm.get('base_yield')?.touched">
         <div
@@ -105,12 +105,14 @@
       <!-- Base Recipe Portions -->
 
       <div>
-
         <!-- Allergens checkbox -->
         <div formArrayName="allergens">
           <label>Алергени: </label>
 
-          <div class="checkbox-wrapper" *ngFor="let allergen of allergens; let i = index">
+          <div
+            class="checkbox-wrapper"
+            *ngFor="let allergen of allergens; let i = index"
+          >
             <input
               type="checkbox"
               [id]="'allergen' + i"
@@ -119,7 +121,9 @@
               (change)="toggleAllergenSelection(allergen.id)"
               class="sc-gJwTLC ikxBAC"
             />
-            <label class="checkbox-label" for="{{ 'allergen' + i }}">{{ allergen.name }}</label>
+            <label class="checkbox-label" for="{{ 'allergen' + i }}">{{
+              allergen.name
+            }}</label>
           </div>
         </div>
 
@@ -129,7 +133,7 @@
 
         <!-- Image Upload -->
 
-        <app-image-upload (imageUploaded)="addImageToForm($event)"/>
+        <app-image-upload (imageUploaded)="addImageToForm($event)" />
 
         <!-- Image Upload -->
 
@@ -144,6 +148,13 @@
               type="text"
               id="image_recipe"
               formControlName="image_recipe"
+            />
+            <!-- Image preview -->
+            <img
+              *ngIf="image_recipe.controls[i].get('image_recipe')?.value"
+              [src]="image_recipe.controls[i].get('image_recipe')?.value"
+              alt="Image Preview"
+              class="image-preview"
             />
             <button type="button" (click)="removeImage(i)">
               Премахнете добавената снимка
@@ -210,15 +221,15 @@
         >
           <!-- Ingredient -->
           <div class="divider">
-            <hr/>
+            <hr />
             <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
-            <hr/>
+            <hr />
           </div>
 
           <!-- Name required-->
 
           <label for="name">Име (задължително):</label>
-          <input type="text" id="name" formControlName="name"/>
+          <input type="text" id="name" formControlName="name" />
 
           <div *ngIf="baseForm.get('ingredients.' + i + '.name')?.touched">
             <div
@@ -232,7 +243,7 @@
           <!-- Amount required-->
 
           <label for="amount">Количество (задължително):</label>
-          <input type="number" id="amount" formControlName="amount"/>
+          <input type="number" id="amount" formControlName="amount" />
 
           <div *ngIf="baseForm.get('ingredients.' + i + '.amount')?.touched">
             <div
@@ -269,14 +280,14 @@
           <p class="hint">
             Използва се когато съставка има точно определени бройки
           </p>
-          <input type="number" id="quantity" formControlName="quantity"/>
+          <input type="number" id="quantity" formControlName="quantity" />
 
           <!-- Preparation Method -->
 
           <label for="preparation_method">Допълнителна информация:</label>
           <p class="hint">
             Въведете информация, разделена със запетайка и интервал:
-            <br/>
+            <br />
             Пример: Почистване, измиване, нарязване.
           </p>
 
@@ -302,10 +313,14 @@
 
           <label for="order_index">Последователност:</label>
           <p class="hint">Редът по който се показват съставките в рецептата</p>
-          <input type="number" id="order_index" formControlName="order_index"/>
+          <input type="number" id="order_index" formControlName="order_index" />
+          <!-- Add a button to remove the ingredient -->
+          <button type="button" (click)="removeIngredient(i)">
+            Премахнете съставката
+          </button>
         </div>
       </div>
-      <br/>
+      <br />
 
       <button type="button" (click)="addIngredient()">
         Добавете още една съставка
