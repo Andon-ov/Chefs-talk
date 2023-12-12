@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseRecipe } from '../shared/interfaces/interfaces';
-import { BaseRecipeService } from '../shared/base-recipe.services/base-recipe.service';
-import { AuthService } from '../shared/auth.services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {BaseRecipe} from '../shared/interfaces/interfaces';
+import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.service';
+import {AuthService} from '../shared/auth.services/auth.service';
 
 @Component({
   selector: 'app-base-list',

@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   private userDataSubject: BehaviorSubject<any | null> = new BehaviorSubject< any | null >(null);
   private userDataSubscription: Subscription;
 
-  
+
 
   constructor(private authService: AuthService) {
     this.userDataSubscription = this.userDataSubject.subscribe((value) => {
@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
           console.log('Нямате потребител.');
         }
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err)
+      },
     });
   }
 
@@ -47,7 +49,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logoutUser();
   }
-  
+
   getUserDisplayName(): string {
     return this.userData ? this.userData.lastName : 'Anonymous';
   }

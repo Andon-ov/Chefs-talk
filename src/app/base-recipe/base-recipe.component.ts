@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Allergens, BaseRecipe } from '../shared/interfaces/interfaces';
-import { BaseRecipeService } from '../shared/base-recipe.services/base-recipe.service';
-import { AuthService } from '../shared/auth.services/auth.service';
-import { AllergensService } from '../shared/allergens.services/allergens.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Allergens, BaseRecipe} from '../shared/interfaces/interfaces';
+import {BaseRecipeService} from '../shared/base-recipe.services/base-recipe.service';
+import {AuthService} from '../shared/auth.services/auth.service';
+import {AllergensService} from '../shared/allergens.services/allergens.service';
 
 @Component({
   selector: 'app-base-recipe',

@@ -184,8 +184,6 @@ export class BaseFormEditComponent implements OnInit {
         description: this.base.description,
         base_yield: this.base.base_yield,
         unit: this.base.unit,
-        selectedAllergen: this.base.selectedAllergen,
-        selectedAllergenNames: this.base.selectedAllergenNames,
         base_recipe_portions: this.base.base_recipe_portions,
       });
     }

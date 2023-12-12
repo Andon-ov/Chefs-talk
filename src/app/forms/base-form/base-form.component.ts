@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,11 +6,12 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { BaseRecipeService } from 'src/app/shared/base-recipe.services/base-recipe.service';
-import { Allergens, BaseRecipe } from 'src/app/shared/interfaces/interfaces';
-import { AllergensService } from 'src/app/shared/allergens.services/allergens.service';
-import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
+import {Firestore, collection, addDoc} from '@angular/fire/firestore';
+import {BaseRecipeService} from 'src/app/shared/base-recipe.services/base-recipe.service';
+import {Allergens, BaseRecipe} from 'src/app/shared/interfaces/interfaces';
+import {AllergensService} from 'src/app/shared/allergens.services/allergens.service';
+import {FormErrorCheckService} from 'src/app/shared/form-error-check.service/form-error-check.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-base-form',
@@ -29,7 +30,8 @@ export class BaseFormComponent implements OnInit {
     private fb: FormBuilder,
     private baseRecipeService: BaseRecipeService,
     private allergenService: AllergensService,
-    private formErrorCheckService: FormErrorCheckService
+    private formErrorCheckService: FormErrorCheckService,
+    private router: Router,
   ) {
     this.firestore = firestore;
 
@@ -215,12 +217,12 @@ export class BaseFormComponent implements OnInit {
     });
   }
 
-  addBaseRecipe(baseRecipeData: any) {
+  addBaseRecipe(baseRecipeData: BaseRecipe) {
     const collectionName = 'BaseRecipe';
 
     addDoc(collection(this.firestore, collectionName), baseRecipeData)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
+        this.router.navigate(['/base', docRef.id]);
       })
       .catch((error) => {
         console.error('Error adding document: ', error);
