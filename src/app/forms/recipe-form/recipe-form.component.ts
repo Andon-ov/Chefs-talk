@@ -18,6 +18,7 @@ import {
 import { AllergensService } from 'src/app/shared/allergens.services/allergens.service';
 import { PlatesService } from 'src/app/shared/plates.services/plates.service';
 import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-form',
@@ -41,7 +42,8 @@ export class RecipeFormComponent implements OnInit {
     private categoriesService: CategoriesService,
     private allergenService: AllergensService,
     private platesService: PlatesService,
-    private formErrorCheckService: FormErrorCheckService
+    private formErrorCheckService: FormErrorCheckService,
+    private router: Router,
   ) {
     this.firestore = firestore;
 
@@ -78,38 +80,17 @@ export class RecipeFormComponent implements OnInit {
         }),
       ]),
     });
-
-    this.getAllergens();
-    // .subscribe((data) => {
-    //   this.allergens = data;
-    // });
-
-    this.getPlates();
-    // .subscribe((data) => {
-    //   this.plates = data;
-    // });
   }
 
+  // start here
   ngOnInit(): void {
     this.getBaseRecipe();
     this.getCategory();
+    this.getPlates();
+    this.getAllergens();
   }
 
   // image
-  addImage() {
-    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
-    imageArray.push(
-      this.fb.group({
-        image_recipe: [],
-      })
-    );
-  }
-
-  removeImage(index: number) {
-    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
-    imageArray.removeAt(index);
-  }
-
   addImageToForm(imageUrl: string) {
     const imageArray = this.recipeForm.get('image_recipe') as FormArray;
     imageArray.push(
@@ -117,6 +98,11 @@ export class RecipeFormComponent implements OnInit {
         image_recipe: imageUrl,
       })
     );
+  }
+
+  removeImage(index: number) {
+    const imageArray = this.recipeForm.get('image_recipe') as FormArray;
+    imageArray.removeAt(index);
   }
 
   // video
@@ -151,6 +137,7 @@ export class RecipeFormComponent implements OnInit {
     preparationArray.removeAt(index);
   }
 
+  // ingredient
   addIngredient() {
     const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
     ingredientsArray.push(
@@ -167,30 +154,12 @@ export class RecipeFormComponent implements OnInit {
     this.currentOrderIndex++;
   }
 
-  // addReferenceToSelectedAllergen(event: any) {
-  //   const selectedAllergenId = event.target.value;
-  //   const allergensArray = this.recipeForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-  // }
+  removeIngredient(index: number) {
+    const ingredients = this.recipeForm.get('ingredients') as FormArray;
+    ingredients.removeAt(index);
+  }
 
-  // addSelectedAllergen() {
-  //   const selectedAllergenId = this.recipeForm.get('selectedAllergen')?.value;
-  //   const allergensArray = this.recipeForm.get('allergens') as FormArray;
-  //   allergensArray.push(this.fb.control(selectedAllergenId));
-
-  //   const selectedAllergenNames = this.recipeForm.get('selectedAllergenNames');
-  //   const selectedAllergen = this.allergens.find(
-  //     (a) => a.id === selectedAllergenId
-  //   );
-  //   if (selectedAllergen) {
-  //     selectedAllergenNames?.setValue(
-  //       selectedAllergenNames.value
-  //         ? selectedAllergenNames.value + ', ' + selectedAllergen.name
-  //         : selectedAllergen.name
-  //     );
-  //   }
-  // }
-
+  // allergen
   isAllergenSelected(allergenId: string): boolean {
     return this.added_allergens.value.some(
       (addedAllergenId: string) => addedAllergenId === allergenId
@@ -242,10 +211,10 @@ export class RecipeFormComponent implements OnInit {
     this.recipeForm.reset();
   }
 
-  getCategory(): void {
-    this.categoriesService.getCategories().subscribe({
-      next: (category) => {
-        this.categories = category;
+  getAllergens(): void {
+    this.allergenService.getAllergens().subscribe({
+      next: (allergens) => {
+        this.allergens = allergens;
       },
       error: (error) => {
         console.error('Error fetching recipes:', error);
@@ -253,37 +222,21 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
-  // getAllergens(): Observable<Allergens[]> {
-  //   const collectionName = 'Allergens';
-  //   const collectionRef: CollectionReference = collection(
-  //     this.firestore,
-  //     collectionName
-  //   );
+  getBaseRecipe(): void {
+    this.baseRecipeService.getBaseRecipe().subscribe({
+      next: (baseRecipes) => {
+        this.baseRecipes = baseRecipes;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes:', error);
+      },
+    });
+  }
 
-  //   return new Observable((observer) => {
-  //     getDocs(collectionRef)
-  //       .then((querySnapshot) => {
-  //         const data: Allergens[] = [];
-
-  //         querySnapshot.forEach((doc) => {
-  //           const allergensData = doc.data() as any;
-
-  //           const allergensWithId = { ...allergensData, id: doc.id };
-
-  //           data.push(allergensWithId);
-  //         });
-  //         observer.next(data);
-  //         observer.complete();
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   });
-  // }
-  getAllergens(): void {
-    this.allergenService.getAllergens().subscribe({
-      next: (allergens) => {
-        this.allergens = allergens;
+  getCategory(): void {
+    this.categoriesService.getCategories().subscribe({
+      next: (category) => {
+        this.categories = category;
       },
       error: (error) => {
         console.error('Error fetching recipes:', error);
@@ -302,51 +255,13 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
-  // getPlates(): Observable<Plates[]> {
-  //   const collectionName = 'Plates';
-  //   const collectionRef: CollectionReference = collection(
-  //     this.firestore,
-  //     collectionName
-  //   );
-
-  //   return new Observable((observer) => {
-  //     getDocs(collectionRef)
-  //       .then((querySnapshot) => {
-  //         const data: Plates[] = [];
-
-  //         querySnapshot.forEach((doc) => {
-  //           const platesData = doc.data() as any;
-
-  //           const platesWithId = { ...platesData, id: doc.id };
-
-  //           data.push(platesWithId);
-  //         });
-  //         observer.next(data);
-  //         observer.complete();
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   });
-  // }
-
-  getBaseRecipe(): void {
-    this.baseRecipeService.getBaseRecipe().subscribe({
-      next: (baseRecipes) => {
-        this.baseRecipes = baseRecipes;
-      },
-      error: (error) => {
-        console.error('Error fetching recipes:', error);
-      },
-    });
-  }
-
   addRecipe(recipeData: any) {
     const collectionName = 'Recipe';
 
     addDoc(collection(this.firestore, collectionName), recipeData)
       .then((docRef) => {
         console.log('Document written with ID: ', docRef.id);
+        this.router.navigate(['/recipe', docRef.id]);
       })
       .catch((error) => {
         console.error('Error adding document: ', error);

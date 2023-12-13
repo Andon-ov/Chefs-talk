@@ -168,6 +168,14 @@
               id="image_recipe"
               formControlName="image_recipe"
             />
+
+            <!-- Image preview -->
+            <img
+              *ngIf="image_recipe.controls[i].get('image_recipe')?.value"
+              [src]="image_recipe.controls[i].get('image_recipe')?.value"
+              alt="Image Preview"
+              class="image-preview"
+            />
             <button type="button" (click)="removeImage(i)">
               Премахнете добавената снимка
             </button>
@@ -356,6 +364,11 @@
             id="ingredient_order_index"
             formControlName="order_index"
           />
+
+          <!-- Add a button to remove the ingredient -->
+          <button type="button" (click)="removeIngredient(i)">
+            Премахнете съставката
+          </button>
         </div>
       </div>
       <br />
