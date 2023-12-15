@@ -19,6 +19,7 @@ import { AllergensService } from 'src/app/shared/allergens.services/allergens.se
 import { PlatesService } from 'src/app/shared/plates.services/plates.service';
 import { FormErrorCheckService } from 'src/app/shared/form-error-check.service/form-error-check.service';
 import { Router } from '@angular/router';
+import { SharedFormService } from 'src/app/shared/shared-form.service/shared-form.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -44,6 +45,8 @@ export class RecipeFormComponent implements OnInit {
     private platesService: PlatesService,
     private formErrorCheckService: FormErrorCheckService,
     private router: Router,
+
+    private sharedFormService: SharedFormService
   ) {
     this.firestore = firestore;
 
@@ -114,6 +117,8 @@ export class RecipeFormComponent implements OnInit {
       })
     );
   }
+
+  
   removeVideo(index: number) {
     const videoArray = this.recipeForm.get('video_recipe') as FormArray;
     videoArray.removeAt(index);
