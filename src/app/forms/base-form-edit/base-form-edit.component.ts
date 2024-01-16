@@ -330,7 +330,7 @@ export class BaseFormEditComponent implements OnInit {
   getBaseRecipe(): void {
     this.baseRecipeService.getBaseRecipe().subscribe({
       next: (baseRecipes) => {
-        this.baseRecipes = baseRecipes;
+        this.baseRecipes = baseRecipes.sort((a, b) => a.title.localeCompare(b.title));
       },
       error: (error) => {
         console.error('Error fetching recipes:', error);
