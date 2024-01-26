@@ -265,6 +265,11 @@
           *ngFor="let ingredient of ingredients.controls; let i = index"
           [formGroupName]="i"
         >
+
+
+        <div class="ingredient">
+
+
           <!-- Ingredient титле-->
           <div class="divider">
             <hr />
@@ -273,6 +278,7 @@
           </div>
 
           <!-- Name required-->
+          
 
           <label for="name">Име (задължително):</label>
           <input type="text" id="name" formControlName="name" />
@@ -366,11 +372,13 @@
           />
 
           <!-- Add a button to remove the ingredient -->
-          <button type="button" (click)="removeIngredient(i)">
-            Премахнете съставката
+          <button class="removeIngredient" type="button" (click)="removeIngredient(i)">
+            <i class="fa-solid fa-trash fa-shake"></i>&nbsp;Премахнете съставката
           </button>
         </div>
       </div>
+
+    </div>
       <br />
 
       <button type="button" (click)="addIngredient()">

@@ -252,17 +252,24 @@
       <input type="text" id="order_index" formControlName="order_index" />
 
       <!-- Ingredients -->
-      <div class="divider">
-        <hr />
-        <p>&nbsp;&nbsp;Съставки&nbsp;&nbsp;</p>
-        <hr />
-      </div>
+     
 
       <div formArrayName="ingredients">
         <div
           *ngFor="let ingredient of ingredients.controls; let i = index"
           [formGroupName]="i"
+          
         >
+
+        <div class="ingredient">
+        <div class="divider">
+          <hr />
+          <p>&nbsp;&nbsp;Съставка&nbsp;&nbsp;</p>
+          <hr />
+        </div>
+
+
+
           <!-- Name required-->
           <label [for]="'name' + i">Име (задължително):</label>
           <input type="text" [id]="'name' + i" formControlName="name" />
@@ -362,11 +369,12 @@
           />
 
           <!-- Add a button to remove the ingredient -->
-          <button type="button" (click)="removeIngredient(i)">
-            Премахнете съставката
+          <button class="removeIngredient" type="button" (click)="removeIngredient(i)">
+            <i class="fa-solid fa-trash fa-shake"></i>&nbsp;Премахнете съставката
           </button>
         </div>
       </div>
+    </div>
 
       <!-- Add button to add new ingredient -->
       <button type="button" (click)="addIngredient()">

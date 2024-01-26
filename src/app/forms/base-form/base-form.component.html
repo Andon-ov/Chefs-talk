@@ -219,6 +219,11 @@
           *ngFor="let ingredient of ingredients.controls; let i = index"
           [formGroupName]="i"
         >
+
+
+        <div class="ingredient">
+
+
           <!-- Ingredient -->
           <div class="divider">
             <hr />
@@ -314,12 +319,14 @@
           <label for="order_index">Последователност:</label>
           <p class="hint">Редът по който се показват съставките в рецептата</p>
           <input type="number" id="order_index" formControlName="order_index" />
+
           <!-- Add a button to remove the ingredient -->
-          <button type="button" (click)="removeIngredient(i)">
-            Премахнете съставката
+         <button class="removeIngredient" type="button" (click)="removeIngredient(i)">
+            <i class="fa-solid fa-trash fa-shake"></i>&nbsp;Премахнете съставката
           </button>
         </div>
       </div>
+    </div>
       <br />
 
       <button type="button" (click)="addIngredient()">
