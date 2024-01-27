@@ -111,6 +111,15 @@ a {
 }
 
 
+a.backBtn  {
+  font-size: 18px;
+  color: var(--mainColor);
+}
+
+a.backBtn:hover {
+  color: var(--secondColor);
+}
+
 
 /* css */
 
