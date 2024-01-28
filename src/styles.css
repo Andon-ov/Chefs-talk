@@ -244,11 +244,12 @@ textarea {
 label.checkbox-label {
   display: block;
   margin-top: 0;
+  cursor: pointer;
 }
 
 .checkbox-wrapper .ikxBAC {
   appearance: none;
-  background-color: var(--mainColor);
+  background-color: var(--mainGreyColor);
   border-radius: 72px;
   border-style: none;
   flex-shrink: 0;
@@ -284,7 +285,7 @@ label.checkbox-label {
 }
 
 .checkbox-wrapper input[type=checkbox] {
-  cursor: default;
+  cursor: pointer;
 }
 
 .checkbox-wrapper .ikxBAC:hover {
@@ -331,7 +332,7 @@ select:checked {
   background: var(--mainWhiteColor);
   color: var(--secondColor);
 }
-
+.checkbox-wrapper input[type="checkbox"]
 select:active,
 select:focus {
   outline: 1px solid var(--secondColor);
