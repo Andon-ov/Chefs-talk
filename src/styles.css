@@ -110,6 +110,19 @@ a {
   box-shadow: unset;
 }
 
+.addIngredient {
+  all: unset;
+  color: var(--secondColor);
+  cursor: pointer;
+  margin:0 0 20px 30px;
+}
+
+.addIngredient:hover{
+  background-color: unset;
+  color: var(--mainRedColor);
+  box-shadow: unset;
+}
+
 
 a.backBtn  {
   font-size: 18px;
